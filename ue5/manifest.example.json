@@ -1,0 +1,26 @@
+{
+  "manifestVersion": 1,
+  "sessionId": "ses_example",
+  "gameId": "gm_example",
+  "expiresAt": "2026-10-30T12:15:00Z",
+  "spec": {
+    "version": 1,
+    "engine": "unreal",
+    "title": "카이의 등불",
+    "genre": "rpg-quest",
+    "palette": { "bg": "#10141f", "accent": "#ffb000", "text": "#f5f5f5" },
+    "player": { "speed": 2, "ipId": "ip_hero" },
+    "objective": { "type": "talk", "target": 1 },
+    "difficulty": "normal",
+    "enemies": [],
+    "props": [{ "effect": "key", "ipId": "ip_lantern", "name": "등불" }],
+    "dialogue": [{ "text": "강이 얼어붙던 밤, 등불이 꺼졌다네." }, { "text": "골짜기의 유물을 모아 다시 불을 밝혀 주게." }],
+    "quest": { "title": "등불을 다시 밝혀라" },
+    "map": { "width": 20, "height": 15, "seed": 1234 }
+  },
+  "ips": {
+    "ip_hero": { "role": "player", "name": "카이", "glbUrl": "https://ipverse-assets-087967639890-us-east-1.s3.amazonaws.com/...signed...", "yaw": 0 },
+    "ip_lantern": { "role": "prop", "name": "등불", "glbUrl": "https://ipverse-assets-087967639890-us-east-1.s3.amazonaws.com/...signed...", "yaw": 0 },
+    "ip_elder": { "role": "npc", "name": "장로", "glbUrl": "https://ipverse-assets-087967639890-us-east-1.s3.amazonaws.com/...signed...", "yaw": 0 }
+  }
+}

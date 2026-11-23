@@ -1,0 +1,847 @@
+{
+ "_source": "tools/list of the mediagen video MCP and the storyboard image MCP, read 2026-11-05",
+ "image": {
+  "get_image_results": {
+   "properties": {
+    "job_id": {
+     "title": "Job Id",
+     "type": "string"
+    }
+   },
+   "required": [
+    "job_id"
+   ],
+   "title": "get_image_resultsArguments",
+   "type": "object"
+  },
+  "get_image_status": {
+   "properties": {
+    "job_id": {
+     "title": "Job Id",
+     "type": "string"
+    }
+   },
+   "required": [
+    "job_id"
+   ],
+   "title": "get_image_statusArguments",
+   "type": "object"
+  },
+  "list_models": {
+   "properties": {},
+   "title": "list_modelsArguments",
+   "type": "object"
+  },
+  "start_image": {
+   "properties": {
+    "model": {
+     "title": "Model",
+     "type": "string"
+    },
+    "prompt": {
+     "title": "Prompt",
+     "type": "string"
+    },
+    "reference_image_urls": {
+     "anyOf": [
+      {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Reference Image Urls"
+    },
+    "seed": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Seed"
+    },
+    "style": {
+     "default": "real",
+     "title": "Style",
+     "type": "string"
+    }
+   },
+   "required": [
+    "prompt",
+    "model"
+   ],
+   "title": "start_imageArguments",
+   "type": "object"
+  }
+ },
+ "video": {
+  "deadline_get_status": {
+   "properties": {
+    "job_id": {
+     "title": "Job Id",
+     "type": "string"
+    }
+   },
+   "required": [
+    "job_id"
+   ],
+   "title": "deadline_get_statusArguments",
+   "type": "object"
+  },
+  "deadline_render_start": {
+   "properties": {
+    "input_video_url": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Input Video Url"
+    },
+    "seconds": {
+     "default": 5,
+     "title": "Seconds",
+     "type": "integer"
+    },
+    "title": {
+     "title": "Title",
+     "type": "string"
+    }
+   },
+   "required": [
+    "title"
+   ],
+   "title": "deadline_render_startArguments",
+   "type": "object"
+  },
+  "list_video_models": {
+   "properties": {},
+   "title": "list_video_modelsArguments",
+   "type": "object"
+  },
+  "ltx_get_status": {
+   "properties": {
+    "job_id": {
+     "title": "Job Id",
+     "type": "string"
+    }
+   },
+   "required": [
+    "job_id"
+   ],
+   "title": "ltx_get_statusArguments",
+   "type": "object"
+  },
+  "ltx_inpaint_start": {
+   "properties": {
+    "blend_sigma": {
+     "default": 14.0,
+     "title": "Blend Sigma",
+     "type": "number"
+    },
+    "keep_level": {
+     "default": 0.3,
+     "title": "Keep Level",
+     "type": "number"
+    },
+    "keep_regions": {
+     "anyOf": [
+      {
+       "items": {
+        "items": {
+         "type": "number"
+        },
+        "type": "array"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Keep Regions"
+    },
+    "mode": {
+     "default": "relight",
+     "title": "Mode",
+     "type": "string"
+    },
+    "prompt": {
+     "title": "Prompt",
+     "type": "string"
+    },
+    "seconds": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Seconds"
+    },
+    "seed": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Seed"
+    },
+    "task": {
+     "default": "water",
+     "title": "Task",
+     "type": "string"
+    },
+    "video_url": {
+     "title": "Video Url",
+     "type": "string"
+    }
+   },
+   "required": [
+    "video_url",
+    "prompt"
+   ],
+   "title": "ltx_inpaint_startArguments",
+   "type": "object"
+  },
+  "ltx_list_tasks": {
+   "properties": {},
+   "title": "ltx_list_tasksArguments",
+   "type": "object"
+  },
+  "ltx_restyle_start": {
+   "properties": {
+    "attention_strength": {
+     "default": 1.0,
+     "title": "Attention Strength",
+     "type": "number"
+    },
+    "control": {
+     "default": "depth",
+     "title": "Control",
+     "type": "string"
+    },
+    "height": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Height"
+    },
+    "mask_url": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Mask Url"
+    },
+    "prompt": {
+     "title": "Prompt",
+     "type": "string"
+    },
+    "reference_image_url": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Reference Image Url"
+    },
+    "seconds": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Seconds"
+    },
+    "seed": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Seed"
+    },
+    "strength": {
+     "default": 1.0,
+     "title": "Strength",
+     "type": "number"
+    },
+    "video_url": {
+     "title": "Video Url",
+     "type": "string"
+    },
+    "width": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Width"
+    }
+   },
+   "required": [
+    "video_url",
+    "prompt"
+   ],
+   "title": "ltx_restyle_startArguments",
+   "type": "object"
+  },
+  "ltx_start_video": {
+   "properties": {
+    "height": {
+     "default": 704,
+     "title": "Height",
+     "type": "integer"
+    },
+    "image_url": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Image Url"
+    },
+    "prompt": {
+     "title": "Prompt",
+     "type": "string"
+    },
+    "seconds": {
+     "default": 3,
+     "title": "Seconds",
+     "type": "number"
+    },
+    "seed": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Seed"
+    },
+    "width": {
+     "default": 1280,
+     "title": "Width",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "prompt"
+   ],
+   "title": "ltx_start_videoArguments",
+   "type": "object"
+  },
+  "ltx_v2v_start": {
+   "properties": {
+    "attention_strength": {
+     "default": 1.0,
+     "title": "Attention Strength",
+     "type": "number"
+    },
+    "blend_mode": {
+     "default": "relight",
+     "title": "Blend Mode",
+     "type": "string"
+    },
+    "blend_sigma": {
+     "default": 14.0,
+     "title": "Blend Sigma",
+     "type": "number"
+    },
+    "blend_source_url": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Blend Source Url"
+    },
+    "height": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Height"
+    },
+    "keep_level": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Keep Level"
+    },
+    "keep_mask_url": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Keep Mask Url"
+    },
+    "keep_regions": {
+     "anyOf": [
+      {
+       "items": {
+        "items": {
+         "type": "number"
+        },
+        "type": "array"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Keep Regions"
+    },
+    "mask_url": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Mask Url"
+    },
+    "prompt": {
+     "default": "",
+     "title": "Prompt",
+     "type": "string"
+    },
+    "reference_image_url": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Reference Image Url"
+    },
+    "seconds": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Seconds"
+    },
+    "seed": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Seed"
+    },
+    "strength": {
+     "default": 1.0,
+     "title": "Strength",
+     "type": "number"
+    },
+    "task": {
+     "title": "Task",
+     "type": "string"
+    },
+    "video_url": {
+     "title": "Video Url",
+     "type": "string"
+    },
+    "width": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Width"
+    }
+   },
+   "required": [
+    "task",
+    "video_url"
+   ],
+   "title": "ltx_v2v_startArguments",
+   "type": "object"
+  },
+  "minimax_h3_get_status": {
+   "properties": {
+    "job_id": {
+     "title": "Job Id",
+     "type": "string"
+    }
+   },
+   "required": [
+    "job_id"
+   ],
+   "title": "minimax_h3_get_statusArguments",
+   "type": "object"
+  },
+  "minimax_h3_start_video": {
+   "properties": {
+    "height": {
+     "default": 768,
+     "title": "Height",
+     "type": "integer"
+    },
+    "image_url": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Image Url"
+    },
+    "last_image_url": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Last Image Url"
+    },
+    "prompt": {
+     "title": "Prompt",
+     "type": "string"
+    },
+    "seconds": {
+     "default": 5,
+     "title": "Seconds",
+     "type": "number"
+    },
+    "seed": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Seed"
+    },
+    "width": {
+     "default": 1344,
+     "title": "Width",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "prompt"
+   ],
+   "title": "minimax_h3_start_videoArguments",
+   "type": "object"
+  },
+  "video_get_status": {
+   "properties": {
+    "job_id": {
+     "title": "Job Id",
+     "type": "string"
+    }
+   },
+   "required": [
+    "job_id"
+   ],
+   "title": "video_get_statusArguments",
+   "type": "object"
+  },
+  "video_start": {
+   "properties": {
+    "image_url": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Image Url"
+    },
+    "model": {
+     "title": "Model",
+     "type": "string"
+    },
+    "prompt": {
+     "title": "Prompt",
+     "type": "string"
+    },
+    "seconds": {
+     "default": 5,
+     "title": "Seconds",
+     "type": "number"
+    },
+    "seed": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Seed"
+    }
+   },
+   "required": [
+    "model",
+    "prompt"
+   ],
+   "title": "video_startArguments",
+   "type": "object"
+  },
+  "wan_animate_get_status": {
+   "properties": {
+    "job_id": {
+     "title": "Job Id",
+     "type": "string"
+    }
+   },
+   "required": [
+    "job_id"
+   ],
+   "title": "wan_animate_get_statusArguments",
+   "type": "object"
+  },
+  "wan_animate_start": {
+   "properties": {
+    "driving_video_url": {
+     "title": "Driving Video Url",
+     "type": "string"
+    },
+    "height": {
+     "default": 480,
+     "title": "Height",
+     "type": "integer"
+    },
+    "prompt": {
+     "default": "",
+     "title": "Prompt",
+     "type": "string"
+    },
+    "reference_image_url": {
+     "title": "Reference Image Url",
+     "type": "string"
+    },
+    "seconds": {
+     "default": 4,
+     "title": "Seconds",
+     "type": "number"
+    },
+    "seed": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Seed"
+    },
+    "width": {
+     "default": 832,
+     "title": "Width",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "reference_image_url",
+    "driving_video_url"
+   ],
+   "title": "wan_animate_startArguments",
+   "type": "object"
+  },
+  "wan_restyle_get_status": {
+   "properties": {
+    "job_id": {
+     "title": "Job Id",
+     "type": "string"
+    }
+   },
+   "required": [
+    "job_id"
+   ],
+   "title": "wan_restyle_get_statusArguments",
+   "type": "object"
+  },
+  "wan_restyle_start": {
+   "properties": {
+    "control": {
+     "default": "depth",
+     "title": "Control",
+     "type": "string"
+    },
+    "height": {
+     "default": 480,
+     "title": "Height",
+     "type": "integer"
+    },
+    "prompt": {
+     "title": "Prompt",
+     "type": "string"
+    },
+    "reference_image_url": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Reference Image Url"
+    },
+    "seconds": {
+     "anyOf": [
+      {
+       "type": "number"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Seconds"
+    },
+    "seed": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Seed"
+    },
+    "strength": {
+     "default": 1.0,
+     "title": "Strength",
+     "type": "number"
+    },
+    "video_url": {
+     "title": "Video Url",
+     "type": "string"
+    },
+    "width": {
+     "default": 832,
+     "title": "Width",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "video_url",
+    "prompt"
+   ],
+   "title": "wan_restyle_startArguments",
+   "type": "object"
+  }
+ }
+}

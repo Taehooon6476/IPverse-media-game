@@ -1,0 +1,188 @@
+{
+ "version": 2,
+ "engine": "three",
+ "title": "폐허 지하도의 검문소",
+ "genre": "sf-shooter",
+ "palette": {
+  "bg": "#101b2b",
+  "accent": "#65e2cb",
+  "text": "#eff6ff"
+ },
+ "player": {
+  "ipId": "ip_dev_hero",
+  "name": "루나",
+  "modelUrl": "dev/assets/robot.glb",
+  "spriteUrl": "dev/assets/hero.png",
+  "speed": 2
+ },
+ "props": [],
+ "enemies": [
+  {
+   "ipId": "ip_dev_enemy",
+   "name": "검문병",
+   "spriteUrl": "dev/assets/hero.png",
+   "color": "#f46d83",
+   "shape": "square",
+   "speed": 1,
+   "hp": 1
+  }
+ ],
+ "difficulty": "easy",
+ "objective": {
+  "type": "kills",
+  "target": 4
+ },
+ "dialogue": [],
+ "quest": null,
+ "map": {
+  "width": 20,
+  "height": 15,
+  "seed": 4821
+ },
+ "rules": {
+  "playerHp": 200
+ },
+ "artDirection": {
+  "skyColor": "#263751",
+  "fogColor": "#516279",
+  "fogDensity": 0.012,
+  "exposure": 1.25,
+  "bloomStrength": 0.4
+ },
+ "world": {
+  "width": 100,
+  "depth": 100,
+  "groundColor": "#303f50",
+  "spawn": {
+   "x": 0,
+   "z": 40
+  },
+  "entities": [
+   {
+    "id": "wall-west",
+    "kind": "box",
+    "x": -20,
+    "z": 10,
+    "width": 1.5,
+    "depth": 18,
+    "height": 5,
+    "color": "#39495d"
+   },
+   {
+    "id": "wall-east",
+    "kind": "box",
+    "x": 20,
+    "z": 10,
+    "width": 1.5,
+    "depth": 18,
+    "height": 5,
+    "color": "#39495d"
+   },
+   {
+    "id": "pillar-a",
+    "kind": "cylinder",
+    "x": -8,
+    "z": 24,
+    "width": 2,
+    "depth": 2,
+    "height": 5,
+    "color": "#64788b"
+   },
+   {
+    "id": "pillar-b",
+    "kind": "cylinder",
+    "x": 8,
+    "z": 24,
+    "width": 2,
+    "depth": 2,
+    "height": 5,
+    "color": "#64788b"
+   },
+   {
+    "id": "exit",
+    "kind": "beacon",
+    "x": 0,
+    "z": -44,
+    "width": 4,
+    "height": 2,
+    "color": "#83b9ef",
+    "label": "지하도 출구",
+    "solid": false
+   }
+  ],
+  "propPlacements": [],
+  "enemySpawns": [
+   {
+    "id": "guard-a",
+    "enemyIndex": 0,
+    "x": -3,
+    "z": 30,
+    "stageId": "clear"
+   },
+   {
+    "id": "guard-b",
+    "enemyIndex": 0,
+    "x": 3,
+    "z": 30,
+    "stageId": "clear"
+   },
+   {
+    "id": "guard-c",
+    "enemyIndex": 0,
+    "x": -30,
+    "z": -25,
+    "stageId": "clear"
+   },
+   {
+    "id": "guard-d",
+    "enemyIndex": 0,
+    "x": 30,
+    "z": -30,
+    "stageId": "clear"
+   }
+  ]
+ },
+ "mission": {
+  "title": "검문소를 뚫고 출구로",
+  "successText": "검문소를 지나 지하도를 빠져나왔습니다.",
+  "stages": [
+   {
+    "id": "clear",
+    "type": "kills",
+    "label": "검문병 넷을 제압하세요",
+    "target": 4,
+    "entityIds": [
+     "guard-a",
+     "guard-b",
+     "guard-c",
+     "guard-d"
+    ],
+    "story": {
+     "speaker": "루나",
+     "text": "검문병이 길을 막고 있어. 가까운 둘부터 처리하자."
+    }
+   },
+   {
+    "id": "extract",
+    "type": "reach",
+    "label": "지하도 출구에 도착하세요",
+    "target": 1,
+    "entityIds": [
+     "exit"
+    ],
+    "holdSec": 0.5
+   }
+  ]
+ },
+ "mechanics": {
+  "dash": true,
+  "jump": true,
+  "sprint": true,
+  "autoFire": false,
+  "regenPerSec": 0,
+  "weaponDamage": 3,
+  "fireIntervalSec": 0.25,
+  "interactRadius": 2.4,
+  "style": "arpg"
+ }
+}

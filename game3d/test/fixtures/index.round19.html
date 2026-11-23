@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IPverse 게임</title>
+<link rel="stylesheet" href="./ui.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module" src="./runtime3d.js"></script>
+</head>
+<body>
+<div id="stage">
+  <div id="game"></div>
+  <div id="floats" aria-hidden="true"></div>
+  <div id="crosshair" hidden aria-hidden="true"></div>
+  <div id="hud" hidden>
+    <div id="topbar">
+      <div><div id="title"></div><div id="objective" aria-live="polite"></div></div>
+      <div id="status" aria-live="polite"></div>
+    </div>
+    <div id="notice" hidden aria-live="polite"></div>
+    <div id="vitals" data-kind="none">
+      <div id="hp"><div id="hpbar"><div id="hpfill"></div></div><span id="hptext"></span></div>
+      <div id="hearts" role="img"></div>
+      <div id="shield" hidden></div>
+      <div id="dash" title="대시"><span>대시</span><div id="dashbar"><div id="dashfill"></div></div></div>
+    </div>
+    <div id="hint"></div>
+  </div>
+  <div id="say" hidden aria-live="polite"><b></b><span></span></div>
+  <div id="loading" role="status"><div class="spinner"></div>불러오는 중…</div>
+  <div id="end" hidden role="dialog" aria-modal="true" aria-labelledby="end-title">
+    <p id="end-title"></p>
+    <button id="restart" type="button">다시 시작</button>
+  </div>
+  <div id="errors" hidden role="alert"></div>
+  <div id="fps" hidden></div>
+</div>
+<div id="ad" hidden><video playsinline autoplay muted></video><button id="skip"></button></div>
+</body>
+</html>

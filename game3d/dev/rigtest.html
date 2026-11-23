@@ -1,0 +1,31 @@
+<!doctype html>
+<!-- localhost only: the three race cars side by side, rigged, wheels tinted red, spun and steered -->
+<html><body style="margin:0;background:#888">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+<pre id="testlog" style="position:fixed;top:0;left:0;color:#fff;font:12px monospace;margin:4px"></pre>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { carBody } from '../race.js';
+import { driveRig } from '../carrig.js';
+const q = new URLSearchParams(location.search);
+const r = new THREE.WebGLRenderer({ antialias: true }); r.setSize(1280, 720); document.body.appendChild(r.domElement);
+const scene = new THREE.Scene(); scene.add(new THREE.HemisphereLight(0xffffff, 0x666666, 6));
+const view = q.get('view') ?? 'side';
+const cam = new THREE.PerspectiveCamera(30, 1280 / 720, .1, 200);
+if (view === 'side') cam.position.set(24, 1.2, 0); else cam.position.set(16, 9, 14);
+cam.lookAt(0, .7, 0);
+const ids = ['ip_dde4cdfd17', 'ip_7fe3153fb9', 'ip_3290c81cd7'], log = [];
+const rigs = [];
+for (const [i, id] of ids.entries()) {
+  const gltf = await new GLTFLoader().loadAsync(`/build/rigtest/${id}.glb`);
+  const g = carBody(gltf.scene); g.position.z = (i - 1) * 6; scene.add(g);
+  const rig = g.userData.rig; rigs.push(rig);
+  if (q.has('tint')) for (const w of rig.wheels) w.spin.traverse((n) => { if (n.isMesh) n.material = new THREE.MeshStandardMaterial({ color: w.front ? 0xff2020 : 0x2060ff }); });
+  log.push(`${id} wheels=${rig.wheels.length} ` + rig.wheels.map((w) => w.spin.children.reduce((n, m) => n + m.geometry.attributes.position.count / 3, 0)).join(','));
+}
+const spin = +(q.get('spin') ?? 0), steer = +(q.get('steer') ?? 0);
+for (const rig of rigs) { driveRig(rig, 1, { speed: spin * rig.wheels[0]?.radius || 0, steer }); rig.body.rotation.set(0, 0, 0); rig.body.position.y = 0; }
+r.render(scene, cam);
+document.getElementById('testlog').textContent = log.join('\n');
+</script></body></html>

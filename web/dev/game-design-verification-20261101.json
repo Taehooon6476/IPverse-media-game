@@ -1,0 +1,157 @@
+{
+  "verifiedAt": "2026-11-01T14:50:20.751141+00:00",
+  "status": "PASS",
+  "scope": "IPverse web local source/build/tests/browser only",
+  "contract": {
+    "route": "POST /api/sessions/{id}/chat",
+    "body": [
+      "text",
+      "gameDesign"
+    ],
+    "gameDesignFields": [
+      "prompt",
+      "castIpIds",
+      "playerIpId",
+      "weaponIpId",
+      "propIpIds",
+      "enemyIpIds",
+      "npcIpIds"
+    ],
+    "fullBriefIncludedInPrompt": true,
+    "manualCastRequiresExactlyOnePlayer": true,
+    "maxWeapons": 1,
+    "maxNpcs": 1,
+    "emptyCastAllowsModelSelection": true,
+    "maxPromptUnicodeCodePoints": 4000,
+    "fullPromptOverflowIsBlockedWithoutTruncation": true
+  },
+  "checks": {
+    "productionBuild": "PASS",
+    "typecheck": "PASS",
+    "vitest": {
+      "testsRun": 28,
+      "files": 5,
+      "failed": 0
+    },
+    "actualBrowser": {
+      "namedSession": "ipverse-design-ui-qa",
+      "mode": "local mock fixture",
+      "promptRetained": true,
+      "selectedRoles": [
+        "player",
+        "prop",
+        "enemy"
+      ],
+      "selectedIpBeforeOptionalTypes": true,
+      "submissionEnabledWithValidCast": true,
+      "desktopViewport": [
+        1440,
+        1000
+      ],
+      "mobileViewport": [
+        390,
+        844
+      ],
+      "horizontalOverflow": false,
+      "drawerFitsMobileViewport": true,
+      "v2SummaryFixture": {
+        "stages": [
+          "안내자에게 의뢰 받기",
+          "코어 3개 수집",
+          "탈출 문으로 이동"
+        ],
+        "bindings": [
+          "player:3D",
+          "prop:image:3placements",
+          "npc:3D:1placement"
+        ],
+        "originalRequestSeparate": true
+      },
+      "pageErrors": []
+    }
+  },
+  "limits": {
+    "deployedUiVerified": false,
+    "realGameGenerationVerified": false,
+    "modelsInvoked": false,
+    "awsResourcesModified": false,
+    "backendSourceModified": false,
+    "gameRuntimeSourceModified": false
+  },
+  "setupDiagnostics": [
+    "One temporary summary fixture import used a named import for a CommonJS optimized module, producing TypeError; corrected to the actual default export before final screenshots.",
+    "Two partial session-link label selectors timed out because labels include timestamps; final UI checks used the already-polled mock session."
+  ],
+  "screenshots": [
+    {
+      "path": "dev/game-design-desktop-20261101.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "770a0bbc405678b05c29856251ff3ed54cf1e6edde0ffc2442af90bba63d77ec",
+      "scope": "Local mock or authored UI fixture; not AWS generation evidence"
+    },
+    {
+      "path": "dev/game-design-prompt-mobile-20261101.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "7d5a52a3d1a9de833f06477176c4f03e0914f27022f18215705f57e1a24e7783",
+      "scope": "Local mock or authored UI fixture; not AWS generation evidence"
+    },
+    {
+      "path": "dev/game-summary-v2-desktop-20261101.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "7ced8464f20ae568308fd65aab83a6da8ed2bcf4215a1d3497ed6cd9f67b477e",
+      "scope": "Local mock or authored UI fixture; not AWS generation evidence"
+    },
+    {
+      "path": "dev/game-summary-v2-mobile-20261101.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "59ca1d1e8552810d054959be230a6071023d88d54a9086ae20c97d782ed2b6eb",
+      "scope": "Local mock or authored UI fixture; not AWS generation evidence"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "src/api.ts",
+      "sha256": "7fc29f617d4128c75f8697a9d489a5aba06f06da7cbcc79f0dcb81068a613065"
+    },
+    {
+      "path": "src/App.tsx",
+      "sha256": "c3950ac41e354603d1a07fa1c7802a395dfacbff08f39efe22295897dcc49739"
+    },
+    {
+      "path": "src/types.ts",
+      "sha256": "4e6fe9d84b347a5d2beafdd77541d041fe4177bffb88a9f54b527b1c600ccf67"
+    },
+    {
+      "path": "src/components/DesignDrawer.tsx",
+      "sha256": "e3174c094d7688ee6ee566b83ed8965b51ceb16ec0b53f9173cd718bca8bcb71"
+    },
+    {
+      "path": "src/components/GamePane.tsx",
+      "sha256": "723c5db65703b722a4feff984296c83af0b7e718b6b3c3c19e71454167115699"
+    },
+    {
+      "path": "src/components/GameDesignSummary.tsx",
+      "sha256": "5943486856fddc9e4bdb19d235ce6c36885137eac7396b03a95d52f7365d62c3"
+    },
+    {
+      "path": "src/origin.css",
+      "sha256": "c215c877c87e37688c17ec1b33cbbacdc509b3ea3ad1caeedc657abaf0984017"
+    },
+    {
+      "path": "src/api.test.ts",
+      "sha256": "8c14a46789b5a834d276fd8b7a67661cb06ad950fa58f4f1bed720b5537902cc"
+    },
+    {
+      "path": "src/game-design.test.tsx",
+      "sha256": "c288e9f233168a89ca317b17857b0bee4b4fe7d627d6e28d443255eac34bbb1c"
+    },
+    {
+      "path": "src/game-summary.test.tsx",
+      "sha256": "b3d3172afd9738c05e9372e46c750220e7d5c0028893a0279a244ca73f83a424"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "title": "루나의 궤도 탈출",
+  "genre": "sf-shooter",
+  "palette": {"bg": "#0b0d12", "accent": "#5de6cf", "text": "#f5f7fa"},
+  "player": {"ipId": "ip_dev_hero", "name": "루나", "spriteUrl": "dev/assets/hero.png", "speed": 2},
+  "props": [
+    {"ipId": "ip_dev_prop", "name": "플라즈마 코어", "spriteUrl": "dev/assets/prop.png", "effect": "score"},
+    {"ipId": "ip_dev_prop", "name": "수리 키트", "spriteUrl": "dev/assets/prop.png", "effect": "heal"},
+    {"ipId": "ip_dev_prop", "name": "방어막 셀", "spriteUrl": "dev/assets/prop.png", "effect": "shield"},
+    {"ipId": "ip_dev_prop", "name": "카드키", "spriteUrl": "dev/assets/prop.png", "effect": "key"}
+  ],
+  "enemies": [
+    {"name": "드론", "color": "#ff5a5a", "shape": "triangle", "speed": 2, "hp": 1},
+    {"name": "장갑 포드", "color": "#ffb84d", "shape": "square", "speed": 1, "hp": 3},
+    {"name": "탐사구", "color": "#b28dff", "shape": "circle", "speed": 3, "hp": 1}
+  ],
+  "objective": {"type": "kills", "target": 15},
+  "difficulty": "normal",
+  "dialogue": [],
+  "quest": null,
+  "map": {"width": 20, "height": 15, "seed": 1234}
+}

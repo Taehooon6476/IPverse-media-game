@@ -1,0 +1,34 @@
+<!doctype html>
+<!-- The studio's big view as far as a game page can tell (web BigGameModal.tsx): the game in a frame, the frame given
+     the focus, and the view's own Esc hook put on the frame's window as the frame loads, before the game has booted.
+     dev/qa-round20.mjs (scene bigview) presses real keys here: the Esc that pauses a round must not reach the hook
+     (one press must not both pause the game and close the view); at the briefing and the end card it does.
+     window.closes counts the presses the view would have closed on. ?src=<the game's address> -->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>크게 보기 stand-in</title>
+<style>
+  html, body { height: 100%; margin: 0; background: #10141c; color: #e8eef6; font: 14px system-ui, sans-serif; }
+  header { box-sizing: border-box; height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; }
+  iframe { display: block; width: 100%; height: calc(100% - 44px); border: 0; }
+</style>
+</head>
+<body>
+<header><b>크게 보기 (stand-in)</b><span id="closes">Esc로 닫힌 횟수 0</span></header>
+<iframe id="frame" title="게임" allow="autoplay; fullscreen; gamepad"></iframe>
+<script>
+  const frame = document.getElementById('frame');
+  window.closes = 0;
+  frame.onload = () => {
+    frame.contentWindow.addEventListener('keydown', (k) => {
+      if (k.key !== 'Escape') return;
+      window.closes += 1;
+      document.getElementById('closes').textContent = `Esc로 닫힌 횟수 ${window.closes}`;
+    });
+    frame.focus();
+  };
+  frame.src = new URLSearchParams(location.search).get('src');
+</script>
+</body>
+</html>

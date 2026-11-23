@@ -1,0 +1,1515 @@
+/* ORIGIN-style layer, loaded after styles.css: sidebar, sticky header, hero, numbered panes, boxed tabs, genre radio
+ * tabs, model pickers by the composer, edit drawer, publish modal, split login. */
+
+/* 12 px at least for text in the shell */
+.eyebrow { font-size: 12px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
+.eyebrow--orange { color: var(--accent); }
+
+/* controls */
+.btn { border-radius: 6px; background: var(--panel-2); border-color: var(--border-strong); font-size: 13px; }
+.btn-primary { background: var(--lime); color: var(--lime-ink); }
+.btn-primary:hover { background: var(--lime); filter: brightness(1.05); }
+.btn-outline { background: transparent; border-color: var(--border-strong); color: var(--text); }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); background: transparent; }
+.btn-edit { border-color: color-mix(in srgb, var(--accent) 55%, var(--border-strong)); color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.btn-edit:hover { background: color-mix(in srgb, var(--accent) 16%, transparent); }
+.link-btn { padding: 0; border: 0; background: none; color: var(--accent); font: inherit; font-size: 13px; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+/* #667059: 3.6:1 against the field, so its edge can be seen */
+:where(input:not([type="radio"]), select, textarea) { border-radius: 6px; background: #12150f; border-color: #667059; }
+:where(input, select, textarea):focus { border-color: color-mix(in srgb, var(--lime) 60%, var(--border-strong)); }
+
+/* brand */
+.brand { gap: 11px; padding: 0 6px; }
+.brand-mark {
+  position: relative; width: 26px; height: 26px; border-radius: 0; background: none;
+  border: 2.5px solid var(--accent); transform: rotate(-12deg);
+}
+.brand-mark::after {
+  content: ""; position: absolute; top: -8px; right: -8px; width: 8px; height: 8px;
+  border: 2.5px solid var(--accent); background: var(--panel);
+}
+.brand-name { display: grid; }
+.brand-name strong { font-size: 22px; letter-spacing: -1px; font-weight: 750; line-height: 1.1; }
+.brand-name small { margin-top: 5px; font-size: 12px; letter-spacing: 2px; color: #9a9f90; font-weight: 500; }
+.brand-dot { color: var(--accent); }
+.brand--lg .brand-name strong { font-size: 26px; }
+.topbar-logo .brand-mark { width: 18px; height: 18px; margin-right: 6px; }
+/* with a session open the logo is the way to the start screen */
+a.topbar-logo { min-height: 40px; padding-inline: 4px; margin-inline: -4px; border-radius: 6px; color: inherit; text-decoration: none; }
+a.topbar-logo:hover { color: var(--accent); }
+
+/* sidebar */
+.sidebar { padding: 26px 16px 16px; gap: 0; }
+.sidebar nav { gap: 0; }
+.new-session {
+  margin-top: 30px; height: 44px; padding: 0 14px; gap: 10px;
+  border: 0; border-radius: 7px; background: var(--accent); color: var(--accent-ink); font-weight: 700; font-size: 13px;
+  box-shadow: 0 2px 10px rgb(0 0 0 / .25);
+}
+.new-session:hover, .new-session[aria-expanded="true"] { color: var(--accent-ink); filter: brightness(1.06); }
+.new-session .plus { font-size: 18px; line-height: 1; }
+.new-session-form { margin-top: 10px; }
+.side-label { margin: 28px 10px 12px; font-size: 9px; letter-spacing: 1.8px; color: var(--faint); }
+.side-label--row { display: flex; justify-content: space-between; }
+.side-nav {
+  display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 6px;
+  background: var(--panel-3); color: #d4e4ba; font-size: 13px;
+}
+.side-nav svg { color: #a4b28f; flex: none; }
+/* 시작 화면: the row under 새 세션 while a session is open */
+.side-home { width: 100%; margin-top: 8px; border: 0; font: inherit; font-size: 13px; text-align: left; cursor: pointer; }
+.side-home:hover { color: var(--text); }
+.nav-dot { width: 5px; height: 5px; margin-left: auto; border-radius: 50%; background: var(--lime); }
+.session { padding: 10px 9px; border: 1px solid transparent; border-radius: 6px; margin-bottom: 4px; }
+.session:hover { background: #20251b; }
+.session[aria-current="page"] { background: #20251b; border-color: #404934; box-shadow: none; }
+.session-icon { width: 28px; height: 30px; border-radius: 5px; background: #20261a; color: #8e9d7e; }
+.session[aria-current="page"] .session-icon { background: color-mix(in srgb, var(--accent) 10%, transparent); color: var(--accent); }
+.session-title { font-size: 13px; font-weight: 500; color: #c4ccb8; }
+.session-meta { font-size: 12px; color: var(--faint); }
+/* the folds and the session list scroll as one: the list alone could shrink to nothing with both folds open */
+.side-scroll { display: flex; flex-direction: column; flex: 1; min-height: 0; margin: 0 -8px; padding: 0 8px 8px; overflow-y: auto;
+  overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent; }
+.side-scroll > * { flex: none; }
+.side-scroll .session-list { flex: none; overflow: visible; } /* as tall as its rows: the scroller scrolls, not the list */
+.side-scroll .conn-mini { max-height: none; overflow: visible; }
+/* An open fold's content scrolls inside its share of the window, so the session list keeps its first rows: one fold
+   may take --fold-room, two open ones half of it each. The room is the window less the top of the sidebar (brand,
+   새 세션, 시작 화면, the two fold heads) and the list's label, find box and three rows. */
+.side-scroll { --fold-room: max(150px, calc(100dvh - 610px)); }
+@media (max-width: 767.98px) { .side-scroll { --fold-room: max(140px, calc(100dvh - 690px)); } } /* the phone's foot (who, 게시하기, 로그아웃) takes 80 px more */
+.side-scroll > .fold > .fold-region[data-open] > .fold-inner { max-height: var(--fold-room); overflow-y: auto; overscroll-behavior: contain;
+  scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent; }
+.side-scroll:has(#work-acc-region[data-open]):has(#conn-acc-region[data-open]) > .fold > .fold-region > .fold-inner { max-height: calc(var(--fold-room) / 2); }
+/* a long list is found by name; the delete button shows at rest, not only under the pointer */
+.session-find { margin: 0 0 8px; }
+.session-find input { height: 34px; font-size: 13px; }
+.session-delete { opacity: .45; }
+.session-row:hover .session-delete, .session-row:focus-within .session-delete { opacity: 1; }
+.session-list .session { padding-right: 40px; } /* the title never runs under the button */
+@media (hover: none) { .session-delete { opacity: 1; } }
+/* a row's name is changed in place: ✎ stands left of the delete button, shown at rest like it; the field takes the
+   row's place while it is open */
+.session-rename {
+  position: absolute; top: 50%; right: 38px; translate: 0 -50%; display: grid; place-items: center; width: 28px; height: 28px;
+  padding: 0; border: 0; border-radius: 6px; background: var(--panel-3); color: var(--muted); cursor: pointer; opacity: .45;
+  transition: opacity .12s ease-out, color .12s ease-out;
+}
+.session-row:hover .session-rename, .session-row:focus-within .session-rename { opacity: 1; }
+.session-rename:hover, .session-rename:focus-visible { color: var(--text); }
+@media (hover: none) { .session-rename { opacity: 1; } }
+.session-list .session-row--tools .session { padding-right: 72px; } /* the title never runs under the two buttons */
+.session-rename-form { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 4px; padding: 8px;
+  border: 1px solid #404934; border-radius: 6px; background: #20251b; }
+.session-rename-form input { flex: 1 1 100%; min-width: 0; height: 32px; font-size: 13px; }
+.session-rename-count { margin-right: auto; color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.session-rename-count.is-full, .hero-rename-count.is-full { color: #fcd34d; } /* 60/60: said, not silent */
+.session-rename-form .form-error { flex-basis: 100%; margin: 0; }
+/* the list while it loads */
+.session-loading { display: grid; gap: 6px; }
+.session-skel { display: block; height: 50px; border-radius: 6px; }
+.sidebar-who { flex-basis: 100%; margin: 0 0 2px; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
+.sidebar-foot { flex-wrap: wrap; padding-top: 10px; border-top: 1px solid var(--border); }
+
+/* sticky header */
+.topbar { padding: 0 32px; background: color-mix(in srgb, #11140e 90%, transparent); border-bottom: 1px solid var(--border); }
+.topbar.is-scrolled { box-shadow: 0 6px 20px rgb(0 0 0 / .35); }
+.breadcrumb { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; color: var(--faint); font-size: 12px; }
+.breadcrumb > span, .breadcrumb > svg { flex: none; }
+.topbar-title { font-size: 13px; font-weight: 500; color: #c9d0be; max-width: 48ch; }
+.topbar-actions { align-items: center; gap: 12px; }
+.status-pill { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); white-space: nowrap; }
+.status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 3px rgb(181 217 137 / .12); }
+.status-pill.is-busy .status-dot { background: var(--accent); box-shadow: 0 0 0 3px rgb(242 143 80 / .14); animation: pulse 1.2s ease-in-out infinite; }
+/* the open session stopped answering */
+.status-pill.is-offline { color: var(--err); }
+.status-pill.is-offline .status-dot { background: var(--err); box-shadow: 0 0 0 3px rgb(231 130 106 / .16); animation: pulse 1.2s ease-in-out infinite; }
+.topbar-jobs { align-items: center; gap: 12px; }
+/* the first crumb goes back to the start screen */
+.breadcrumb-home { flex: none; color: var(--muted); text-decoration: none; border-radius: 4px; }
+.breadcrumb-home:hover { color: var(--text); text-decoration: underline; }
+/* who is signed in, on the account menu's trigger */
+.topbar-account-name { max-width: 14ch; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+
+/* hero row */
+.app { grid-template-rows: var(--header-h) auto 1fr var(--dock-h); grid-template-areas: "nav header" "nav hero" "nav main" "nav chat"; }
+.page-hero { grid-area: hero; padding: 30px 32px 6px; display: grid; gap: 10px; }
+.hero-title { font-size: 28px; font-weight: 600; letter-spacing: -.6px; }
+.hero-logline { max-width: 80ch; color: var(--muted); font-size: 13px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.hero-chip {
+  display: inline-flex; align-items: center; gap: 8px; height: 28px; padding: 0 10px; border-radius: 5px;
+  border: 1px solid var(--border-strong); color: var(--muted); font-size: 12px;
+}
+.hero-chip--genre { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 55%, var(--border-strong)); }
+.swatches i { border-color: var(--panel); }
+.split { gap: 24px; padding: 20px 32px 28px; }
+
+/* numbered panes */
+.pane { background: #181b15; border-color: var(--border); border-radius: 10px; }
+.pane-head { justify-content: flex-start; gap: 14px; height: auto; padding: 20px 20px 16px; border-bottom: 1px solid var(--border); }
+.pane-num {
+  display: grid; place-items: center; flex: none; width: 28px; height: 28px; border-radius: 5px;
+  border: 1px solid #4b3a2a; background: #2a2118; color: var(--accent); font-size: 12px; font-weight: 600;
+}
+.pane-head h2 { font-size: 13px; letter-spacing: 1.6px; font-weight: 650; }
+.pane-head h2 span { color: var(--muted); font-weight: 400; }
+.pane-sub { margin-top: 4px; font-size: 11px; }
+
+/* tabs: boxed, the active one outlined in orange */
+.tablist { gap: 8px; padding: 14px 16px 0; border-bottom: 0; }
+.tab { flex: 1; justify-content: center; height: 36px; border: 1px solid transparent; border-radius: 5px; font-size: 13px; }
+.tab::after { display: none; }
+.tab[aria-selected="true"] { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 70%, transparent); background: #2a2118; }
+.tab[aria-selected="true"] .tab-count { background: color-mix(in srgb, var(--accent) 22%, transparent); color: #ffb489; } /* 4.39:1 in the accent itself */
+.tabpanel { padding: 16px; }
+
+/* genre radio tabs */
+.genre-tabs { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px 16px 0; }
+.genre-tab {
+  height: 34px; padding: 0 14px; border-radius: 5px; border: 1px solid var(--border-strong);
+  background: transparent; color: var(--muted); font: inherit; font-size: 13px; cursor: pointer;
+}
+.genre-tab:hover { color: var(--text); }
+.genre-tab[aria-checked="true"] { color: #d4e4ba; border-color: #5b6d43; background: #232b1a; }
+
+/* cards and media */
+.card { background: #1c2018; border-color: var(--border); border-radius: 8px; }
+.card-media { background: #12150f; }
+/* the card's picture opens big: a plain button around it */
+.card-media-open { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.card-media-open:focus-visible { outline-offset: -3px; }
+.cutout-toggle[aria-pressed="true"] { background: var(--lime); color: var(--lime-ink); }
+/* 배경 · 전체 장면 sits on the picture itself: filled like the 적 and 무기 badges, to stay readable on a bright scene */
+.kind-badge--scene { background: rgb(14 17 22 / .78); color: var(--text); }
+.video-section h3 { flex-wrap: wrap; }
+.video-section .count { font-size: 12px; }
+.section-action { margin-left: auto; }
+.figure-actions { display: inline-flex; gap: 12px; flex: none; }
+.video-card figcaption span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.empty { border-radius: 8px; }
+.jobs .job { background: #1c2018; border-radius: 8px; }
+.spec { background: #0e100c; color: #d6e3c0; }
+
+/* composer with model pickers */
+.chat { background: #13160f; }
+.composer-models { display: flex; gap: 8px; flex: none; }
+.composer-models .listbox { left: 0; right: auto; }
+/* ... unless that takes it past the window's edge (Dropdown.tsx measures it) */
+.dropdown-custom .listbox.is-end { left: auto; right: 0; }
+.dropdown-custom .listbox.is-start { left: 0; right: auto; }
+.composer-models .dropdown-button { min-width: 0; height: 46px; font-weight: 500; font-size: 12px; }
+.bubble { border-radius: 10px; }
+.msg--user .bubble { background: color-mix(in srgb, var(--lime) 14%, var(--panel-2)); }
+.listbox { background: #20251b; border-radius: 8px; }
+/* the option the keys are on shows a ring: its tint alone is too faint and the list's own outline is off */
+.listbox:focus .is-active { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+/* shared dialog bits (drawer + modal) */
+.dialog-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 18px 16px 16px 22px; border-bottom: 1px solid var(--border); }
+@media (pointer: coarse) { .dialog-head .icon-btn { width: 44px; height: 44px; } }
+.dialog-head .eyebrow { font-size: 12px; letter-spacing: 2px; }
+.dialog-head h2 { margin-top: 4px; font-size: 18px; font-weight: 650; }
+.dialog-body { display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 18px; flex: 1; overflow-y: auto; padding: 22px; }
+.dialog-lead { font-size: 13px; }
+.dialog-empty { margin: 22px; }
+
+/* drawer (edit) */
+.drawer { width: 440px; }
+.edit-preview { margin: 0; display: grid; gap: 8px; }
+.media--image > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #0e100c; }
+.edit-preview figcaption { font-size: 12px; color: var(--muted); }
+.edit-prompt { font-size: 12px; color: var(--faint); font-family: var(--mono); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: -8px; }
+.chip-btn {
+  max-width: 100%; height: 28px; padding: 0 10px; border-radius: 999px; border: 1px solid var(--border-strong);
+  background: transparent; color: var(--muted); font: inherit; font-size: 12px; cursor: pointer;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.chip-btn:hover { color: var(--text); border-color: var(--accent); }
+.row--fields > .field { flex: 1; min-width: 0; }
+/* the chat progress spinner (the Unreal overlay's 34 px .spinner rule comes later in styles.css) */
+.progress .spinner { width: 11px; height: 11px; border-width: 2px; border-color: currentColor; border-right-color: transparent; }
+
+/* modal (publish) */
+.modal-root { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 24px; }
+.modal-backdrop { position: absolute; inset: 0; background: rgb(5 7 4 / .66); animation: fade .2s ease-out; }
+.modal {
+  position: relative; display: flex; flex-direction: column; width: min(560px, 100%); max-height: calc(100dvh - 48px);
+  background: var(--panel); border: 1px solid var(--border-strong); border-radius: 12px; box-shadow: var(--shadow);
+  animation: pop .18s ease-out;
+}
+@keyframes pop { from { opacity: 0; transform: translateY(8px) scale(.98); } }
+.radio:has(input:checked) { border-color: var(--lime); background: color-mix(in srgb, var(--lime) 8%, var(--panel-2)); }
+.radio input { accent-color: var(--lime); }
+.publish-result { background: rgb(181 217 137 / .07); border-color: rgb(181 217 137 / .35); }
+/* the address's actions: 주소 복사 leads, 게시 내리기 stands apart at the end; and the line that says a game was taken down */
+.publish-result-actions { flex-wrap: wrap; align-items: center; }
+.publish-down { margin-left: auto; color: #ff9b8f; }
+.publish-note { padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px; font-size: 13px; color: var(--muted); }
+/* an IP's picture opened big; the cutout over the card's checker */
+.picture-modal { width: min(820px, 100%); }
+.picture-figure { margin: 0; display: grid; gap: 12px; }
+.picture-stage { display: grid; place-items: center; border-radius: 8px; background: #0e100c; overflow: hidden; }
+.picture-stage.is-cutout { background: repeating-conic-gradient(#2a3240 0 25%, #1e242e 0 50%) 0 0 / 16px 16px; }
+.picture-stage img { display: block; max-width: 100%; max-height: calc(100dvh - 230px); object-fit: contain; }
+.picture-prompt summary { cursor: pointer; font-size: 13px; color: var(--muted); }
+.picture-prompt p { margin: 8px 0 0; font-size: 13px; line-height: 1.6; color: var(--muted); overflow-wrap: anywhere; }
+/* on a phone the big picture takes the window's width, so it is not smaller than the card it was opened from */
+@media (max-width: 767.98px) {
+  .modal-root.picture-root { padding: 0; place-items: stretch; }
+  .modal-root .picture-modal { width: 100%; height: 100%; max-height: none; border: 0; border-radius: 0; }
+  .picture-modal .dialog-body { padding: 0 0 16px; align-content: center; }
+  .picture-stage { border-radius: 0; }
+  .picture-stage img { width: 100%; max-height: calc(100dvh - 150px); }
+  .picture-figure figcaption { padding-inline: 16px; }
+}
+
+.toast { border-radius: 8px; background: #20251b; }
+/* left of an open drawer, whichever is wider: the drawer (440 px; the design drawer 520, the connections' 480) or the
+   chat column */
+@media (min-width: 768px) {
+  /* ... beside the stack in the page, or on <body> (버전 기록): no sibling of the stack then */
+  .drawer-root ~ .toasts, body:has(> .drawer-root) .toasts { right: max(calc(440px + 16px), calc(var(--chat-w, 0px) + 16px)); }
+  .drawer-root:has(.design-drawer) ~ .toasts { right: max(calc(520px + 16px), calc(var(--chat-w, 0px) + 16px)); }
+  .drawer-root:has(.drawer--conn) ~ .toasts { right: max(calc(480px + 16px), calc(var(--chat-w, 0px) + 16px)); }
+}
+
+/* login: left visual, right form */
+.login { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); place-items: stretch; padding: 0; background: var(--bg); }
+.login-visual {
+  position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 32px; padding: 48px 56px;
+  background: radial-gradient(600px 420px at 40% 40%, #2b3a1d 0%, transparent 70%), #12160e; border-right: 1px solid var(--border);
+}
+.orbit { position: relative; align-self: center; width: 280px; height: 240px; display: grid; place-items: center; color: var(--lime); }
+.ring { position: absolute; inset: 0; border: 1px solid rgb(208 239 152 / .28); border-radius: 50%; }
+.ring--a { transform: rotate(-20deg) scaleY(.6); }
+.ring--b { transform: rotate(35deg) scaleY(.75); }
+.cube { filter: drop-shadow(0 0 18px rgb(208 239 152 / .35)); }
+.login-headline { margin-top: 18px; font-size: clamp(28px, 3.2vw, 40px); line-height: 1.35; letter-spacing: -1px; }
+.login-headline em { font-style: normal; color: var(--lime); }
+.login-copy .muted { margin-top: 18px; font-size: 13px; line-height: 1.8; }
+.login-tags { display: flex; gap: 8px; margin: 22px 0 0; padding: 0; list-style: none; }
+.login-tags li { padding: 6px 12px; border: 1px solid #3f4a33; border-radius: 4px; font-size: 12px; color: #c8d4b4; }
+.login-side { position: relative; display: grid; place-items: center; padding: 48px 24px; }
+.login-side > .lang-toggle { position: absolute; top: 16px; right: 20px; }
+.lang-toggle { min-width: 44px; height: 36px; padding: 0 10px; font-size: 13px; font-weight: 700; }
+/* the toggle keeps the top right corner: in the start screen's top bar nothing before it takes the free room, and on
+   the login page of a phone the form starts under it */
+.topbar > .lang-toggle { flex: none; margin-left: auto; }
+.topbar > .topbar-jobs + .lang-toggle { margin-left: 0; }
+@media (max-width: 900px) { .login-side { padding-top: 64px; } }
+/* 데모 로그인 under the form with what it is */
+.login-demo { display: grid; gap: 8px; padding-top: 16px; border-top: 1px solid var(--border); }
+.login-demo .hint { text-align: left; color: var(--muted); line-height: 1.6; }
+.login-card { width: min(380px, 100%); padding: 0; gap: 18px; background: none; border: 0; box-shadow: none; }
+.login-card h1 { margin-top: 10px; font-size: 22px; font-weight: 600; }
+.login-card .btn-block { height: 44px; }
+.login-foot { padding-top: 16px; border-top: 1px solid var(--border); }
+/* what the product is, in one line under the heading */
+.login-what { margin-top: 8px; color: #c9d0be; font-size: 13px; line-height: 1.7; }
+.login-card .login-what + .muted { margin-top: 6px; font-size: 13px; }
+/* the sign-up rules stay under their fields while they are typed; each password rule lights up when it is met */
+.auth-panel .field > label { padding: 0; font-size: 13px; font-weight: 600; color: var(--muted); }
+.auth-panel .field > .form-error { font-size: 12px; line-height: 1.5; }
+.auth-panel .field [aria-invalid="true"] { border-color: var(--err); }
+.pw-rules { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.pw-rules li { padding: 2px 8px; border: 1px solid var(--border-strong); border-radius: 999px; color: var(--muted); font-size: 12px; }
+.pw-rules li.is-met { color: var(--lime); border-color: color-mix(in srgb, var(--lime) 50%, var(--border-strong)); }
+.pw-rules li.is-met::before { content: "✓ "; }
+
+@media (max-width: 900px) {
+  .login { grid-template-columns: minmax(0, 1fr); }
+  .login-visual { display: none; }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .sidebar .side-label, .new-session kbd { display: none; }
+  .side-nav { justify-content: center; width: 44px; padding: 12px 0; }
+  .new-session { width: 44px; justify-content: center; padding: 0; }
+  .split { padding: 16px; }
+}
+@media (max-width: 767.98px) {
+  .app { grid-template-rows: var(--header-h) auto 1fr auto; grid-template-areas: "header" "hero" "main" "chat"; }
+  .page-hero { padding: 20px 16px 0; }
+  .hero-title { font-size: 22px; }
+  .split { padding: 16px; }
+  .breadcrumb { display: none; }
+  .composer { flex-wrap: wrap; }
+  .composer-models { width: 100%; }
+  .composer-models .dropdown { flex: 1; }
+  .drawer { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .modal, .modal-backdrop { animation: none; }
+  .status-pill.is-busy .status-dot { animation: none; }
+}
+
+/* micro-interaction buttons (ActionButton) */
+.action-btn { position: relative; gap: 6px; transition: background-color .15s, border-color .15s, color .15s, transform .15s; }
+.action-btn:active:not(:disabled, [aria-disabled="true"]) { transform: scale(.96); }
+/* off but not natively disabled, so it keeps the keyboard focus (ActionButton): the look of .btn:disabled */
+.action-btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
+.action-btn.is-busy { cursor: progress; }
+.action-btn.is-done { color: var(--ok); border-color: rgb(181 217 137 / .5); }
+.action-btn.is-error { animation: shake .3s ease-in-out; }
+.action-spin {
+  width: 11px; height: 11px; border-radius: 50%; border: 2px solid currentColor; border-right-color: transparent;
+  animation: spin .8s linear infinite;
+}
+.action-check { animation: pop .15s ease-out; }
+.link-btn.action-btn { height: auto; }
+@keyframes shake { 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
+
+/* version badge is a button */
+.version-btn { display: inline-flex; align-items: center; gap: 6px; background: transparent; cursor: pointer; font: inherit; font-size: 12px; font-weight: 700; }
+.version-btn:hover { border-color: var(--accent); color: var(--accent); }
+.version-count { min-width: 16px; padding: 0 4px; border-radius: 999px; background: color-mix(in srgb, var(--accent) 22%, transparent); color: var(--accent); font-size: 12px; text-align: center; }
+/* tap targets under a finger */
+@media (pointer: coarse) { .version-btn, .card-media .cutout-toggle { min-height: 40px; min-width: 44px; padding-inline: 12px; justify-content: center; } } /* under a finger: 40 px */
+
+/* version drawer */
+.compare { margin: 0; display: grid; gap: 8px; }
+.compare-stage > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #0e100c; }
+.compare-line { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: var(--lime); box-shadow: 0 0 8px rgb(208 239 152 / .6); pointer-events: none; }
+.compare-tag { position: absolute; top: 8px; padding: 2px 8px; border-radius: 4px; background: rgb(14 16 12 / .78); font-size: 12px; font-weight: 700; }
+.compare-tag--left { left: 8px; color: var(--lime); }
+.compare-tag--right { right: 8px; color: var(--text); }
+.compare-range input { width: 100%; height: auto; padding: 0; border: 0; background: none; accent-color: var(--lime); }
+.version-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.version-item { display: flex; align-items: center; gap: 10px; padding: 6px 8px 6px 6px; border: 1px solid var(--border); border-radius: 8px; background: var(--panel-2); }
+.version-item.is-picked { border-color: color-mix(in srgb, var(--lime) 55%, var(--border)); }
+.version-pick { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.version-pick img { width: 72px; height: 40px; object-fit: cover; border-radius: 4px; flex: none; }
+.version-pick strong { display: block; font-size: 13px; }
+.version-pick em { font-style: normal; color: var(--accent); font-weight: 600; }
+.version-pick small { display: block; color: var(--faint); font-size: 12px; }
+.version-pick small.is-failed { color: var(--err); } /* the version failed its composition check */
+.versions-note { line-height: 1.6; }
+
+/* pipeline retry */
+.job-error-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 6px; }
+.job-error-row .job-error { margin-top: 0; }
+/* what to do next on a job: 다시 시도, another picture, 버전 기록; 중지 on one that waits or runs */
+.job-actions { display: inline-flex; flex: none; gap: 6px; }
+.job-actions:empty { display: none; }
+.job-run { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 6px; }
+.job-run .job-progress { margin-top: 0; font-family: inherit; } /* a sentence, not a provider's log line */
+.job-run .jobs-menu-stop { margin-left: auto; }
+/* a picture that failed its check: its job is neither done nor failed */
+.job--rejected { border-color: rgb(251 191 36 / .35); }
+.badge--rejected { color: #fcd34d; background: rgb(251 191 36 / .12); }
+.job-error--check { color: #fcd34d; }
+
+/* toast with an action: stays until used or closed, button under the text */
+.toast--action { grid-template-columns: auto minmax(0, 1fr) auto; }
+.toast-action { grid-column: 2 / 3; justify-self: start; margin-top: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .action-btn, .action-btn.is-error, .action-check { animation: none; transition: none; }
+  .action-spin { animation-duration: 3s; }
+}
+.field-hint { color: var(--faint); font-size: 11px; }
+
+/* live tab */
+.live { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; min-width: 0; }
+.live-stage > video { position: absolute; inset: 0; width: 100%; height: 100%; background: #000; }
+.live-idle { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; color: var(--muted); border: 1px dashed var(--border-strong); border-radius: 10px; }
+.live-badge { position: absolute; top: 10px; left: 10px; padding: 3px 8px; border-radius: 4px; background: #c23a2b; color: #fff; font-size: 12px; font-weight: 800; letter-spacing: 1px; }
+.live-ad { position: absolute; top: 10px; right: 10px; padding: 3px 8px; border-radius: 4px; background: var(--lime); color: var(--lime-ink); font-size: 12px; font-weight: 800; }
+.live-status dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 0 0 10px; }
+.live-status dl div { padding: 8px 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--panel-2); }
+.live-status dt { font-size: 12px; color: var(--faint); }
+.live-status dd { margin: 2px 0 0; font-size: 13px; }
+.live-url { font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 10px; }
+.live-form { display: grid; gap: 12px; }
+
+/* expanded game modal: big stage + live toolbar */
+.game-modal { width: min(1240px, 96vw); max-height: calc(100dvh - 32px); }
+.game-modal-head { align-items: center; }
+.game-modal-head > div:first-child { flex: 1; min-width: 0; }
+.view-switch { display: flex; gap: 6px; }
+.view-switch .genre-tab[aria-selected="true"] { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 70%, transparent); background: #2a2118; }
+.view-switch .genre-tab:disabled { opacity: .4; cursor: not-allowed; }
+.game-modal-stage { position: relative; aspect-ratio: 16 / 9; max-height: calc(100dvh - 260px); margin: 0 auto; width: 100%; background: #000; }
+/* before a broadcast the stage holds a sentence and a button, or a preview: capped, so the ad styles, their values and
+   고급 설정 are in sight when they are chosen. On air its cap is the window's (the rule above) */
+.game-modal-stage--setup { max-height: min(38vh, 340px); }
+/* The stage gives way to the controls, on air too. The console is a column no taller than the window and the stage
+   is its one part that shrinks, to a floor; what a longer tab or an open 고급 설정 adds scrolls inside the console.
+   The floors: a picture 409 px wide on air (the console as it opens then fits 1024x768 too), and the setup stage's
+   sentence, button and note. */
+.game-modal > * { flex-shrink: 0; }
+.game-modal > .game-modal-stage { flex-shrink: 1; min-height: 230px; container-type: size; }
+.game-modal > .game-modal-stage--setup { min-height: 180px; }
+/* a corner trailer shown on that stage is never taller than it: its width follows the stage's height (its picture's
+   16:9 over about 90 px of caption, 44 px from the top) */
+.game-modal-stage .corner-ad, .game-modal-stage .corner-ad.is-big { max-width: calc((100cqh - 150px) * 16 / 9); }
+.game-modal-stage > iframe, .game-modal-stage > video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000; }
+/* the console's own player of the broadcast: mounted on both tabs, out of sight on 플레이 화면 */
+.game-modal-stage > .stage-live { position: absolute; inset: 0; }
+.stage-live > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; }
+.stage-live.is-off { visibility: hidden; }
+.game-modal-stage .live-idle { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; color: var(--muted); }
+.game-modal-bar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; padding: 14px 22px 4px; border-top: 1px solid var(--border); }
+.game-modal-bar .live-toggle { margin-left: auto; height: 40px; padding: 0 18px; }
+.game-modal-hint { padding: 0 22px 16px; }
+/* The footnote under the console is not laid out on a window under 800 px tall (the fold would cut it, and what it
+   says is said above it). It stays the dialog's description for a screen reader (aria-describedby). */
+@media (max-height: 800px) { .game-modal-hint { display: none; } }
+/* the console's state above the game's title, in words */
+.game-modal-head .eyebrow { font-size: 12px; letter-spacing: .3px; text-transform: none; color: var(--muted); }
+/* what stops a start, above the ad styles it is about */
+.live-need, .live-pc-note { margin: 0 16px 10px; padding: 9px 12px; border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--border)); border-radius: var(--radius); background: color-mix(in srgb, var(--accent) 8%, transparent); font-size: 13px; line-height: 1.55; }
+/* that a broadcast needs a PC, under the steps (the same box): in the page for every device, shown where the pointer
+   is a finger */
+.live-pc-note { display: none; margin-top: 10px; }
+@media (pointer: coarse) { .live-pc-note { display: block; } }
+/* each ad style in one plain line, where it is chosen */
+.ad-type-what { margin: 0; font-size: 13px; line-height: 1.55; }
+/* 광고 간격 [2] 판마다: the number between its two words, as on the play window's bar */
+.field--narrow.live-every { width: 150px; }
+.live-every-row { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+.live-every-row input { flex: 1; min-width: 0; }
+/* what to do next: the three steps under the title, the step the user is at lit */
+.live-steps { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0; padding: 9px 22px; list-style: none; border-bottom: 1px solid var(--border); font-size: 13px; line-height: 1.5; color: var(--muted); }
+.live-steps li + li::before { content: "→"; margin-right: 14px; color: var(--faint); font-weight: 400; }
+.live-steps b { margin-right: 3px; font-size: 16px; font-weight: 400; line-height: 1; vertical-align: -1px; }
+.live-steps small { font-size: 12px; font-weight: 400; }
+.live-steps li[aria-current="step"] { color: var(--lime); font-weight: 700; }
+.live-steps li[aria-current="step"] small { color: var(--muted); }
+/* On a laptop's window (under 800 px tall) the console takes all but 8 px of the height a side and closes up its head,
+   its steps and the ad styles' box, 44 px in all, so its longest states end inside it at 1280x720 and 1024x768. */
+@media (max-height: 800px) and (min-width: 768px) {
+  .game-modal { max-height: calc(100dvh - 16px); }
+  .game-modal-head { padding-block: 12px 10px; }
+  .live-steps { padding-block: 6px; }
+  .game-modal .ad-type { margin-bottom: 8px; padding-bottom: 8px; }
+}
+/* over the stage: what the user has to do now (the game waits at its briefing; the play window is covered) */
+.stage-notice { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 4; display: grid; justify-items: center; gap: 10px; width: min(88%, 480px); padding: 14px 16px; border: 1px solid color-mix(in srgb, var(--lime) 55%, transparent); border-radius: 10px; background: rgb(14 16 12 / .94); color: var(--text); font-size: 14px; line-height: 1.5; text-align: center; box-shadow: 0 10px 30px rgb(0 0 0 / .5); }
+.stage-notice p { margin: 0; }
+.stage-notice--alert { border-color: var(--accent); background: rgb(34 22 12 / .96); } /* the play window is covered */
+.game-modal-stage .live-idle small { max-width: 44ch; font-size: 12px; line-height: 1.5; color: var(--faint); }
+/* the reason a tab or the button is as it is, under it and in sight */
+.view-switch-wrap { display: grid; justify-items: end; gap: 4px; }
+.view-switch-why, .live-go-does { font-size: 12px; line-height: 1.4; color: var(--muted); }
+.live-go { display: grid; justify-items: end; gap: 5px; margin-left: auto; }
+.field--inline { min-width: 220px; }
+.field--narrow { min-width: 0; width: 120px; }
+.live-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+.live-chips div { padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--panel-2); }
+.live-chips dt { font-size: 12px; color: var(--faint); letter-spacing: .5px; } /* a chip's name (방송 상태, 나간 광고…) */
+.live-chips dd { margin: 2px 0 0; font-size: 13px; }
+.live-limit { font-variant-numeric: tabular-nums; }
+.live-limit.is-warn { color: var(--accent); font-weight: 700; } /* the last 5 minutes before the 45-minute cap */
+
+/* game design drawer */
+.design-drawer { width: 520px; }
+.type-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.radio--card span { display: grid; gap: 2px; font-size: 13px; font-weight: 600; }
+.radio--card small { font-weight: 400; }
+/* where a game on screen is edited, the design guide an example sends along, and the hints behind 자세히 */
+.design-edit-offer { padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px; font-size: 13px; line-height: 1.6; color: var(--muted); }
+.design-edit-offer .link-btn { font-weight: 700; }
+.design-spec, .design-more { font-size: 12px; color: var(--muted); }
+.design-spec > summary, .design-more > summary { cursor: pointer; padding-block: 4px; }
+.design-spec p, .design-more p { margin-top: 6px; line-height: 1.6; overflow-wrap: anywhere; }
+.design-spec .link-btn { margin-top: 6px; font-size: 12px; }
+/* the line that brings a typed design back after an example took its place */
+.design-undo { margin-top: -8px; font-size: 12px; line-height: 1.6; color: var(--muted); }
+.design-undo .link-btn { font-size: 12px; }
+.design-drawer .field small { font-size: 12px; } /* a label's note: `small` in a 13 px label would come out under 11 px */
+/* 게임 설계 without a hero in 3D: what is missing and the way there, in place of the form */
+.design-blocked { justify-items: start; gap: 14px; font-size: 13px; line-height: 1.6; }
+.design-blocked-lead { font-size: 15px; }
+.design-blocked .game-needs { margin: 0; }
+.design-blocked-now { color: #c9d0be; }
+.design-blocked-note { color: var(--muted); font-size: 12px; }
+.design-blocked-list { display: grid; gap: 8px; width: 100%; margin: 0; padding: 0; list-style: none; }
+.design-blocked-list li { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--panel-2); }
+.design-blocked-list .cast-thumb { flex: none; width: 44px; }
+.design-blocked-name { flex: 1 1 120px; min-width: 0; font-weight: 600; overflow-wrap: anywhere; }
+.design-blocked-list small { color: var(--muted); font-size: 12px; }
+.design-blocked-list .badge { flex: 0 1 auto; height: auto; min-height: 22px; white-space: normal; }
+@media (max-width: 767.98px) { .design-blocked .btn { min-height: 40px; } }
+.pane-action { margin-left: auto; }
+@media (max-width: 767.98px) {
+  .game-modal { width: 100vw; max-height: 100dvh; border-radius: 0; }
+  /* a phone's console is taller than the window whatever the stage does: the stage keeps its 16:9 and the console scrolls */
+  .game-modal > .game-modal-stage { flex-shrink: 0; min-height: 0; }
+  .game-modal-bar .live-toggle { margin-left: 0; width: 100%; }
+  .game-modal-head .view-switch-wrap { order: 3; width: 100%; justify-items: start; }
+  /* inside the wrap the switch stays first: the older rule that sends it to the header's end (order 3) put it under its own reason */
+  .game-modal-head .view-switch-wrap .view-switch { order: 0; width: auto; }
+  .live-steps { padding-inline: 16px; }
+  .live-go { width: 100%; justify-items: stretch; }
+  .live-go .modal-actions { flex-wrap: wrap; margin-left: 0; }
+  /* under a finger the console's buttons and its server switch are 40 px high */
+  .game-modal-bar .btn, .game-modal .live-idle .btn, .game-modal .ad-type .btn, .game-modal .stage-notice .btn, .game-modal .console-ad .btn,
+  .game-modal .gen-switch { min-height: 40px; }
+  .game-modal .console-trailer .icon-btn { width: 40px; height: 40px; }
+  .design-drawer { width: 100%; }
+  .type-grid { grid-template-columns: minmax(0, 1fr); }
+}
+.modal-root ~ .toasts { top: auto; right: 16px; bottom: 16px; } /* keep the modal header (view switch, close) clear */
+
+/* separate play / watch windows */
+/* one column that never grows past the window, and a bar that wraps: the window does not scroll, so a column as
+   wide as the bar would cut its controls off */
+.popup-window { height: 100dvh; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); overflow: hidden; background: var(--bg); }
+.popup-bar { position: sticky; top: 0; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; row-gap: 6px; padding: 10px 16px;
+  background: color-mix(in srgb, #11140e 92%, transparent); border-bottom: 1px solid var(--border); }
+.popup-bar .brand-mark { width: 18px; height: 18px; margin-right: 4px; }
+.popup-title { font-size: 14px; font-weight: 650; flex: 1 1 160px; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } /* 160: the game's name keeps a floor before the controls wrap */
+.popup-title small { margin-left: 8px; color: var(--muted); font-weight: 400; font-size: 12px; }
+.popup-meta { font-size: 12px; color: var(--muted); white-space: nowrap; }
+@media (max-width: 900px) { .popup-title small { display: none; } .popup-wait { flex-basis: 100%; white-space: normal; } } /* two windows side by side on a laptop are about 720 px each */
+/* 광고 간격 [2] 판마다: the number between its two words */
+.popup-every { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); white-space: nowrap; }
+.popup-every input { height: 34px; width: 56px; padding-inline: 8px; }
+/* the play window's own start button with what a start does before it (the 45-minute limit, the playable server's
+   price): one group that wraps together, the line itself wrapping in a narrow window */
+.popup-go { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; min-width: 0; }
+.popup-does { white-space: normal; }
+/* Under a finger the two windows' controls are 40 px or more: their bars, a failed load's button, a tile's playable
+   card and corner trailer, the game played over the tiles. The corner in a tile is 140 px wide there: its row of
+   게임 보기 and a 40-px × needs 118 px. */
+@media (max-width: 767.98px) {
+  .popup-bar .btn, .popup-every input, .popup-window .load-error .btn, .popup-window .play-card .btn, .popup-window .lp-bar .btn,
+  .popup-window .lp-card .btn, .popup-window .corner-ad .btn { min-height: 40px; }
+  .popup-window .corner-ad-close { width: 40px; height: 40px; }
+  .popup-window .vt-stage .corner-ad:not(.is-big) { width: 140px; }
+}
+/* a window that could not load says why in its stage, with the way on: the studio's own box, read from the left */
+.live-idle .load-error { text-align: left; }
+.popup-stage { position: relative; background: #000; }
+.popup-stage > iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.watch-split { display: grid; grid-template-columns: minmax(0, 1fr) 300px; min-height: 0; height: 100%; }
+.watch-stage { position: relative; background: #000; min-height: 0; }
+.watch-stage > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; }
+.watch-stage .live-idle { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; padding: 24px; text-align: center; color: var(--muted); }
+.watch-side { padding: 16px; border-left: 1px solid var(--border); display: grid; align-content: start; gap: 12px; overflow-y: auto; }
+.live-chips--stack { display: grid; grid-template-columns: 1fr 1fr; }
+.watch-h { font-size: 12px; letter-spacing: 1px; color: var(--muted); margin: 6px 0 0; }
+.watch-breaks { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.watch-breaks li { display: grid; gap: 2px; padding: 8px 10px; border: 1px solid color-mix(in srgb, var(--lime) 35%, var(--border)); border-radius: 6px; background: color-mix(in srgb, var(--lime) 6%, var(--panel-2)); font-size: 12px; }
+.watch-breaks span { color: var(--muted); }
+.watch-break-note { font-size: 12px; line-height: 1.5; } /* why a round got another ad than the broadcast's */
+/* with one ad to give, why the four viewers all get it and how to change that: a box above the chips */
+.watch-side .same-ad-note { margin: 0; padding: 8px 10px; border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--border)); border-radius: 6px; background: color-mix(in srgb, var(--accent) 8%, transparent); font-size: 12px; line-height: 1.55; }
+.live-badge--inline { position: static; }
+@media (max-width: 900px) { .watch-split { grid-template-columns: minmax(0, 1fr); } .watch-side { border-left: 0; border-top: 1px solid var(--border); } }
+.game-modal-stage > video { object-fit: contain; }
+.game-modal-stage .live-idle { display: grid; place-content: center; gap: 14px; text-align: center; }
+/* at 390 px its sentence wraps to three lines over a stage 219 px tall: less air, so the button and the note stay inside */
+@media (max-width: 767.98px) { .game-modal-stage .live-idle { padding: 12px; gap: 10px; } }
+.console-ad { position: absolute; left: 50%; bottom: 44px; transform: translateX(-50%); z-index: 3; display: flex; align-items: center; gap: 10px; margin: 0; padding: 8px 12px; border-radius: 6px; background: var(--lime); color: var(--lime-ink); font-size: 13px; font-weight: 800; max-width: calc(100% - 28px); }
+.console-trailer { position: absolute; inset: 0; z-index: 2; margin: 0; background: #000; display: grid; grid-template-rows: minmax(0, 1fr) auto; }
+.console-trailer video { width: 100%; height: 100%; object-fit: contain; }
+.console-trailer figcaption { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 6px 10px; background: rgb(10 12 16 / .92); color: #fff; font-size: 12px; font-weight: 700; }
+.mirror-badge { position: absolute; top: 10px; left: 10px; padding: 3px 8px; border-radius: 4px; background: rgb(14 16 12 / .78); color: var(--lime); font-size: 12px; font-weight: 700; }
+.modal-actions { display: flex; gap: 8px; margin-left: auto; align-items: center; }
+.modal-actions .live-toggle { margin-left: 0; }
+
+/* live highlights: the watch window's carousel of shorts, the send drawer, the overlay ad */
+.watch-split { grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr); } /* 60/40: the broadcast beside its monitoring panel */
+@media (max-width: 900px) { .watch-split { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(240px, 56vh) auto; } }
+.watch-h small { margin-left: 6px; color: var(--lime); font-size: 12px; letter-spacing: 0; }
+.watch-persona small { font-size: 12px; line-height: 1.5; } /* the picked viewer's line under 1명 보기's select */
+.hl-empty { margin: 0; font-size: 12px; }
+.hl-carousel { display: grid; gap: 8px; }
+.hl-slide { display: grid; gap: 8px; }
+.hl-media { position: relative; aspect-ratio: 9 / 16; max-height: 46vh; margin-inline: auto; width: 100%; max-width: calc(46vh * 9 / 16); border-radius: 8px; overflow: hidden; background: #000; border: 1px solid var(--border); }
+.hl-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hl-status { position: absolute; inset: 0; margin: 0; display: grid; place-items: center; padding: 16px; text-align: center; font-size: 12px; color: var(--muted); border-radius: 0; }
+.hl-status--failed { color: #ff9b8f; }
+.hl-meta { display: grid; gap: 2px; font-size: 12px; }
+.hl-meta strong { font-size: 14px; }
+.hl-meta span { color: var(--muted); }
+.hl-send { justify-self: start; }
+.hl-nav { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.hl-dots { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.hl-dot { width: 8px; height: 8px; padding: 0; border-radius: 50%; border: 0; background: var(--border-strong); cursor: pointer; }
+.hl-dot.is-on { background: var(--lime); }
+.hl-dot:focus-visible { outline: 2px solid var(--lime); outline-offset: 2px; }
+.drawer--hl { width: 400px; }
+@media (max-width: 767.98px) { .drawer--hl { width: 100%; } }
+.hl-drawer-preview { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 12px; align-items: center; }
+.hl-drawer-preview video { width: 96px; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 6px; background: #000; }
+.hl-drawer-preview div { display: grid; gap: 4px; font-size: 12px; }
+.hl-drawer-preview strong { font-size: 15px; }
+.hl-kinds { display: grid; gap: 8px; margin: 0; padding: 0; border: 0; }
+.hl-kinds legend { margin-bottom: 8px; font-size: 12px; letter-spacing: 1px; color: var(--muted); }
+.hl-kind { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; }
+.hl-kind.is-on { border-color: color-mix(in srgb, var(--lime) 60%, var(--border)); background: color-mix(in srgb, var(--lime) 7%, transparent); }
+.hl-kind input { margin-top: 3px; accent-color: var(--lime); }
+.hl-kind span { display: grid; gap: 3px; }
+.hl-kind small { color: var(--muted); font-size: 11px; line-height: 1.45; }
+.hl-overlay { position: absolute; top: 44px; right: 14px; width: min(22%, 220px); margin: 0; border-radius: 10px; overflow: hidden; border: 2px solid var(--lime); box-shadow: 0 10px 30px rgb(0 0 0 / .55); background: #000; animation: fade .2s ease-out; z-index: 2; }
+.hl-overlay video { display: block; width: 100%; aspect-ratio: 9 / 16; object-fit: cover; }
+.hl-overlay figcaption { padding: 4px 8px; font-size: 12px; font-weight: 800; background: var(--lime); color: var(--lime-ink); }
+
+/* login: 로그인 | 회원가입 tabs (underline) */
+.auth-tabs { display: flex; gap: 20px; border-bottom: 1px solid var(--border); }
+.auth-tab { position: relative; padding: 10px 2px; border: 0; background: none; color: var(--muted); font: inherit; font-weight: 600; cursor: pointer; }
+.auth-tab[aria-selected="true"] { color: var(--text); }
+.auth-tab[aria-selected="true"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--lime); }
+.auth-tab:focus-visible { outline: 2px solid var(--lime); outline-offset: 2px; border-radius: 4px; }
+.auth-panel { display: grid; gap: 14px; }
+
+/* sidebar: connections */
+.conn-mini { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.conn-mini-row { display: flex; align-items: center; gap: 8px; width: 100%; padding: 6px 10px; border: 0; border-radius: 6px; background: none; color: var(--text); font: inherit; font-size: 12px; text-align: left; cursor: pointer; }
+.conn-mini-row:hover { background: var(--panel-2); }
+.conn-mini-row:focus-visible { outline: 2px solid var(--lime); outline-offset: -2px; }
+.conn-mini-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.conn-mini-meta { color: var(--faint); font-size: 12px; }
+.conn-mini-actions { display: grid; gap: 2px; margin-top: 6px; }
+.conn-manage { width: 100%; border: 0; background: none; font: inherit; color: var(--muted); cursor: pointer; text-align: left; }
+.conn-manage:hover { color: var(--text); }
+.conn-manage .plus { width: 16px; text-align: center; color: var(--lime); }
+.conn-dot { width: 7px; height: 7px; flex: none; border-radius: 50%; background: var(--faint); }
+.conn-dot--connected { background: #7fd48a; box-shadow: 0 0 0 3px rgb(127 212 138 / .14); }
+.conn-dot--error { background: #ff7b6b; }
+.conn-dot--unknown { background: var(--accent); }
+@media (min-width: 768px) and (max-width: 1024px) { .conn-mini-row { justify-content: center; width: 44px; padding: 8px 0; } }
+/* Accordion (Fold): a header button with a rotating chevron; the region opens in 200 ms and stops clipping once open */
+.fold { display: grid; min-width: 0; flex-shrink: 0; }
+.fold-head {
+  display: flex; align-items: center; gap: 8px; width: 100%; min-height: 36px; padding: 0 10px;
+  border: 0; border-radius: 6px; background: none; color: var(--muted); font: inherit; font-size: 12px; font-weight: 600;
+  text-align: left; cursor: pointer;
+}
+.fold-head:hover { color: var(--text); background: var(--panel-2); }
+.fold-head:focus-visible { outline: 2px solid var(--lime); outline-offset: -2px; }
+.fold-title { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; }
+.fold-meta { flex: none; color: var(--faint); font-size: 12px; font-weight: 500; }
+.fold-chevron { flex: none; transition: transform .2s ease; }
+.fold-head[aria-expanded="true"] .fold-chevron { transform: rotate(180deg); }
+.fold-region { display: grid; grid-template-rows: 0fr; min-height: 0; transition: grid-template-rows .2s ease; }
+.fold-region[data-open] { grid-template-rows: 1fr; }
+.fold-inner { min-height: 0; overflow: hidden; }
+.fold-region.is-settled > .fold-inner { overflow: visible; }
+@media (prefers-reduced-motion: reduce) { .fold-region, .fold-chevron { transition: none; } }
+@media (max-width: 767.98px) { .fold-head { min-height: 44px; } }
+/* sidebar folds read like the section labels they replace */
+.side-fold-head { margin-top: 20px; color: var(--faint); font-size: 12px; font-weight: 400; letter-spacing: .5px; }
+@media (min-width: 768px) and (max-width: 1024px) { .side-fold-head { justify-content: center; width: 44px; padding: 0; } }
+
+/* Dropdown action menu (ActionMenu): portalled to <body>, at most 8 rows, a bottom sheet under 640px */
+.menu { position: relative; display: inline-flex; align-items: center; gap: 6px; }
+.menu-trigger { min-width: 32px; padding: 0 8px; }
+.menu-dots { font-size: 16px; line-height: 1; letter-spacing: 1px; }
+.menu-status { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.menu-status:empty { display: none; }
+.menu-list {
+  z-index: 60; display: grid; gap: 2px; max-height: calc(8 * 40px + 12px); overflow-y: auto; padding: 6px;
+  background: var(--panel-3); border: 1px solid var(--border-strong); border-radius: 10px; box-shadow: var(--shadow);
+}
+.menu-item {
+  display: grid; gap: 2px; min-height: 36px; padding: 8px 10px; border: 0; border-radius: 6px; background: none;
+  color: var(--text); font: inherit; font-size: 13px; text-align: left; text-decoration: none; cursor: pointer;
+}
+.menu-item small { color: var(--muted); font-size: 12px; }
+.menu-item:hover, .menu-item:focus-visible { background: color-mix(in srgb, var(--lime) 14%, transparent); outline: none; }
+/* the item the keyboard is on shows a ring, not the tint alone */
+.menu-item:focus-visible { outline: 2px solid var(--lime); outline-offset: -2px; }
+.menu-item[aria-disabled="true"] { color: var(--faint); cursor: default; }
+.menu-item[aria-disabled="true"]:hover { background: none; }
+@media (max-width: 639.98px) {
+  .menu-list { inset: auto 8px 8px 8px !important; min-width: 0 !important; max-height: 60dvh; padding: 8px; }
+  .menu-item { min-height: 44px; }
+}
+
+/* == sidebar folds, account menu == */
+/* 작업 공간 · 스킬: the workspace marker and the skills button, stacked like the rows they were */
+.work-fold { display: grid; gap: 4px; padding-top: 6px; }
+/* The tablet drawer (≤1024px) shows labels, so the sidebar fold headers span it like the rows under them instead of
+ * the 44px rail squeeze, with a touch-sized target. */
+@media (max-width: 1024px) { .sidebar .side-fold-head { justify-content: flex-start; width: 100%; min-height: 44px; padding: 0 10px; } }
+/* account menu: a labelled trigger whose chevron turns like a fold's */
+.topbar-account { padding: 0 12px; }
+.topbar-account-chevron { transition: transform .2s ease; }
+.topbar-account[aria-expanded="true"] .topbar-account-chevron { transform: rotate(180deg); }
+@media (prefers-reduced-motion: reduce) { .topbar-account-chevron { transition: none; } }
+
+
+
+/* == IP, 3D and video card menus == */
+/* One primary on the left, the menu trigger on the card's right edge; its status reads to the left of the trigger. */
+.card-actions { align-items: center; }
+.card-actions > .menu, .card-foot > .menu, .video-card .figure-actions > .menu { margin-left: auto; flex-direction: row-reverse; }
+.video-card .figure-actions { align-items: center; justify-content: flex-end; margin-left: auto; }
+.card-foot .menu-chevron { flex: none; transition: transform .2s ease; }
+.card-foot .menu-trigger[aria-expanded="true"] .menu-chevron { transform: rotate(180deg); }
+@media (prefers-reduced-motion: reduce) { .card-foot .menu-chevron { transition: none; } }
+@media (max-width: 767.98px) {
+  .card-actions .menu-trigger, .card-foot .menu-trigger, .video-card .menu-trigger { min-width: 44px; min-height: 40px; }
+  .video-card .figure-actions .link-btn { min-height: 40px; padding-inline: 4px; }
+}
+
+
+
+/* == game panel settings, preview menu, job groups == */
+/* 게임 설정: genre, version and run mode in one fold, in the box the genre section had; the header keeps the values */
+.game-settings { margin: 12px 16px 4px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--panel-2); }
+.game-settings > .fold-head { min-height: 44px; padding: 0 14px; font-weight: 700; letter-spacing: .5px; }
+.game-settings > .fold-head:hover { background: var(--panel-3); }
+.game-settings .fold-meta { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-size: 12px; letter-spacing: 0; }
+.game-settings-body { display: grid; gap: 12px; padding: 2px 14px 14px; }
+.game-setting { display: grid; grid-template-columns: 64px minmax(0, 1fr); align-items: center; gap: 6px 12px; }
+/* English labels are wider than the 64-px column */
+.game-setting:lang(en) { grid-template-columns: 72px minmax(0, 1fr); }
+.game-setting-label { font-size: 12px; font-weight: 700; letter-spacing: .5px; color: var(--muted); }
+.game-setting-control { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; min-width: 0; }
+.game-setting-hint { flex: 1 1 200px; font-size: 12px; }
+.game-setting .ver-tabs { margin: -4px; padding: 4px; } /* the strip scrolls: room for the focus ring */
+.game-setting .ver-tab[aria-checked="true"] { color: #d4e4ba; border-color: #5b6d43; background: #232b1a; }
+@container (max-width: 440px) { .game-setting, .game-setting:lang(en) { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 767.98px) { .game-setting .ver-tab { min-height: 40px; } }
+
+/* preview bar: 크게 보기 and ⋯ fit beside the title even in a narrow pane; the title wraps first */
+.preview > .preview-bar { align-items: center; }
+/* where the view panel scrolls (from 900 px): the stuck bar covers the panel's 14 px top padding instead of floating below it */
+@media (min-width: 900px) { .preview > .preview-bar { top: -14px; } }
+@container (max-width: 440px) {
+  .preview-bar .preview-title { flex-basis: 120px; }
+  .preview-bar .figure-actions { width: auto; }
+}
+
+/* 작업 현황: a fold per status (진행 중 · 실패 open, 완료 folded), the count as a status badge */
+.job-groups { display: grid; gap: 4px; }
+.job-group > .fold-head { color: var(--text); font-size: 13px; }
+.job-group > .fold-head:hover { background: var(--panel-3); }
+.job-group .jobs { padding: 4px 0 12px; }
+
+
+
+/* == live control advanced settings == */
+/* 고급 설정 under the core ad fields: a divider, the header lined up with the fields, the summary may shrink */
+.live-adv { border-top: 1px solid var(--border); padding-top: 4px; }
+.live-adv > .fold-head { padding-inline: 4px; }
+.live-adv .fold-meta { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 0 1 auto; }
+.live-adv-body { display: grid; gap: 12px; padding: 6px 4px 2px; }
+.live-adv-body .field-hint { margin: 0; }
+.live-adv-check { grid-template-columns: auto minmax(0, 1fr); align-items: center; }
+.live-adv-body .field--narrow { width: 180px; } /* "Linear 광고로 송출" fits */
+@media (max-width: 767.98px) {
+  .game-modal-root { padding: 0; } /* the full-screen modal is 100vw: no 24px inset that pushes it off the right edge */
+  .ad-type .tab { height: auto; min-height: 44px; padding-block: 6px; white-space: normal; line-height: 1.3; text-align: center; } /* both ad types readable */
+}
+
+/* connections drawer */
+.drawer--conn { width: 480px; }
+@media (max-width: 767.98px) { .drawer--conn { width: 100%; } }
+.conn-section-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.conn-h { margin: 0 0 10px; font-size: 12px; letter-spacing: 1px; color: var(--muted); }
+.conn-h small { margin-left: 4px; color: var(--lime); font-size: 12px; }
+.conn-form .field small { font-size: 12px; }
+.conn-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.conn-row { display: grid; gap: 4px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--panel-2); font-size: 12px; }
+.conn-row-head { display: flex; align-items: center; gap: 8px; }
+.conn-row-head strong { font-size: 13px; }
+.conn-status { margin-left: auto; color: var(--muted); }
+.conn-status--connected { color: #7fd48a; }
+.conn-status--error { color: #ff9b8f; }
+/* names and states only: no address, model id or tool name; a server of the user's own says how many tools it has */
+.conn-count { margin: 0; color: var(--muted); }
+.conn-error { margin: 0; color: #ff9b8f; }
+.conn-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 4px; }
+.conn-remove { margin-left: auto; color: #ff9b8f; }
+.switch { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; white-space: nowrap; }
+/* a checkbox, not a field: the page's input rule would make it 40 px high and as wide as its row */
+.switch input { flex: none; width: 16px; height: 16px; padding: 0; accent-color: var(--lime); }
+.conn-form { display: grid; gap: 12px; padding-top: 14px; border-top: 1px solid var(--border); }
+.conn-auth { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 10px; }
+
+/* top bar: jobs dropdown (aligned to its end) */
+.jobs-menu { position: relative; }
+.jobs-menu-btn { padding: 6px 10px; border: 1px solid var(--border); border-radius: 999px; background: none; font: inherit; font-size: 12px; cursor: pointer; }
+.jobs-menu-btn:hover, .jobs-menu-btn[aria-expanded="true"] { border-color: var(--border-strong); color: var(--text); }
+.jobs-menu-btn:focus-visible { outline: 2px solid var(--lime); outline-offset: 2px; }
+.jobs-menu-panel { position: absolute; top: calc(100% + 8px); right: 0; z-index: 30; width: min(380px, 92vw); padding: 8px; border: 1px solid var(--border-strong); border-radius: 10px; background: var(--panel); box-shadow: 0 18px 40px rgb(0 0 0 / .45); animation: fade .15s ease-out; }
+/* On a phone the pill is not the top bar's last item (the language toggle stands to its right), so a panel hung
+   from the pill's right edge would begin left of the window: it spans the window under the bar instead. */
+@media (max-width: 520px) { .jobs-menu { position: static; } .jobs-menu-panel { left: 12px; right: 12px; width: auto; top: calc(100% - 4px); } }
+.jobs-menu-panel ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; max-height: calc(8 * 54px); overflow-y: auto; }
+.jobs-menu-item { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 6px; }
+.jobs-menu-item:hover { background: var(--panel-2); }
+.jobs-menu-text { display: grid; gap: 2px; flex: 1; min-width: 0; font-size: 12px; }
+.jobs-menu-text span { color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.jobs-menu-stop { flex: none; color: #ff9b8f; }
+.jobs-menu-hint { margin: 6px 10px 2px; font-size: 12px; }
+
+/* game versions (tabs, pill indicator) and the click-to-start preview */
+.ver-tabs { display: flex; gap: 6px; margin-bottom: 10px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent; }
+.ver-tab { display: inline-flex; align-items: center; gap: 6px; flex: none; max-width: 240px; padding: 6px 10px; /* 240: room for a 16-character title with ↳v1 */ border: 1px solid var(--border); border-radius: 999px; background: none; color: var(--muted); font: inherit; font-size: 12px; cursor: pointer; }
+.ver-tab:hover { color: var(--text); }
+.ver-tab[aria-selected="true"] { color: #d4e4ba; border-color: #5b6d43; background: #232b1a; }
+.ver-tab:focus-visible { outline: 2px solid var(--lime); outline-offset: 2px; }
+.ver-num { font-weight: 800; color: var(--lime); }
+.ver-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ver-from { color: var(--faint); font-size: 12px; } /* "↳v1", "새로 만듦" on a version's tab */
+.game-start { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 12px; padding: 20px; text-align: center; background: radial-gradient(circle at 50% 40%, #232b1a, var(--panel-2) 70%); }
+.game-start-title { margin: 0; font-size: 18px; font-weight: 700; }
+.game-start-btn { min-width: 150px; height: 44px; transition: transform .15s ease-out; }
+.game-start-btn:hover { transform: scale(1.04); }
+.game-start-btn:active { transform: scale(.96); }
+/* the pane's poster of a game: the game opens in the big view, so the poster is its title, the start button, its
+   version and what ● 라이브 방송 is for, sized by them (not a 16:9 frame the pane cannot hold). The short-window rule
+   below still applies (the title goes and the button comes first). */
+.game-poster .game-start { position: static; min-height: 120px; padding: 16px; gap: 10px; }
+/* that the game takes a keyboard and a mouse, with 게임 시작: shown where the pointer is a finger */
+.keys-note { display: none; margin: 0; font-size: 13px; line-height: 1.5; color: var(--accent); }
+@media (pointer: coarse) { .keys-note { display: block; } }
+/* the same on a short window where the panes stack (768–1024 px wide: the rule below starts at 1025) */
+@media (max-height: 850px) and (min-width: 768px) {
+  .game-poster .game-start { place-content: start; }
+  .game-poster .game-start-title { display: none; }
+}
+.chip-row { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* chat dock: resize handle + hide toggle; --dock-h animates (not while dragging) */
+@property --dock-h { syntax: "<length>"; inherits: true; initial-value: 0px; }
+:root { transition: --dock-h .2s ease-out; }
+:root.is-resizing-dock { transition: none; cursor: ns-resize; user-select: none; }
+.chat { grid-template-rows: auto minmax(0, 1fr); overflow: hidden; }
+.chat-head { position: relative; display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 16px 0 24px; border-bottom: 1px solid var(--border); }
+.chat.is-hidden .chat-head { border-bottom: 0; }
+.chat-head-title { font-size: 12px; letter-spacing: 1px; color: var(--muted); }
+.chat-toggle { margin-left: auto; }
+.chat-resize { position: absolute; top: -5px; left: 0; right: 0; height: 10px; cursor: ns-resize; touch-action: none; }
+.chat-resize::after { content: ""; position: absolute; top: 4px; left: 50%; width: 44px; height: 3px; margin-left: -22px; border-radius: 2px; background: var(--border-strong); }
+.chat-resize:hover::after, .chat-resize:focus-visible::after { background: var(--lime); }
+.chat-resize:focus-visible { outline: none; }
+/* the keyboard's place on the handle is a ring round its grip */
+.chat-resize:focus-visible::after { outline: 2px solid var(--lime); outline-offset: 3px; }
+.chat.is-hidden .chat-resize { display: none; }
+.chat-body { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: 0; }
+.chat-body[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) { :root { transition: none; } .game-start-btn { transition: none; } }
+
+/* highlight delete: card button + confirm modal */
+.hl-actions { display: flex; align-items: center; gap: 8px; }
+.hl-delete { margin-left: auto; color: #ff9b8f; }
+.modal--sm { width: min(400px, 100%); }
+.btn-danger { background: #c23a2b; border-color: #c23a2b; color: #fff; }
+.btn-danger:hover { filter: brightness(1.08); }
+
+/* watch window: 하이라이트 자동 생성 switch */
+.watch-h-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 6px; }
+.watch-h-row .watch-h { margin: 0; }
+.gen-switch { display: inline-flex; align-items: center; gap: 8px; padding: 4px 8px; border: 1px solid var(--border); border-radius: 999px; background: none; color: var(--muted); font: inherit; font-size: 11px; font-weight: 700; cursor: pointer; transition: transform .15s ease-out, border-color .15s ease-out; }
+.gen-switch:active { transform: scale(.95); }
+.gen-switch:disabled { opacity: .5; cursor: default; }
+.gen-switch:focus-visible { outline: 2px solid var(--lime); outline-offset: 2px; }
+.gen-switch[aria-checked="true"] { color: var(--lime); border-color: color-mix(in srgb, var(--lime) 55%, var(--border)); }
+.gen-switch-track { position: relative; width: 26px; height: 14px; border-radius: 7px; background: var(--border-strong); transition: background .15s ease-out; }
+.gen-switch-thumb { position: absolute; top: 2px; left: 2px; width: 10px; height: 10px; border-radius: 50%; background: #fff; transition: transform .15s ease-out; }
+.gen-switch[aria-checked="true"] .gen-switch-track { background: var(--lime); }
+.gen-switch[aria-checked="true"] .gen-switch-thumb { transform: translateX(12px); background: var(--lime-ink); }
+@media (prefers-reduced-motion: reduce) { .gen-switch, .gen-switch-track, .gen-switch-thumb { transition: none; } }
+
+/* design drawer: 출연 IP picker (checkbox cards) */
+.cast legend small { margin-left: 6px; font-weight: 400; }
+.cast-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; }
+.cast-card { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 6px; border: 1px solid var(--border); border-radius: 8px; background: var(--panel-2); cursor: pointer; transition: transform .15s ease-out, border-color .15s ease-out; }
+.cast-card:hover { border-color: var(--border-strong); }
+.cast-card:active { transform: scale(.97); }
+.cast-card.is-on { border-color: var(--lime); background: color-mix(in srgb, var(--lime) 8%, var(--panel-2)); }
+.cast-card input { position: absolute; top: 10px; left: 10px; z-index: 1; width: 18px; height: 18px; min-height: 0; margin: 0; padding: 0; accent-color: var(--lime); }
+.cast-card:focus-within { outline: 2px solid var(--lime); outline-offset: 2px; }
+.cast-thumb { display: block; aspect-ratio: 1; border-radius: 6px; overflow: hidden; background: #0e100c; }
+.cast-thumb img { width: 100%; height: 100%; object-fit: contain; }
+.cast-name { display: grid; font-size: 12px; font-weight: 600; line-height: 1.3; overflow-wrap: anywhere; }
+.cast-name small { color: var(--muted); font-size: 12px; font-weight: 400; }
+.cast-3d { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 12px; }
+.cast-3d .btn-sm { min-height: 26px; padding: 2px 8px; font-size: 12px; }
+.cast-3d-time { flex-basis: 100%; color: var(--muted); font-size: 12px; } /* the usual time of what the button starts */
+/* A badge wider than its card takes a second line: on one line the card's column grew to the badge and its
+   contents ran past the border. */
+.cast-3d .badge { flex: 0 1 auto; height: auto; min-height: 22px; padding-block: 3px; border-radius: 11px; line-height: 1.25; white-space: normal; word-break: keep-all; }
+.cast-3d .badge::before { flex: none; }
+.cast-pick { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; cursor: pointer; }
+.cast-role select { width: 100%; min-width: 0; min-height: 32px; padding: 4px 6px; font-size: 11px; }
+.game-design-summary { display: grid; gap: 10px; margin-top: 16px; padding: 14px; border: 1px solid var(--border); border-radius: 10px; background: var(--panel-2); }
+.game-summary-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 12px; }
+.game-summary-head h3 { font-size: 14px; }
+.game-summary-head > span, .game-design-summary h4 { font-size: 12px; }
+.game-summary-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+.game-summary-grid > div { min-width: 0; }
+.game-summary-grid h4 { margin-bottom: 6px; color: var(--muted); }
+.game-stage-list { display: grid; gap: 7px; margin: 0; padding-left: 20px; font-size: 12px; }
+.game-stage-list li > span, .game-stage-list small { display: block; overflow-wrap: anywhere; }
+.game-stage-list small { color: var(--muted); font-size: 12px; margin-top: 2px; }
+.game-summary-line { font-size: 12px; margin-bottom: 4px; overflow-wrap: anywhere; }
+.game-ip-bindings { list-style: none; display: grid; gap: 5px; margin: 0; padding: 0; }
+.game-ip-bindings li { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; }
+.game-ip-bindings li > span { overflow-wrap: anywhere; }
+.game-ip-bindings strong { color: var(--muted); margin-right: 5px; font-weight: 500; }
+.game-ip-bindings small { color: var(--muted); font-size: 12px; white-space: nowrap; } /* `small` in a 12 px row would come out at 10 px */
+.game-design-warnings { margin: 0; padding-left: 18px; color: var(--err); font-size: 12px; }
+.game-source-prompt, .game-spec-details { font-size: 12px; }
+.game-source-prompt summary, .game-spec-details > summary { cursor: pointer; padding-block: 6px; }
+.game-source-prompt p { white-space: pre-wrap; overflow-wrap: anywhere; margin-top: 8px; }
+.game-spec-details { margin-top: 12px; }
+@media (max-width: 767.98px) { .game-summary-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; } }
+@media (prefers-reduced-motion: reduce) { .cast-card { transition: none; } }
+
+/* Studio usability pass. Keep the existing two-studio theme and actions. */
+:root { --faint: #8b967e; }
+
+/* Give the dock its own space; cards and previews scroll inside the workspace. */
+.app {
+  height: 100dvh;
+  min-height: 0;
+  grid-template-rows: var(--header-h) auto minmax(0, 1fr) var(--dock-h);
+  overflow: hidden;
+}
+.app:not(:has(.chat)) { grid-template-rows: var(--header-h) auto minmax(0, 1fr) 0; }
+.page-hero { padding: 20px 28px 4px; gap: 7px; }
+.hero-title { font-size: 25px; line-height: 1.3; overflow-wrap: anywhere; }
+.hero-logline { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.split { min-height: 0; min-width: 0; padding: 16px 28px 20px; gap: 20px; overflow: hidden; }
+/* The shell and each of its scrollers is a containing block: an .sr-only span is absolutely positioned, and with
+   no positioned ancestor its box stretched the document past .app's overflow: hidden, so the page scrolled
+   behind the shell. */
+.app, .split, .tabpanel, .chat-log { position: relative; }
+.pane { min-height: 0; overflow: hidden; container-type: inline-size; }
+.pane-head { flex: none; padding: 16px; gap: 10px; }
+.pane-head h2 { font-size: 12px; letter-spacing: 1.2px; }
+.pane-sub { font-size: 12px; }
+.pane-title { flex: 1; }
+.pane-action { flex: none; margin-left: auto; }
+.genre-tabs, .tablist { flex-shrink: 0; }
+.tablist { gap: 6px; padding: 12px 12px 0; }
+/* a tab is as wide as its label and count, and the row's spare width is shared (equal tabs cut a long label in a
+   narrow pane). A row that still does not fit scrolls sideways instead of cutting a label. */
+.tab { flex: 1 0 auto; min-width: 0; padding-inline: 8px; gap: 5px; white-space: nowrap; }
+.tablist { overflow-x: auto; scrollbar-width: none; }
+.tab-label { min-width: 0; }
+.tab-count { flex: none; }
+.tabpanel { min-height: 0; overflow: auto; overscroll-behavior: contain; scrollbar-gutter: stable; padding: 14px; }
+.card-grid, .video-grid { grid-template-columns: repeat(auto-fill, minmax(min(190px, 100%), 1fr)); gap: 12px; }
+/* a card keeps its own height: stretched to a taller neighbour, its button would go to its foot, under the fold */
+.card-grid { align-items: start; }
+/* a long tab of cards is found by name, as the session list is */
+.ip-find { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; }
+.ip-find input { flex: 0 1 280px; min-width: 0; height: 34px; font-size: 13px; }
+.ip-find-count { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+@media (max-width: 767.98px) { .ip-find input { flex-basis: 100%; height: 40px; } }
+.media-pair { grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); }
+/* 3D tab: what each of the two views is, which picture the model was made from, and a model whose picture has
+   changed since (amber, with the button that remakes it): that block is the first thing in its card, above the views */
+.media-fig { display: grid; gap: 6px; min-width: 0; margin: 0; }
+.media-fig figcaption { font-size: 12px; color: var(--muted); }
+.model-source { padding: 0 12px 10px; font-size: 12px; color: var(--muted); }
+.model-stale { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 12px 12px 0; padding: 10px 12px;
+  border: 1px solid rgb(251 191 36 / .3); border-radius: 8px; background: rgb(251 191 36 / .07); font-size: 13px; }
+.model-stale-text { flex: 1 1 100%; }
+.model-stale small { font-size: 12px; color: var(--muted); }
+.card-title { flex-wrap: wrap; align-items: flex-start; gap: 5px 8px; }
+.card-title h3 { min-width: 0; overflow-wrap: anywhere; }
+.version { max-width: 100%; font-size: 12px; }
+.card-actions { gap: 7px; }
+.card-action-primary { border-color: color-mix(in srgb, var(--accent) 60%, var(--border-strong)); color: var(--accent); }
+.card-status { font-size: 12px; color: var(--muted); line-height: 1.5; }
+/* what the card's 3D button starts and how long that takes, under the button */
+.card-hint { font-size: 12px; color: var(--muted); line-height: 1.5; }
+/* what went another way than asked and what helps, on the card until it is answered (a refused 움직임 뼈대, a new
+   picture the check kept out). Amber as the 3D tab's notice; its button on a line of its own */
+.card-note { display: grid; justify-items: start; gap: 6px; padding: 8px 10px; border: 1px solid rgb(251 191 36 / .3); border-radius: 8px;
+  background: rgb(251 191 36 / .07); font-size: 12px; line-height: 1.5; }
+.card-note p { margin: 0; overflow-wrap: anywhere; }
+.card-note small { color: var(--muted); font-size: 12px; }
+.card-note-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.card-note .link-btn { font-size: 12px; }
+/* two notes in one block (a kept-out picture and a refused skeleton): one line, what helps, the reasons folded */
+.card-note-more { justify-self: stretch; }
+.card-note-more > summary { cursor: pointer; color: var(--muted); }
+.card-note-more[open] > summary { margin-bottom: 6px; }
+.card-note-more > p + p { margin-top: 6px; padding-top: 6px; border-top: 1px solid rgb(251 191 36 / .22); }
+.card-note-more > .card-note-actions { margin-top: 6px; }
+
+/* Titles stay readable when preview actions need a second row. */
+.preview-bar { flex-wrap: wrap; gap: 10px; align-items: flex-start; margin: 0 0 12px; }
+.preview-title { flex: 1 1 200px; font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
+.figure-actions { flex-wrap: wrap; gap: 6px; max-width: 100%; }
+.preview-action-primary { border-color: transparent; color: var(--lime-ink); }
+.preview-action-secondary { color: var(--muted); }
+/* ● 라이브 방송 beside 크게 보기, and the line that says what it is for */
+.preview-action-live { border-color: color-mix(in srgb, #ff6b5e 45%, var(--border-strong)); }
+.preview-action-live > span { margin-right: 3px; color: #ff6b5e; }
+.preview-hint { margin: 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
+.preview > .preview-hint { margin-top: 8px; } /* under the cloud stream, where there is no poster to hold it */
+/* a game request the agent held for 3D, in the game pane until a game answers it */
+.held-game { display: grid; gap: 5px; margin: 0; padding: 12px 14px; border: 1px solid color-mix(in srgb, var(--lime) 40%, var(--border)); border-radius: var(--radius); background: color-mix(in srgb, var(--lime) 6%, var(--panel-2)); }
+.held-game:not(:last-child) { margin-bottom: 12px; } /* only above an older game's preview */
+.held-game h3 { font-size: 13px; font-weight: 700; color: var(--lime); }
+.held-game p { margin: 0; font-size: 13px; line-height: 1.55; }
+.held-game-ask { color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.held-game .btn { justify-self: start; margin-top: 3px; }
+/* 게임 만들기 and, for a hero without a skeleton, 그림 다시 뽑기 beside it */
+.held-game-actions { display: flex; flex-wrap: wrap; gap: 0 8px; }
+.held-game p.held-game-more { color: var(--muted); font-size: 12px; }
+.video-card figcaption { flex-wrap: wrap; }
+.video-card figcaption span:first-child { flex: 1 1 140px; }
+.game-summary-meta { color: var(--muted); font-size: 12px; }
+.game-rules-details summary { cursor: pointer; padding-block: 4px; font-size: 12px; color: var(--muted); }
+.game-rules-details[open] > summary { margin-bottom: 8px; }
+.game-ip-bindings li { flex-wrap: wrap; gap: 3px 10px; }
+.game-ip-bindings small { white-space: normal; }
+.game-design-summary { padding: 12px; }
+.empty-state { display: grid; justify-items: center; align-content: center; gap: 8px; min-height: 190px; }
+.empty-state-icon { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 10px; color: var(--accent); background: #2a2118; font-size: 20px; }
+.empty-state h3 { color: var(--text); font-size: 15px; font-weight: 600; }
+.empty-state p { max-width: 38ch; font-size: 13px; line-height: 1.6; }
+.empty-state small { max-width: 42ch; font-size: 12px; color: var(--muted); }
+.empty-state .btn { margin-top: 4px; }
+/* 채팅 열기 in an empty tab: only where the chat is a shut drawer (the phone rule below shows it) */
+.empty-state .empty-chat-open { display: none; }
+/* what a game needs first, in order, the step to do now lit */
+.game-needs { display: grid; gap: 3px; margin: 2px 0; padding: 0; list-style: none; text-align: left; font-size: 13px; line-height: 1.5; color: var(--muted); }
+.game-needs li[aria-current="step"] { color: var(--lime); font-weight: 700; }
+.empty-state--needs { align-content: start; min-height: 0; padding-block: 18px; } /* from the top: the heading and the steps are what a short pane shows */
+.game-start-kicker { color: var(--accent); font-size: 12px; }
+.loading-state { display: flex; align-items: center; gap: 8px; }
+.loading-state .spinner { width: 14px; height: 14px; border-width: 2px; }
+
+/* Clear, compact chat controls. Menus and the resize handle must not be clipped. */
+.chat { position: relative; bottom: auto; min-height: 0; overflow: visible; box-shadow: 0 -4px 18px rgb(0 0 0 / .18); }
+.chat-body { min-height: 0; overflow: visible; }
+.chat-log { min-height: 0; padding: 10px 24px; }
+.chat-head { padding-inline: 24px; }
+.chat-resize { top: -5px; z-index: 2; }
+.chat-resize::after { width: 44px; background: var(--border-strong); }
+.composer { align-items: flex-start; padding: 10px 24px 12px; }
+.composer-input { flex: 1; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; }
+.composer-input textarea { grid-column: 1 / -1; width: 100%; resize: none; } /* it grows with its text by itself (ChatDock), up to five lines */
+.composer-help { grid-column: 1; color: var(--muted); font-size: 12px; line-height: 16px; }
+/* how much of the 4,000 characters a message may have is used, shown near the limit */
+.composer-count { grid-column: 2; justify-self: end; color: var(--muted); font-size: 12px; line-height: 16px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.composer-count.is-over { color: var(--err); }
+/* 보내기 while it would do nothing: dimmed but still in the Tab order, its reason in .composer-help */
+.composer-send[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
+.composer-send[aria-disabled="true"]:hover { filter: none; }
+.composer-models .dropdown-button { max-width: 180px; }
+.composer-models .dropdown-button > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.composer-models .listbox { min-width: 210px; max-height: min(300px, 50dvh); overflow-y: auto; }
+.chat-intro { display: grid; justify-items: center; gap: 6px; }
+.chat-intro strong { color: var(--text); font-size: 15px; font-weight: 600; }
+.chat-intro p { font-size: 13px; max-width: 58ch; }
+.chat-intro small { color: var(--muted); font-size: 12px; }
+/* the examples are buttons that fill the message box */
+.chat-examples { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 6px 0 2px; }
+.chat-example { height: auto; min-height: 32px; padding: 6px 12px; color: #c9d0be; font-size: 13px; line-height: 1.4; white-space: normal; text-align: left; }
+/* new lines came in under what the reader has on screen (the log does not jump to them) */
+.chat-log-wrap { position: relative; display: flex; flex-direction: column; min-height: 0; }
+.chat-log-wrap > .chat-log { flex: 1; }
+.chat--drawer.is-open .chat-log-wrap { flex: 1; }
+.chat-jump { position: absolute; left: 50%; bottom: 8px; translate: -50% 0; z-index: 2; border-color: var(--accent); color: var(--accent);
+  background: var(--panel); box-shadow: var(--shadow); }
+.jobs-menu-provider { color: var(--muted); font-size: 12px; }
+.jobs-menu-state { font-size: 12px; }
+/* the whole line, wrapped: an ellipsis would cut the estimate at its end */
+.jobs-menu-text .jobs-menu-state { white-space: normal; overflow-wrap: anywhere; }
+.login-progress { color: var(--muted); font-size: 12px; }
+
+/* The final action stays visible while settings and asset lists scroll. */
+.dialog-head, .dialog-footer { flex-shrink: 0; }
+.dialog-body { min-height: 0; }
+.dialog-section { display: grid; gap: 12px; min-width: 0; }
+.dialog-section-heading { color: var(--text); font-size: 13px; font-weight: 650; margin: 0; }
+.dialog-footer { display: grid; gap: 8px; padding: 14px 22px; border-top: 1px solid var(--border); background: var(--panel); }
+.dialog-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 8px; }
+.dialog-submit-hint { font-size: 12px; line-height: 1.5; color: var(--muted); }
+/* the line a dialog adds at its foot when Esc or a click beside it would have thrown typed text away (useDialog) */
+.dialog-keep { flex: none; margin: 0; padding: 10px 22px; border-top: 1px solid rgb(251 191 36 / .3); background: rgb(251 191 36 / .1);
+  color: #fcd34d; font-size: 13px; line-height: 1.5; }
+.cast-role select { min-height: 36px; font-size: 12px; }
+.field-hint { font-size: 12px; line-height: 1.5; }
+.conn-mini { flex-shrink: 1; overflow-y: auto; max-height: min(210px, 28dvh); min-width: 0; }
+.conn-mini > li, .conn-mini-row { min-width: 0; }
+.conn-mini-meta { flex-shrink: 0; }
+.session-list { flex: 1; }
+.side-label { margin-top: 20px; font-size: 12px; letter-spacing: .5px; }
+.conn-mini-actions, .side-label, .side-nav, .sidebar-foot { flex-shrink: 0; }
+
+@container (max-width: 440px) {
+  .preview-title { flex-basis: 100%; }
+  .figure-actions { width: 100%; }
+  .game-summary-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .pane-head { flex-wrap: wrap; }
+  .pane-head .pane-action { margin-left: auto; }
+}
+
+/* The navigation is a drawer behind ☰, with full service and session names, wherever the workspace needs the width:
+   tablets and laptops. From 1680 px the sidebar stands beside the workspace. */
+@media (max-width: 1679.98px) {
+  .app { grid-template-columns: minmax(0, 1fr); grid-template-areas: "header" "hero" "main" "chat"; }
+  .sidebar {
+    position: fixed; inset: 0 auto 0 0; z-index: 45; width: min(300px, 86vw); height: 100dvh;
+    padding: 26px 16px 16px; align-items: stretch; transform: translateX(-100%); visibility: hidden;
+    box-shadow: var(--shadow); transition: transform .22s ease, visibility 0s linear .22s;
+  }
+  .sidebar.is-open { transform: none; visibility: visible; transition: transform .22s ease; }
+  .sidebar nav { align-items: stretch; }
+  .sidebar .label, .sidebar .brand-name {
+    position: static; width: auto; height: auto; overflow: visible; clip-path: none; white-space: normal;
+  }
+  .sidebar .brand-name, .session .label { display: grid; }
+  .sidebar .side-label { display: flex; }
+  .sidebar .conn-mini-row { width: 100%; justify-content: flex-start; padding: 6px 10px; }
+  .sidebar .conn-mini-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .new-session .label { display: inline; }
+  .new-session kbd { display: none; }
+  .new-session, .session { width: auto; height: auto; justify-content: flex-start; padding: 10px 12px; }
+  /* the row is whole in the drawer, so its delete button is the one of the wide sidebar, not the 20-px corner button
+     of the 64-px rail (styles.css, 768–1024 px) */
+  .session-delete { top: 50%; right: 6px; translate: 0 -50%; width: 28px; height: 28px; }
+  .new-session { height: 44px; }
+  .side-nav { width: auto; justify-content: flex-start; padding: 12px; }
+  .session-list { justify-items: stretch; }
+  .new-session-form { position: static; width: auto; box-shadow: none; }
+  .nav-backdrop { position: fixed; inset: 0; z-index: 44; background: rgb(5 7 10 / .6); }
+  .menu-btn, .topbar-logo { display: inline-flex; }
+  .topbar { padding-inline: 16px; gap: 12px; }
+  .topbar-actions { gap: 8px; }
+}
+/* Below 1200 px: one pane a row, and the workspace scrolls. */
+@media (max-width: 1199.98px) {
+  .split { grid-template-columns: minmax(0, 1fr); padding: 14px 20px 20px; overflow-y: auto; overscroll-behavior: contain; align-items: start; }
+}
+/* Tablets held upright and phones, where the chat is under the panes: a pane is as tall as what is in it, and the
+   workspace scrolls as one. */
+@media (max-width: 899.98px) {
+  .pane { min-height: auto; overflow: visible; }
+  .tabpanel { overflow: visible; scrollbar-gutter: auto; }
+}
+/* 900–1199 px: the chat is a column beside the panes here too (below), so no dock covers them; the panes are one
+   column, each at most as tall as the workspace less a strip, scrolling inside like the wide layout's: a whole card
+   with its buttons shows in the IP pane, and the head of the game pane shows under it. */
+@media (min-width: 900px) and (max-width: 1199.98px) {
+  .split { grid-auto-rows: max-content; } /* a row is as tall as its pane: an auto row would squeeze both into the window */
+  .pane { max-height: max(calc(100dvh - var(--header-h) - 132px), 440px); } /* the title row 40, the workspace's padding 28, the strip 64 */
+  .tabpanel { overscroll-behavior: auto; } /* at a pane's end the wheel goes on to the next pane */
+}
+
+@media (max-width: 767.98px) {
+  .split { padding: 12px 12px 18px; gap: 16px; }
+  .pane-head { padding: 14px; }
+  .pane-sub { white-space: normal; }
+  .tablist { gap: 4px; padding-inline: 10px; }
+  .tab { font-size: 12px; padding-inline: 5px; gap: 3px; }
+  .tab-count { min-width: 17px; padding-inline: 4px; }
+  .tabpanel { padding: 12px; }
+  .card-grid { grid-template-columns: minmax(0, 1fr); }
+  .card-actions .btn, .preview-bar .btn, .genre-tab { min-height: 40px; }
+  .cutout-toggle, .chip-btn { min-height: 40px; } /* tap targets */
+  .chat-head { padding-inline: 16px; }
+  .chat-log { padding-inline: 16px; }
+  .composer { gap: 8px; padding: 8px 16px 12px; }
+  .composer-models { gap: 8px; }
+  .composer-models .dropdown { min-width: 0; }
+  .composer-models .dropdown-native { width: 100%; min-width: 0; height: 36px; font-size: 12px; }
+  .composer-models .dropdown-button { width: 100%; height: 36px; }
+  .composer-input textarea, .composer .btn { height: 44px; }
+  .composer-help:empty { display: none; } /* a phone's line says only why 보내기 waits (ChatDock) */
+  .empty-state .empty-chat-open { display: inline-flex; min-height: 40px; }
+  .dialog-head { padding: 16px; }
+  .dialog-body { padding: 16px; gap: 16px; }
+  .dialog-footer { padding: 12px 16px max(12px, env(safe-area-inset-bottom)); }
+  .dialog-actions > .btn { min-height: 40px; }
+  .game-modal-head { flex-wrap: wrap; gap: 8px; }
+  .game-modal-head .view-switch { order: 3; width: 100%; }
+  .game-modal-head .icon-btn { margin-left: auto; }
+  .game-modal-bar { padding: 12px 16px 4px; }
+  .field--inline { min-width: 0; flex: 1 1 160px; }
+  .game-modal-hint { padding-inline: 16px; }
+}
+
+@media (max-height: 850px) and (min-width: 1025px) {
+  .split { padding-top: 12px; padding-bottom: 14px; }
+  .pane-head { padding-block: 12px; }
+}
+/* the sidebar on a short window, wherever it is not the phone's drawer */
+@media (max-height: 850px) and (min-width: 768px) {
+  .sidebar { padding-top: 20px; }
+  .new-session { margin-top: 20px; }
+  .side-label { margin-top: 14px; margin-bottom: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar { transition: none; }
+}
+
+/* == the workspace on laptop windows ==
+   Under the top bar a 768 px window has 704 px: a chat that shows 8 lines under the panes leaves them less than a
+   card is tall. So from 900 px the chat is a column right of the panes (the IP pane stays on the left, where the
+   agent says a picture appears), each as tall as the window; the session's title block is one row; and the
+   navigation is the ☰ drawer until 1680 px (above). Between 900 and 1199 px the panes are one column beside the
+   chat; only narrower windows keep the dock under the panes. */
+.page-hero { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; min-width: 0; padding: 12px 28px 0; }
+.hero-title { min-width: 0; max-width: min(40ch, 100%); font-size: 18px; font-weight: 650; line-height: 1.4; letter-spacing: -.2px;
+  overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.hero-meta { flex: none; flex-wrap: nowrap; gap: 6px; }
+.hero-chip { height: 26px; white-space: nowrap; }
+.hero-logline { display: block; flex: 1 1 240px; min-width: 0; max-width: none; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+/* the composer in the order it is tabbed: the message box, the model pickers, 보내기 */
+.composer-input { flex: 1 1 200px; }
+.composer-models { flex: none; }
+@media (max-width: 1199.98px) {
+  .page-hero { padding: 12px 20px 0; }
+}
+@media (max-width: 767.98px) {
+  .page-hero { padding: 10px 14px 0; align-items: flex-start; }
+  /* a long name is read on two lines with ✎ beside the first */
+  .hero-title { font-size: 16px; max-width: calc(100% - 46px); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+    white-space: normal; overflow-wrap: anywhere; padding-top: 9px; }
+  /* ... and in the list, where the row's two 40-px buttons leave a name about ten characters */
+  .session-list .session-title { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; white-space: normal; overflow-wrap: anywhere; }
+  .hero-logline { flex-basis: 100%; font-size: 12px; }
+  /* the shell's touch targets: 40 px at least */
+  .menu-btn, .hero-rename { width: 40px; height: 40px; }
+  .tab { height: 40px; }
+  .chat-toggle, .chat-jump, .chat-example, .sidebar-foot .btn, .jobs-menu-btn, .conn-mini-row { min-height: 40px; }
+  .session-delete { right: 2px; width: 40px; height: 40px; }
+  .session-list .session { padding-right: 48px; }
+  .session-rename { right: 44px; width: 40px; height: 40px; }
+  .session-list .session-row--tools .session { padding-right: 90px; }
+  .session-rename-form input, .session-rename-form .btn { height: 40px; }
+  .session-find input { height: 40px; }
+  /* ... and the rest a thumb must hit in the shell, the panes and their drawers (the title's ✎ has its own rule
+     below this block, which would win otherwise) */
+  .page-hero .hero-rename { width: 40px; height: 40px; }
+  .page-hero .hero-rename-form input, .new-session-form input { height: 40px; }
+  .app .btn-sm, .drawer .btn-sm, .modal:not(.game-modal, .big-game) .btn-sm, .toasts .btn-sm { min-height: 40px; }
+  .version-btn { min-width: 44px; min-height: 40px; justify-content: center; }
+  .preview-bar .menu-trigger { min-width: 44px; }
+  .dropdown-native { min-height: 40px; }
+  .tool-log > summary, .game-rules-details > summary, .game-spec-details > summary, .design-more > summary, .design-spec > summary,
+  .picture-prompt > summary, .card-note-more > summary { padding-block: 11px; }
+  .video-card .link-btn, .card-note .link-btn, .design-drawer .link-btn, .toast-open, .login-foot .link-btn { display: inline-flex; align-items: center; min-height: 40px; }
+  .conn-form .btn { min-height: 40px; }
+}
+@media (min-width: 900px) {
+  .app { grid-template-columns: minmax(0, 1fr) var(--chat-w, 380px); grid-template-rows: var(--header-h) auto minmax(0, 1fr);
+    grid-template-areas: "header header" "hero chat" "main chat"; }
+  .app:not(:has(.chat)) { grid-template-columns: minmax(0, 1fr); grid-template-rows: var(--header-h) minmax(0, 1fr); grid-template-areas: "header" "main"; }
+  .page-hero { padding: 12px 20px 0; }
+  .split { padding: 12px 20px 16px; gap: 16px; }
+  .chat { height: auto; border-top: 0; border-left: 1px solid var(--border); box-shadow: none; }
+  .chat-head { position: static; padding-inline: 16px 10px; }
+  /* the handle is the column's left edge */
+  .chat-resize { top: 0; bottom: 0; left: -5px; right: auto; width: 10px; height: auto; cursor: ew-resize; }
+  .chat-resize::after { top: 50%; left: 4px; width: 3px; height: 44px; margin: -22px 0 0; }
+  :root.is-resizing-dock { cursor: ew-resize; }
+  .chat-log { padding: 12px 16px; }
+  .chat .bubble { max-width: 92%; }
+  .composer { flex-wrap: wrap; padding: 10px 16px 12px; }
+  .composer-input { flex-basis: 100%; }
+  .composer-input textarea { height: 76px; }
+  .composer-models { flex: 1; min-width: 0; }
+  .composer-models .dropdown-button, .composer .btn { height: 36px; }
+  .composer-models .dropdown-button { max-width: 132px; }
+  /* folded: a 44 px strip with the way back */
+  .chat.is-hidden .chat-head { flex-direction: column; justify-content: flex-start; gap: 12px; height: 100%; padding: 10px 0; }
+  .chat.is-hidden .chat-head-title { order: 2; writing-mode: vertical-rl; }
+  .chat.is-hidden .chat-toggle { margin: 0; width: 32px; padding: 0; }
+}
+@media (min-width: 1680px) {
+  .app { grid-template-columns: var(--sidebar-w) minmax(0, 1fr) var(--chat-w, 380px); grid-template-areas: "nav header header" "nav hero chat" "nav main chat"; }
+  .app:not(:has(.chat)) { grid-template-columns: var(--sidebar-w) minmax(0, 1fr); grid-template-areas: "nav header" "nav main"; }
+}
+/* The handle between the two panes stands where their gap was (SplitPanes): drag it, or ← →, to give one pane more
+   of the width (30–70%); the share is kept. A pane is never narrower than its five tabs need (420 px, or 46% of the
+   two when the window or a wide chat leaves less). Not where the panes are one column. */
+.split-handle { display: none; }
+@media (min-width: 1200px) {
+  .split:not(.split--empty) { grid-template-columns: minmax(min(420px, 46%), var(--split-a, 1fr)) 16px minmax(min(420px, 46%), var(--split-b, 1fr)); column-gap: 0; }
+  .split-handle { display: block; position: relative; cursor: col-resize; touch-action: none; }
+  .split-handle::after { content: ""; position: absolute; top: 50%; left: 50%; width: 3px; height: 44px; margin: -22px 0 0 -1.5px; border-radius: 2px;
+    background: var(--border-strong); }
+  .split-handle:hover::after, .split-handle:focus-visible::after { background: var(--lime); }
+  .split-handle:focus-visible { outline: none; }
+  .split-handle:focus-visible::after { outline: 2px solid var(--lime); outline-offset: 3px; }
+  :root.is-resizing-split { cursor: col-resize; user-select: none; }
+}
+/* the session's name, changed in place on the title row */
+.hero-rename { width: 28px; height: 28px; margin-left: -6px; border-radius: 6px; font-size: 14px; }
+.hero-rename-form { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; flex: 1 1 320px; min-width: 0; }
+.hero-rename-form input { flex: 1 1 200px; min-width: 0; max-width: 46ch; height: 32px; font-size: 15px; font-weight: 600; }
+.hero-rename-count { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.hero-rename-form .form-error { flex-basis: 100%; }
+/* a list or a session that did not load: what happened and the way on, where the content would be */
+.load-error { display: grid; justify-items: start; gap: 10px; max-width: 520px; padding: 16px 18px; border: 1px solid rgb(248 113 113 / .35);
+  border-radius: 8px; background: rgb(248 113 113 / .06); color: var(--text); font-size: 13px; line-height: 1.6; }
+.load-error p { margin: 0; overflow-wrap: anywhere; }
+.load-error--side { margin: 0 2px 8px; padding: 12px; font-size: 12px; }
+/* the whole page when a part of it could not be drawn (ErrorBoundary): the same block, in the middle */
+.crash { display: grid; place-items: center; min-height: 100dvh; padding: 24px; }
+
+/* The start screen: the studio with no session open. One column, what the product makes in one sentence, one
+   primary button, the examples, then the recent sessions. */
+.start { grid-area: main; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: clamp(20px, 5vh, 56px) 24px 40px; }
+.start-inner { display: grid; gap: 28px; width: min(760px, 100%); margin: 0 auto; }
+.start-notice { margin: 0; }
+.start-notice--demo { color: #d4e4ba; background: rgb(208 239 152 / .07); border-color: rgb(208 239 152 / .3); }
+.start-head { display: grid; gap: 12px; }
+.start-head h2 { font-size: clamp(24px, 3vw, 32px); font-weight: 650; line-height: 1.3; letter-spacing: -.6px; }
+.start-lead { color: #c9d0be; font-size: 15px; line-height: 1.7; text-wrap: pretty; }
+/* the order at a glance, as a line of text with arrows (not boxes that look like buttons) */
+.start-steps { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin: 4px 0 0; padding: 0; list-style: none; }
+.start-step { color: var(--muted); font-size: 13px; white-space: nowrap; }
+.start-arrow { color: var(--faint); font-size: 13px; }
+.start-step--idea { color: #c9d0be; }
+.start-action { display: grid; justify-items: start; gap: 10px; }
+.start-new { height: 46px; padding: 0 26px; font-size: 15px; }
+.start-hint { color: var(--muted); font-size: 13px; line-height: 1.6; }
+.start-section { display: grid; gap: 10px; min-width: 0; }
+.start-section h3 { display: flex; align-items: baseline; gap: 8px; font-size: 14px; font-weight: 650; }
+.start-count { color: var(--muted); font-size: 12px; font-weight: 400; }
+.start-ideas, .start-sessions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 0; padding: 0; list-style: none; }
+.start-idea { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 48px; padding: 10px 14px;
+  border: 1px solid var(--border-strong); border-radius: 8px; background: var(--panel-2); color: var(--text); font: inherit; font-size: 13px;
+  line-height: 1.5; text-align: left; cursor: pointer; transition: border-color .15s ease-out, background-color .15s ease-out; }
+.start-idea:hover:not(:disabled) { border-color: var(--accent); background: var(--panel-3); }
+.start-idea:disabled { opacity: .55; cursor: progress; }
+.start-idea-go { flex: none; color: var(--accent); font-size: 13px; }
+.start-session { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px;
+  color: var(--text); text-decoration: none; transition: border-color .15s ease-out, background-color .15s ease-out; }
+.start-session:hover { border-color: var(--border-strong); background: #20251b; }
+.start-session-title { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 13px; font-weight: 500; }
+.start-session-time { flex: none; color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.start-session-skel { height: 48px; }
+.start-more { justify-self: start; }
+@media (max-width: 767.98px) {
+  .start { padding: 20px 16px 32px; }
+  .start-inner { gap: 24px; }
+  .start-ideas, .start-sessions { grid-template-columns: minmax(0, 1fr); }
+  .start-new { width: 100%; }
+  .start-more { min-height: 40px; }
+}
+@media (prefers-reduced-motion: reduce) { .start-idea, .start-session { transition: none; } }
+/* == end of the workspace on laptop windows == */
+
+/* the viewer clock (bottom right of the player) vs the 송출 time burnt into the picture (bottom left) */
+.live-clock { position: absolute; bottom: 52px; right: 12px; padding: 4px 10px; border-radius: 4px; background: rgb(0 0 0 / .72); color: var(--lime); font: 700 15px ui-monospace, Menlo, monospace; z-index: 2; }
+
+/* the live playable ad: a GameLift Streams session kept connected but hidden until "▶ 지금 플레이" reveals it */
+.lp-stage { position: absolute; inset: 0; visibility: hidden; pointer-events: none; z-index: 3; background: #000; }
+/* on top of the tiles' cards (z-index 4) while it plays: neither the grid nor a tile's stage is a stacking context */
+.lp-stage.is-on { visibility: visible; pointer-events: auto; z-index: 5; }
+.lp-card { z-index: 4; } /* the playable card sits above any overlay */
+.lp-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; outline: none; }
+.lp-bar { position: absolute; left: 0; right: 0; top: 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 12px; background: linear-gradient(rgb(0 0 0 / .75), transparent); color: var(--lime); font-size: 12px; font-weight: 700; }
+.lp-wait { pointer-events: none; position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 12px; color: var(--muted); }
+.lp-hint { pointer-events: none; position: absolute; left: 50%; bottom: 48px; transform: translateX(-50%); margin: 0; padding: 8px 14px; border-radius: 6px; background: rgb(0 0 0 / .72); color: #fff; font-weight: 700; }
+
+/* the control room's playable-ad server switch and its status */
+.standby-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; flex-basis: 100%; }
+.standby-row .gen-switch { font-size: 12px; }
+.standby-status { font-size: 12px; font-weight: 700; color: var(--text); }
+.standby-cost { flex-basis: 100%; margin: 0; }
+/* the same server in one line on the 플레이어블 tab, outside the fold: what it is doing, the wait, the price, when it
+   goes, and the button that takes it down (or turns it on, with the price on it) */
+.standby-line { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin: 0; padding: 8px 10px; border: 1px solid color-mix(in srgb, var(--lime) 35%, var(--border)); border-radius: 6px; background: color-mix(in srgb, var(--lime) 6%, var(--panel-2)); font-size: 13px; line-height: 1.5; }
+.standby-line span { flex: 1 1 320px; min-width: 0; }
+
+/* the watch window's "시청자 4명": four dummy viewers, each its own small player, profile, activity and ad history */
+.watch-split--grid { grid-template-columns: minmax(0, 7fr) minmax(260px, 3fr); }
+.watch-grid { position: relative; min-height: 0; overflow-y: auto; padding: 12px; background: var(--bg); }
+.vt-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.vt { display: grid; grid-template-rows: auto auto 1fr; min-width: 0; border: 1px solid var(--border); border-radius: 8px; background: var(--panel-2); overflow: hidden; }
+.vt-head { display: flex; align-items: center; gap: 10px; padding: 8px 10px; }
+.vt-avatar { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; color: #fff; font-size: 12px; font-weight: 800; }
+.vt-who { display: grid; gap: 4px; min-width: 0; }
+.vt-who strong { font-size: 14px; }
+.vt-chips { display: flex; flex-wrap: wrap; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.vt-chips li { padding: 1px 6px; border: 1px solid var(--border-strong); border-radius: 4px; font-size: 12px; color: var(--muted); }
+.vt-chips .vt-chip--fav { border-color: color-mix(in srgb, var(--lime) 50%, var(--border)); color: var(--lime); }
+.vt-chips .vt-chip--gam { border-color: var(--accent); color: var(--accent); }
+.vt-stage { position: relative; aspect-ratio: 16 / 9; background: #000; }
+.vt-stage > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.vt-stage .live-idle { margin: 0; border: 0; border-radius: 0; font-size: 12px; }
+.vt-ad { position: absolute; left: 8px; right: 8px; bottom: 8px; margin: 0; padding: 4px 8px; border-radius: 4px; background: var(--lime); color: var(--lime-ink); font-size: 12px; font-weight: 700; line-height: 1.35; }
+.vt-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; padding: 8px 10px 10px; font-size: 12px; }
+.vt-h { margin: 0 0 4px; font-size: 12px; letter-spacing: .5px; color: var(--muted); }
+.vt-h small { color: var(--faint); font-size: 12px; font-weight: 400; }
+.vt-feed, .vt-ads { display: grid; gap: 3px; margin: 0; padding: 0; list-style: none; }
+.vt-feed li { display: flex; justify-content: space-between; gap: 6px; }
+.vt-feed li span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vt-feed li.is-sim span { color: var(--lime); }
+.vt-feed time { flex: none; color: var(--faint); }
+.vt-ads li { display: grid; gap: 1px; padding: 4px 6px; border-radius: 4px; background: color-mix(in srgb, var(--lime) 6%, transparent); }
+.vt-ads span { color: var(--muted); }
+.vt-empty { margin: 0; font-size: 12px; }
+.live-ad-why { display: block; margin-top: 2px; font-weight: 600; }
+@media (max-width: 1100px) { .vt-grid, .vt-body { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 900px) { .watch-split--grid { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto; } }
+/* A narrow watch page (a phone, or a window beside the play window) scrolls as one page under its bar, not as two
+   scrollers stacked in a window that does not scroll. While a card's game plays over the tiles, the tiles' column
+   is one screen tall, so the game is in sight whole. */
+@media (max-width: 900px) {
+  .popup-window.watch { display: block; overflow-y: auto; } /* a block: as a grid of the window's height its rows would share that height out */
+  .watch .watch-split { height: auto; }
+  .watch .watch-grid, .watch .watch-side { overflow: visible; }
+  .watch .watch-grid { min-height: 200px; } /* off air it holds one sentence, laid over it: room for that */
+  .watch .vt-stage { max-height: none; } /* a tile's picture at its full 16:9 (the cap fits four tiles into one window) */
+  /* the title's line on what the page shows stays, under the title: the panel that explains it is now under the tiles */
+  .watch .popup-title { white-space: normal; }
+  .watch .popup-title small { display: block; margin: 2px 0 0; line-height: 1.4; }
+  .watch .watch-split--grid .watch-main.is-playing { height: calc(100dvh - 130px); overflow: hidden; } /* (the bar is 61–124 px tall) */
+  /* an activity line is shown whole there: a tile is the page's full width, and a finger cannot open the tooltip
+     that carries a cut line's rest */
+  .watch .vt-feed li span { white-space: normal; overflow: visible; overflow-wrap: anywhere; }
+}
+.watch-stage .live-ad { max-width: min(60%, 520px); }
+.vt-body section, .vt-feed li, .vt-ads li { min-width: 0; }
+.vt-stage { max-height: calc(50dvh - 220px); min-height: 150px; width: 100%; }
+.vt-ads li strong, .vt-ads li span { overflow-wrap: anywhere; }
+
+/* the watch window's main area: the grid or the one big player, with the page's playable slot over it (while it
+   plays it covers the whole grid: the clicked tile, expanded) */
+.watch-main { position: relative; display: grid; min-height: 0; min-width: 0; }
+.watch-main > main { min-height: 0; min-width: 0; }
+.lp-who { display: inline-flex; align-items: center; gap: 8px; margin-right: 12px; color: #fff; }
+.lp-who .vt-avatar { width: 30px; height: 30px; font-size: 12px; }
+
+/* a viewer's playable card: its own game and why */
+.play-card .play-card-why { margin: 0; font-size: 12px; line-height: 1.35; color: rgb(255 255 255 / .82); }
+.play-card-wait { display: grid; gap: 4px; color: #fff; }
+.play-card-wait strong { font-size: 15px; color: var(--lime); }
+.play-card-wait small { font-size: 12px; color: rgb(255 255 255 / .75); }
+.play-card .play-card-prep { font-size: 12px; color: rgb(255 255 255 / .75); }
+.play-card-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.vt-stage .play-card { top: 8px; right: 8px; width: min(64%, 260px); padding: 8px; gap: 5px; z-index: 4; }
+.vt-stage .play-card .hl-overlay-title { font-size: 13px; }
+
+/* the corner trailer: small and muted in the player's top right over the running broadcast; a tap makes it big */
+.corner-ad { position: absolute; top: 44px; right: 14px; z-index: 3; width: min(30%, 300px); margin: 0; display: grid;
+  border: 2px solid var(--accent); border-radius: 8px; overflow: hidden; background: #000; box-shadow: 0 8px 24px rgb(0 0 0 / .5);
+  animation: fade .2s ease-out; transition: width .2s ease-out; }
+.corner-ad.is-big { width: min(64%, 720px); }
+.corner-ad-media { display: block; padding: 0; border: 0; background: #000; cursor: pointer; }
+.corner-ad-media video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.corner-ad figcaption { display: grid; gap: 2px; padding: 5px 8px 6px; background: rgb(10 12 16 / .92); color: #fff; font-size: 12px; }
+.corner-ad-title { font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.corner-ad figcaption small { color: var(--muted); font-size: 12px; }
+.corner-ad-row { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-top: 2px; }
+.corner-ad-close { width: 22px; height: 22px; font-size: 14px; }
+/* small in a tile: a fixed width, since a tile's stage is wide and short and the corner's height is its picture's
+   16:9 plus an 82-px caption (a share of the width would run over the tile's own text). Its row of 게임 보기 and ×
+   needs 118 px: 124 */
+.vt-stage .corner-ad { top: 6px; right: 6px; width: 124px; }
+/* its caption in two rows there, 광고 beside the title: three rows would make the corner taller than the stage of a
+   short window (150 px: its floor) */
+.vt-stage .corner-ad:not(.is-big) figcaption { grid-template-columns: minmax(0, 1fr) auto; column-gap: 6px; }
+.vt-stage .corner-ad:not(.is-big) .corner-ad-row { grid-column: 1 / -1; }
+/* big in a tile: pinned to the stage, so its height is not its content's. The caption sits beside the picture,
+   which takes the stage's whole height, letterboxed: a tile's stage is wide and short, and a caption row under
+   the picture would leave the picture too little */
+.vt-stage .corner-ad.is-big { width: auto; left: 6px; bottom: 6px; grid-template: minmax(0, 1fr) / minmax(0, 1fr) 150px; }
+.vt-stage .corner-ad.is-big .corner-ad-media video { aspect-ratio: auto; height: 100%; object-fit: contain; }
+.vt-stage .corner-ad.is-big figcaption { align-content: center; }
+@media (prefers-reduced-motion: reduce) { .corner-ad { animation: none; transition: none; } }

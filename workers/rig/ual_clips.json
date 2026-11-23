@@ -1,0 +1,22 @@
+{
+ "idle": "Idle_Loop",
+ "walk": "Walk_Loop",
+ "run": "Jog_Fwd_Loop",
+ "sprint": "Sprint_Loop",
+ "jump": "Jump_Start",
+ "fall": "Jump_Loop",
+ "land": "Jump_Land",
+ "attack_melee": "Sword_Attack",
+ "attack_gun": "Pistol_Shoot",
+ "hit": "Hit_Chest",
+ "death": "Death01",
+ "interact": "Interact",
+ "zombie_walk": "Zombie_Walk_Fwd_Loop",
+ "zombie_attack": "Zombie_Scratch",
+ "idle_gun": "Pistol_Idle_Loop",
+ "idle_melee": "Sword_Idle",
+ "punch": "Punch_Cross",
+ "zombie_idle": "Zombie_Idle_Loop",
+ "aim_gun": "Pistol_Aim_Neutral",
+ "hold_melee": "Sword_Idle"
+}

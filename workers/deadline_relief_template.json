@@ -1,0 +1,88 @@
+{
+  "specificationVersion": "jobtemplate-2023-09",
+  "name": "IPverse relief turntable",
+  "description": "Cutout PNG -> Blender silhouette relief, or GLB -> imported mesh: turntable.mp4, poster.png, meta.json (+ model.glb for relief) under OutputPrefix/.",
+  "parameterDefinitions": [
+    {
+      "name": "InputUri",
+      "type": "STRING",
+      "description": "s3://bucket/key of the cutout PNG (relief) or of a GLB (turntable of that mesh)"
+    },
+    {
+      "name": "OutputPrefix",
+      "type": "STRING",
+      "description": "s3://bucket/prefix for outputs, no trailing slash"
+    },
+    {
+      "name": "Frames",
+      "type": "INT",
+      "default": 72
+    },
+    {
+      "name": "Width",
+      "type": "INT",
+      "default": 1280
+    },
+    {
+      "name": "Height",
+      "type": "INT",
+      "default": 720
+    },
+    {
+      "name": "Samples",
+      "type": "INT",
+      "default": 24
+    },
+    {
+      "name": "Accent",
+      "type": "STRING",
+      "default": "#5de6cf"
+    },
+    {
+      "name": "CondaPackages",
+      "type": "STRING",
+      "default": "blender python boto3 ffmpeg"
+    },
+    {
+      "name": "CondaChannels",
+      "type": "STRING",
+      "default": "deadline-cloud conda-forge"
+    }
+  ],
+  "steps": [
+    {
+      "name": "Render",
+      "script": {
+        "actions": {
+          "onRun": {
+            "command": "python",
+            "args": [
+              "{{Task.File.Run}}",
+              "{{Param.InputUri}}",
+              "{{Param.OutputPrefix}}",
+              "{{Param.Frames}}",
+              "{{Param.Width}}",
+              "{{Param.Height}}",
+              "{{Param.Samples}}",
+              "{{Param.Accent}}",
+              "{{Task.File.Relief}}"
+            ],
+            "timeout": 3600
+          }
+        },
+        "embeddedFiles": [
+          {
+            "name": "Run",
+            "type": "TEXT",
+            "data": "\"\"\"Deadline task: s3 cutout PNG (relief) or GLB (Hunyuan3D mesh) -> Blender (embedded Relief file) -> turntable.mp4 -> s3 OutputPrefix/.\"\"\"\nimport os\nimport subprocess\nimport sys\nimport tempfile\n\nimport boto3\n\ninput_uri, output_prefix, frames, width, height, samples, accent, relief = sys.argv[1:9]\n\n\ndef s3_split(uri):\n    if not uri.startswith(\"s3://\"):\n        sys.exit(\"expected s3://bucket/key, got %r\" % uri)\n    bucket, _, key = uri[5:].partition(\"/\")\n    return bucket, key\n\n\ns3 = boto3.client(\"s3\")\nwith tempfile.TemporaryDirectory(prefix=\"relief-\") as work:\n    ext = os.path.splitext(input_uri)[1].lower()\n    src, out = os.path.join(work, \"input\" + ext), os.path.join(work, \"out\")\n    s3.download_file(*s3_split(input_uri), src)\n    env = {k: v for k, v in os.environ.items() if k not in (\"PYTHONPATH\", \"PYTHONHOME\")}  # Blender brings its own Python\n    subprocess.run([\"blender\", \"-b\", \"--factory-startup\", \"-noaudio\", \"--python-exit-code\", \"1\", \"--python\", relief, \"--\",\n                    \"--glb\" if ext == \".glb\" else \"--image\", src, \"--out\", out, \"--frames\", frames, \"--width\", width, \"--height\", height,\n                    \"--samples\", samples, \"--thickness\", \"0.12\", \"--accent\", accent], check=True, env=env)\n    subprocess.run([\"ffmpeg\", \"-y\", \"-framerate\", \"24\", \"-i\", os.path.join(out, \"frames\", \"%04d.png\"),\n                    \"-c:v\", \"libx264\", \"-pix_fmt\", \"yuv420p\", \"-movflags\", \"+faststart\",\n                    os.path.join(out, \"turntable.mp4\")], check=True)\n    bucket, prefix = s3_split(output_prefix.rstrip(\"/\"))\n    for name, content_type in ((\"turntable.mp4\", \"video/mp4\"), (\"model.glb\", \"model/gltf-binary\"),\n                               (\"poster.png\", \"image/png\"), (\"meta.json\", \"application/json\")):\n        if not os.path.exists(os.path.join(out, name)):  # GLB mode exports no model.glb\n            continue\n        s3.upload_file(os.path.join(out, name), bucket, prefix + \"/\" + name, ExtraArgs={\"ContentType\": content_type})\n        print(\"uploaded s3://%s/%s/%s\" % (bucket, prefix, name), flush=True)\n"
+          },
+          {
+            "name": "Relief",
+            "type": "TEXT",
+            "data": "@@RELIEF@@"
+          }
+        ]
+      }
+    }
+  ]
+}

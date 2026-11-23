@@ -1,0 +1,257 @@
+/* --hint-h: the height of the hint's pill under the game (runtime3d.js keeps it): what sits over it keeps clear */
+:root { --bg: #0b0d12; --accent: #5de6cf; --text: #f5f7fa; --hint-h: 26px; }
+[hidden] { display: none !important; }
+html, body { height: 100%; margin: 0; }
+body {
+  overflow: hidden; background: var(--bg); color: var(--text);
+  font: 15px/1.45 system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+#stage { position: fixed; inset: 0; }
+#game { position: absolute; inset: 0; }
+#game canvas { display: block; width: 100%; height: 100%; outline: none; cursor: grab; }
+#game canvas:active { cursor: grabbing; }
+
+#hud { position: absolute; inset: 0; pointer-events: none; }
+#topbar {
+  position: absolute; inset: 0 0 auto; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
+  padding: 16px 22px 40px; background: linear-gradient(rgb(0 0 0 / .55), transparent);
+  text-shadow: 0 1px 3px rgb(0 0 0 / .6);
+}
+#title { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; opacity: .7; }
+#objective { margin-top: 2px; font-size: 17px; font-weight: 700; color: var(--accent); }
+#status { font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; }
+#notice {
+  position: absolute; top: 22%; left: 50%; transform: translateX(-50%); padding: 8px 18px; border-radius: 999px;
+  background: rgb(0 0 0 / .45); border: 1px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  font-weight: 700; letter-spacing: .02em; backdrop-filter: blur(6px);
+}
+/* a countdown (a race's 3-2-1 and GO!), written large */
+#notice.big { min-width: 1.4em; padding: 6px 34px; font-size: 64px; line-height: 1.15; text-align: center; font-variant-numeric: tabular-nums; }
+
+#vitals { position: absolute; left: 22px; bottom: calc(var(--hint-h) + 18px); display: grid; gap: 8px; min-width: 240px; }
+#vitals:not([data-kind="hp"]) #hp, #vitals:not([data-kind="lives"]) #hearts { display: none; }
+#hp { display: flex; align-items: center; gap: 10px; }
+#hpbar, #dashbar {
+  position: relative; flex: 1; height: 10px; overflow: hidden; border-radius: 3px;
+  background: rgb(255 255 255 / .12); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .18);
+  transform: skewX(-18deg);
+}
+#hpfill, #dashfill { position: absolute; inset: 0; transform-origin: left; transition: transform .15s ease-out; }
+#hpfill { background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 70%, #000), var(--accent)); box-shadow: 0 0 12px var(--accent); }
+#hpfill.low { background: linear-gradient(90deg, #7a1020, #ff4d5e); box-shadow: 0 0 12px #ff4d5e; }
+#hptext { min-width: 2.5em; font-weight: 800; font-variant-numeric: tabular-nums; }
+#hearts { font-size: 26px; letter-spacing: 4px; color: #ff5d73; text-shadow: 0 0 10px rgb(255 93 115 / .6); }
+#shield {
+  justify-self: start; padding: 3px 12px; border-radius: 999px; font-weight: 800; font-variant-numeric: tabular-nums;
+  color: var(--text); background: color-mix(in srgb, var(--accent) 30%, rgb(0 0 0 / .55));
+  border: 1px solid var(--accent); box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 50%, transparent);
+}
+#dash { display: flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: .1em; opacity: .85; }
+#dashbar { height: 5px; max-width: 120px; }
+#dashfill { background: var(--text); }
+/* the keys, on their own dark pill: readable over a bright scene */
+#hint {
+  position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); box-sizing: border-box;
+  width: max-content; max-width: calc(100% - 24px); padding: 4px 14px; border-radius: 13px;
+  background: rgb(0 0 0 / .5); color: rgb(255 255 255 / .92); text-align: center; font-size: 13px; line-height: 18px;
+  word-break: keep-all;
+}
+
+#crosshair {
+  position: absolute; left: 50%; top: 50%; width: 22px; height: 22px; transform: translate(-50%, -50%); pointer-events: none;
+  background:
+    linear-gradient(var(--accent), var(--accent)) center 0 / 2px 6px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) center 100% / 2px 6px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) 0 center / 6px 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) 100% center / 6px 2px no-repeat;
+  filter: drop-shadow(0 0 3px var(--accent));
+}
+
+#floats { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.float { position: absolute; left: 0; top: 0; white-space: nowrap; font-weight: 800; text-shadow: 0 1px 3px rgb(0 0 0 / .8); }
+.float.tag { font-size: 14px; padding: 2px 10px; border-radius: 999px; background: rgb(0 0 0 / .45); }
+.float.prompt {
+  font-size: 14px; padding: 6px 12px; border-radius: 8px; color: var(--bg); background: var(--accent);
+  box-shadow: 0 4px 16px rgb(0 0 0 / .35); text-shadow: none;
+}
+.float.popup { font-size: 20px; animation: rise .9s ease-out forwards; }
+.float.popup.kill { color: var(--text); font-size: 16px; }
+.float.popup.pickup { color: var(--accent); }
+@keyframes rise { from { opacity: 1; margin-top: 0; } to { opacity: 0; margin-top: -56px; } }
+/* what a heal or shield did to the hero: big, boxed, held over the head, then fading */
+.float.popup.effect {
+  font-size: 24px; padding: 4px 14px; border-radius: 999px; color: var(--accent);
+  background: rgb(0 0 0 / .55); border: 1px solid color-mix(in srgb, var(--accent) 70%, transparent); animation-name: hold;
+}
+@keyframes hold { 0% { opacity: 0; margin-top: 8px; } 10%, 75% { opacity: 1; margin-top: 0; } 100% { opacity: 0; margin-top: -28px; } }
+
+#say {
+  position: absolute; left: 50%; bottom: calc(var(--hint-h) + 22px); width: min(720px, calc(100% - 48px)); transform: translateX(-50%);
+  padding: 16px 20px; border: 1px solid color-mix(in srgb, var(--accent) 70%, transparent); border-radius: 14px;
+  background: rgb(8 10 14 / .82); backdrop-filter: blur(8px); word-break: keep-all; box-shadow: 0 10px 40px rgb(0 0 0 / .45);
+  cursor: pointer; /* a click or a tap passes it too (runtime3d.js) */
+}
+#say b { display: block; margin-bottom: 4px; color: var(--accent); }
+#say b:empty { display: none; }
+/* the keys that pass it in every mode (not Space: it jumps in version 2) */
+#say::after { content: "E 또는 Enter로 넘기기 ▶"; display: block; margin-top: 6px; text-align: right; font-size: 12px; opacity: .75; }
+
+#loading { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 14px; background: var(--bg); font-weight: 700; }
+/* how much of the game is in, and what is being fetched (runtime3d.js loadingScreen) */
+#loading p { margin: 0; font-variant-numeric: tabular-nums; }
+#loading-bar { width: min(280px, 70vw); height: 6px; border: 0; border-radius: 999px; overflow: hidden; background: rgb(255 255 255 / .14); accent-color: var(--accent); }
+#loading-bar::-webkit-progress-bar { background: rgb(255 255 255 / .14); }
+#loading-bar::-webkit-progress-value { background: var(--accent); transition: width .2s ease-out; }
+#loading-bar::-moz-progress-bar { background: var(--accent); }
+#loading-detail { font-size: 13px; font-weight: 500; color: rgb(255 255 255 / .72); }
+.spinner { width: 34px; height: 34px; border-radius: 50%; border: 3px solid rgb(255 255 255 / .15); border-top-color: var(--accent); animation: spin 0.9s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+#end, #errors {
+  position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 22px;
+  padding: 24px; background: radial-gradient(ellipse at center, rgb(0 0 0 / .35), rgb(0 0 0 / .72)); text-align: center;
+}
+/* the end card: its title, why the round ended, what it came to, the button, what the button does (runtime3d.js hud.end) */
+#end { gap: 10px; overflow: auto; word-break: keep-all; background: radial-gradient(ellipse at center, rgb(0 0 0 / .5), rgb(0 0 0 / .78)); }
+#end-title { margin: 0 0 6px; font-size: 64px; font-weight: 900; line-height: 1.15; letter-spacing: .02em; text-shadow: 0 0 30px color-mix(in srgb, var(--accent) 70%, transparent); }
+#end[data-won="no"] #end-title { text-shadow: 0 0 30px rgb(255 60 80 / .6); }
+#end-reason { margin: 0; max-width: 640px; font-size: 19px; font-weight: 700; }
+#end-result { margin: 0; font-size: 16px; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+#restart { margin-top: 14px; }
+/* the card's first 0.8 s take no click and no key (runtime3d.js onKey, arpg-data.js END_KEYS_MS: a click or a key meant
+   for the round must not press 다시 시작): the button looks as one that cannot be pressed yet, each time the card comes up */
+#end:not([hidden]) #restart { animation: end-wait .8s step-end; }
+@keyframes end-wait { from { opacity: .55; cursor: default; } }
+#end-next { margin: 0; font-size: 13px; color: rgb(255 255 255 / .74); }
+@media (max-width: 600px), (max-height: 420px) {
+  #end-title { font-size: 40px; }
+  #end-reason { font-size: 16px; }
+}
+/* the pause card (runtime3d.js makePause): over the game and all that is on it, under a pre-roll ad */
+#pause { position: fixed; inset: 0; z-index: 8; display: grid; padding: 16px; overflow: auto; background: rgb(3 6 12 / .64); backdrop-filter: blur(3px); }
+.pause-card {
+  box-sizing: border-box; width: min(460px, 100%); margin: auto; padding: 24px 26px;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); border-radius: 18px;
+  background: rgb(9 18 29 / .93); box-shadow: 0 20px 70px rgb(0 0 0 / .45); text-align: center; word-break: keep-all;
+}
+.pause-card h2 { margin: 0; font-size: 26px; line-height: 1.2; }
+.pause-note { margin: 8px 0 0; font-size: 13px; color: rgb(230 239 250 / .82); }
+.pause-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 18px 0 8px; }
+.pause-esc { margin: 0; font-size: 12px; color: rgb(230 239 250 / .62); }
+/* what 다시 시작 does from here (runtime3d.js restartNote), as under the end card's button */
+.pause-next { margin: 4px 0 0; font-size: 13px; color: rgb(255 255 255 / .74); }
+.pause-card h3 { margin: 18px 0 10px; font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: .06em; text-align: left; }
+button.quiet { background: transparent; color: var(--text); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .38); }
+@media (max-height: 420px) {
+  #pause { padding: 8px; } /* (the card still fits a 513 × 289 frame whole) */
+  .pause-card { padding: 14px 18px; }
+  .pause-card h2 { font-size: 20px; }
+  .pause-actions { margin: 10px 0 6px; }
+  .pause-card h3 { margin: 10px 0 6px; }
+}
+
+#errors h1 { margin: 0; font-size: 22px; }
+#errors p { margin: 0; font-family: ui-monospace, Menlo, monospace; font-size: 13px; color: #ffb4b4; }
+button {
+  font: inherit; font-weight: 700; padding: 11px 28px; border: 0; border-radius: 999px; cursor: pointer;
+  background: var(--accent); color: var(--bg);
+}
+button:disabled { opacity: .55; cursor: default; }
+button:focus-visible { outline: 3px solid var(--text); outline-offset: 3px; }
+#ad { position: fixed; inset: 0; z-index: 10; background: #000; }
+#ad video { width: 100%; height: 100%; object-fit: contain; }
+#skip { position: absolute; right: 24px; bottom: 24px; }
+#fps { position: absolute; right: 12px; bottom: 34px; font: 12px ui-monospace, Menlo, monospace; opacity: .8; }
+
+@media (prefers-reduced-motion: reduce) {
+  .float.popup { animation-duration: .01s !important; }
+  .float.popup.effect { animation: none !important; } /* stays readable, without the motion */
+  .spinner { animation: none; }
+}
+
+/* the keys a game takes, a row a key: what it does, then its key caps (runtime3d.js keyList: the briefing, the pause card) */
+.keys { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px 22px; margin: 0; padding: 0; list-style: none; text-align: left; font-size: 13px; }
+.keys li { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-width: 0; color: rgb(233 244 255 / .82); }
+.keys .caps { display: inline-flex; flex: none; align-items: center; gap: 4px; }
+.keys .caps i { font-style: normal; font-size: 11px; opacity: .6; }
+kbd {
+  min-width: 1.1em; padding: 1px 6px; border: 1px solid rgb(255 255 255 / .24); border-bottom-width: 2px; border-radius: 6px;
+  background: rgb(255 255 255 / .1); color: var(--text); font-family: inherit; font-size: 12px; font-weight: 600; line-height: 1.5;
+  text-align: center; white-space: nowrap;
+}
+
+/* (the card's own margin centres it: a card taller than the window starts at its top and scrolls, never cut above) */
+.briefing {
+  position: absolute; inset: 0; z-index: 4; display: grid;
+  padding: 24px; background: linear-gradient(100deg, rgb(4 9 17 / .88), rgb(4 9 17 / .3));
+  overflow: auto;
+}
+.briefing-card {
+  width: min(560px, 100%); position: relative; box-sizing: border-box; margin: auto; padding: 28px;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); border-radius: 20px;
+  background: rgb(9 18 29 / .87); backdrop-filter: blur(16px); box-shadow: 0 20px 70px rgb(0 0 0 / .4);
+}
+.briefing-card img { float: right; width: 78px; height: 96px; object-fit: contain; margin: 0 0 10px 20px; }
+.briefing-kicker { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: .06em; margin: 0 0 12px; }
+.briefing-card h1 { font-size: 30px; line-height: 1.18; margin: 0 0 12px; }
+.briefing-summary { color: rgb(230 239 250 / .7); font-size: 13px; }
+.briefing-steps { clear: both; padding-left: 22px; margin: 20px 0; }
+.briefing-steps li { padding: 5px 0 5px 5px; color: rgb(233 244 255 / .85); font-size: 14px; }
+/* (sticky: in a window shorter than the card the start button stays in sight) */
+.briefing-start { position: sticky; bottom: 0; width: 100%; }
+.briefing-enter { margin: 8px 0 0; text-align: center; font-size: 12px; color: rgb(230 239 250 / .62); }
+/* on a device without a keyboard (runtime3d.js tellDevice): what the game needs, over the start button; and what
+   cannot be pressed there is not shown */
+.briefing-device {
+  margin: 0 0 12px; padding: 10px 12px; border: 1px solid rgb(255 196 87 / .55); border-radius: 10px;
+  background: rgb(255 196 87 / .14); color: #ffe2a6; font-size: 14px; font-weight: 700; word-break: keep-all;
+}
+body.keyless :is(.briefing-enter, .briefing-keys, .briefing-controls) { display: none; }
+body.keyless #say::after { content: "눌러서 넘기기 ▶"; }
+body.keyless .pause-card :is(.pause-esc, h3, .keys) { display: none; }
+/* the card says how to start: the pill's "Enter · 임무 시작" behind it is not shown a second time, half under the card
+   (a broadcast's capture has no card and still draws the pill) */
+#stage:has(.briefing:not([hidden])) #notice { visibility: hidden; }
+.briefing-keys { margin: 20px 0 10px; font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: .06em; }
+.briefing-controls { margin: 0; }
+/* a round after the first (runtime3d.js nextRound): not the whole briefing again, its title over the start button
+   while the world is built; the round then starts by itself */
+.briefing.again .briefing-card { width: min(380px, 100%); text-align: center; }
+.briefing.again :is(img, .briefing-kicker, .briefing-summary, .briefing-steps, .briefing-enter, .briefing-keys, .briefing-controls) { display: none; }
+.briefing.again h1 { font-size: 22px; margin-bottom: 16px; }
+@media (max-width: 600px), (max-height: 560px) {
+  .briefing { padding: 12px; }
+  .briefing-card { padding: 18px; border-radius: 14px; }
+  .briefing-card h1 { font-size: 22px; }
+  .briefing-card img { width: 44px; height: 54px; margin-left: 10px; }
+  .briefing-steps { margin: 12px 0; }
+  .briefing-steps li { padding: 3px 0; font-size: 12px; }
+  .briefing-kicker { margin-bottom: 8px; }
+  .briefing-keys { margin: 14px 0 8px; }
+  .keys { gap: 5px 16px; font-size: 12px; }
+  #topbar { padding: 12px 14px 32px; gap: 10px; }
+  #objective { font-size: 14px; }
+  #status { font-size: 13px; white-space: nowrap; }
+  #vitals { left: 14px; min-width: 160px; }
+  #hint { font-size: 12px; line-height: 17px; padding: 3px 10px; } /* (no smaller: 11 px cannot be read there) */
+  #notice.big { font-size: 44px; }
+}
+@media (max-width: 440px) { .keys { grid-template-columns: minmax(0, 1fr); } }
+
+/* arpg (arpg.js): level + XP bar, gold · potions · power, worn gear in rarity colours */
+#arpg { position: fixed; right: 18px; top: 56px; z-index: 6; display: grid; gap: 6px; width: 300px; max-width: 46vw; padding: 10px 14px; border: 1px solid rgb(255 210 63 / .35); border-radius: 10px; background: rgb(12 10 8 / .72); color: #f1e7d0; font: 600 12px/1.35 system-ui, sans-serif; pointer-events: none; }
+#arpg .arpg-level { display: flex; align-items: center; gap: 10px; }
+#arpg .arpg-level b { color: #ffd23f; font-size: 14px; white-space: nowrap; }
+#arpg .arpg-xp { flex: 1; height: 7px; border-radius: 4px; background: rgb(255 255 255 / .12); overflow: hidden; }
+#arpg .arpg-xp i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #b8860b, #ffd23f); transition: width .2s ease-out; }
+#arpg .arpg-stats { display: flex; gap: 14px; color: #d9cfb8; }
+#arpg .arpg-gear { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; }
+#arpg .arpg-gear li { color: var(--c); }
+#arpg .arpg-gear b { display: inline-block; min-width: 34px; color: #a59a83; font-weight: 600; }
+#arpg .arpg-keys { margin: 0; color: #8f8670; font-weight: 500; font-size: 11px; }
+/* at phone width a compact box in its corner (the level, gold, potions and power), clear of the hero, the stage's
+   notice and the story box. Its text keeps the panel's own 12 px */
+@media (max-width: 600px) { #arpg { top: 72px; right: 8px; width: auto; max-width: 54vw; padding: 6px 9px; gap: 4px; }
+  #arpg .arpg-level b { font-size: 13px; } #arpg .arpg-stats { flex-wrap: wrap; gap: 1px 8px; }
+  #arpg .arpg-gear, #arpg .arpg-keys { display: none; } }

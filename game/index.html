@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IPverse 게임</title>
+<style>
+  :root { --bg: #0b0d12; --accent: #5de6cf; --text: #f5f7fa; }
+  [hidden] { display: none !important; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    display: grid; place-items: center; overflow: hidden;
+    background: var(--bg); color: var(--text);
+    font: 15px/1.45 system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  }
+  /* 960x540 stage, scaled to fit the window; Phaser.Scale.FIT fills #game exactly. */
+  #stage { position: relative; width: min(100vw, 177.78vh); aspect-ratio: 16 / 9; }
+  #game { position: absolute; inset: 0; }
+  #game canvas { display: block; }
+  #hud {
+    position: absolute; inset: 0 0 auto; display: flex; justify-content: space-between; gap: 16px;
+    padding: 10px 16px 18px; font-weight: 700; pointer-events: none;
+    background: linear-gradient(rgb(0 0 0 / .6), transparent);
+  }
+  #objective { color: var(--accent); }
+  #hint { position: absolute; inset: auto 0 8px; text-align: center; font-size: 12px; opacity: .65; pointer-events: none; }
+  #say {
+    position: absolute; inset: auto 32px 34px; padding: 14px 18px;
+    border: 2px solid var(--accent); border-radius: 12px; background: rgb(0 0 0 / .8); word-break: keep-all;
+  }
+  #say b { display: block; margin-bottom: 4px; color: var(--accent); }
+  #say b:empty { display: none; }
+  #say::after { content: "E · 스페이스 ▶"; display: block; margin-top: 6px; text-align: right; font-size: 12px; opacity: .6; }
+  #end, #errors {
+    position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 18px;
+    padding: 24px; background: rgb(0 0 0 / .62); text-align: center;
+  }
+  #end p { margin: 0; font-size: 48px; font-weight: 800; }
+  #errors h1 { margin: 0; font-size: 22px; }
+  #errors p { margin: 0; font-family: ui-monospace, Menlo, monospace; font-size: 13px; color: #ffb4b4; }
+  button {
+    font: inherit; font-weight: 700; padding: 10px 24px; border: 0; border-radius: 999px; cursor: pointer;
+    background: var(--accent); color: var(--bg);
+  }
+  button:disabled { opacity: .55; cursor: default; }
+  button:focus-visible { outline: 3px solid var(--text); outline-offset: 3px; }
+  #ad { position: fixed; inset: 0; z-index: 10; background: #000; }
+  #ad video { width: 100%; height: 100%; object-fit: contain; }
+  #skip { position: absolute; right: 24px; bottom: 24px; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/phaser@3.87.0/dist/phaser.min.js"
+  integrity="sha384-cJpI3yuICryqltDcFHLunsV3lpWFnx502EbNR2OZDin/z/JM2EamUFHYEeneZHfT" crossorigin="anonymous"></script>
+<script type="module" src="./runtime.js"></script>
+</head>
+<body>
+<div id="stage">
+  <div id="game"></div>
+  <div id="hud"><span id="objective"></span><span id="status"></span></div>
+  <div id="hint"></div>
+  <div id="say" hidden aria-live="polite"><b></b><span></span></div>
+  <div id="end" hidden role="dialog" aria-modal="true" aria-labelledby="end-title">
+    <p id="end-title"></p>
+    <button id="restart" type="button">다시 시작</button>
+  </div>
+  <div id="errors" hidden role="alert"></div>
+</div>
+<div id="ad" hidden><video playsinline autoplay muted></video><button id="skip"></button></div>
+</body>
+</html>

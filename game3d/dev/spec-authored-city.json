@@ -1,0 +1,31 @@
+{
+  "version": 2, "engine": "three", "title": "폭풍 도시의 구조 작전", "genre": "sf-shooter",
+  "palette": {"bg":"#101b2b","accent":"#65e2cb","text":"#eff6ff"},
+  "player": {"ipId":"ip_dev_hero","name":"루나","modelUrl":"dev/assets/robot.glb","spriteUrl":"dev/assets/hero.png","speed":2},
+  "props": [{"ipId":"ip_dev_prop","name":"구조 신호기","effect":"key","spriteUrl":"dev/assets/prop.png"}],
+  "enemies": [{"ipId":"ip_dev_enemy","name":"검문병","spriteUrl":"dev/assets/hero.png","color":"#f46d83","shape":"square","speed":1,"hp":1}],
+  "difficulty":"easy", "objective":{"type":"collect","target":1}, "dialogue":[{"speaker":"관제실","text":"신호기를 확보하고 제어기에 연결한 다음 탈출 지점으로 이동하세요."}],
+  "quest":null, "map":{"width":20,"height":15,"seed":4821}, "rules":{"timeLimitSec":120,"playerHp":150},
+  "artDirection":{"skyColor":"#263751","fogColor":"#516279","fogDensity":0.012,"exposure":1.25,"bloomStrength":0.4},
+  "world":{
+    "width":48,"depth":48,"groundColor":"#303f50","spawn":{"x":0,"z":9},
+    "entities":[
+      {"id":"west-tower","kind":"building","x":-9,"z":0,"width":6,"depth":6,"height":12,"color":"#273b55","emissive":"#508aab"},
+      {"id":"east-tower","kind":"building","x":9,"z":-8,"width":6,"depth":7,"height":15,"color":"#39495d","emissive":"#75b2cf"},
+      {"id":"archive","kind":"building","x":-11,"z":-12,"width":7,"depth":5,"height":8,"color":"#4d5f70"},
+      {"id":"arrival-gate","kind":"arch","x":0,"z":15,"width":6,"depth":1.5,"height":5,"color":"#344457","emissive":"#65e2cb"},
+      {"id":"cover","kind":"box","x":5,"z":8,"width":2,"depth":3,"height":1.6,"color":"#64788b"},
+      {"id":"console","kind":"beacon","x":0,"z":-6,"width":3,"height":2,"color":"#eac483","label":"구조 제어기","solid":false},
+      {"id":"exit","kind":"beacon","x":0,"z":-15,"width":4,"height":2,"color":"#83b9ef","label":"수송선 착륙 지점","solid":false}
+    ],
+    "propPlacements":[{"id":"signal","propIndex":0,"x":0,"z":2,"stageId":"recover"}],
+    "enemySpawns":[{"id":"guard","enemyIndex":0,"x":0,"z":-4,"stageId":"clear"}]
+  },
+  "mission":{"title":"선택한 신호기로 구조 경로 복구","successText":"도시 구조 작전 완료","stages":[
+    {"id":"recover","type":"collect","label":"구조 신호기를 회수하세요","target":1,"entityIds":["signal"]},
+    {"id":"clear","type":"kills","label":"검문병을 제압하세요","target":1,"entityIds":["guard"]},
+    {"id":"connect","type":"interact","label":"제어기에 신호기를 연결하세요","target":1,"entityIds":["console"],"holdSec":1},
+    {"id":"extract","type":"reach","label":"수송선 착륙 지점에 도착하세요","target":1,"entityIds":["exit"],"holdSec":0.5}
+  ]},
+  "mechanics":{"dash":true,"jump":true,"sprint":true,"autoFire":false,"regenPerSec":0,"weaponDamage":1,"fireIntervalSec":0.25,"interactRadius":2.4}
+}

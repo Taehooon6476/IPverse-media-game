@@ -1,0 +1,48 @@
+{
+  "name": "IPverse",
+  "library_schema_version": "0.6.0",
+  "metadata": {
+    "author": "IPverse Studio",
+    "description": "Two custom nodes for the IPverse Studio AWS demo: IPverseRunTool calls any agent tool directly; IPverseSessionAssets fetches the current session snapshot.",
+    "library_version": "0.1.0",
+    "engine_version": "0.101.0",
+    "tags": ["AWS", "IP", "Game"],
+    "dependencies": {
+      "pip_dependencies": []
+    }
+  },
+  "categories": [
+    {
+      "ipverse": {
+        "title": "IPverse",
+        "description": "IPverse Studio integration nodes",
+        "color": "border-teal-500",
+        "icon": "Boxes"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "class_name": "IPverseRunTool",
+      "file_path": "ipverse_nodes.py",
+      "metadata": {
+        "category": "ipverse",
+        "description": "POST /api/sessions/{id}/tools/{tool} — call any IPverse agent tool directly and receive the JSON result.",
+        "display_name": "IPverse Run Tool",
+        "icon": "Boxes",
+        "tags": ["AWS", "tool", "agent"]
+      }
+    },
+    {
+      "class_name": "IPverseSessionAssets",
+      "file_path": "ipverse_nodes.py",
+      "metadata": {
+        "category": "ipverse",
+        "description": "GET /api/sessions/{id} — fetch the full session snapshot and expose the assets list and URL array.",
+        "display_name": "IPverse Session Assets",
+        "icon": "Images",
+        "tags": ["AWS", "assets", "session"]
+      }
+    }
+  ]
+}

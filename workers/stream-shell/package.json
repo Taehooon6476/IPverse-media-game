@@ -1,0 +1,7 @@
+{
+  "name": "ipverse-web-player",
+  "version": "1.0.0",
+  "description": "IPverse three.js games on Amazon GameLift Streams (Electron shell)",
+  "main": "main.js",
+  "private": true
+}

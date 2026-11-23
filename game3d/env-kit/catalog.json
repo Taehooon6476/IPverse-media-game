@@ -1,0 +1,787 @@
+{
+ "version": 1,
+ "source": "Poly Haven (polyhaven.com)",
+ "license": "CC0-1.0",
+ "licenseUrl": "https://polyhaven.com/license",
+ "base": "/games/env-kit/v1/",
+ "biomes": {
+  "forest": {
+   "hdri": "forest/hdri/autumn_forest_01_1k.hdr",
+   "hdriPage": "https://polyhaven.com/a/autumn_forest_01",
+   "ground": {
+    "map": "forest/tex/forest_ground_04_diff_1k.jpg",
+    "normalMap": "forest/tex/forest_ground_04_nor_1k.jpg",
+    "roughnessMap": "forest/tex/forest_ground_04_rough_1k.jpg"
+   },
+   "groundPage": "https://polyhaven.com/a/forest_ground_04",
+   "wall": {
+    "map": "forest/tex/brick_moss_001_diff_1k.jpg",
+    "normalMap": "forest/tex/brick_moss_001_nor_1k.jpg",
+    "roughnessMap": "forest/tex/brick_moss_001_rough_1k.jpg"
+   },
+   "wallPage": "https://polyhaven.com/a/brick_moss_001",
+   "fog": "#9fae9a",
+   "models": {
+    "tree": [
+     {
+      "id": "pine_sapling_small",
+      "path": "forest/models/pine_sapling_small/pine_sapling_small_1k.glb",
+      "page": "https://polyhaven.com/a/pine_sapling_small",
+      "bytes": 1090700
+     }
+    ],
+    "rock": [
+     {
+      "id": "rock_moss_set_01",
+      "path": "forest/models/rock_moss_set_01/rock_moss_set_01_1k.glb",
+      "page": "https://polyhaven.com/a/rock_moss_set_01",
+      "bytes": 337268
+     },
+     {
+      "id": "rock_moss_set_02",
+      "path": "forest/models/rock_moss_set_02/rock_moss_set_02_1k.glb",
+      "page": "https://polyhaven.com/a/rock_moss_set_02",
+      "bytes": 445524
+     },
+     {
+      "id": "boulder_01",
+      "path": "forest/models/boulder_01/boulder_01_1k.glb",
+      "page": "https://polyhaven.com/a/boulder_01",
+      "bytes": 996468
+     }
+    ],
+    "debris": [
+     {
+      "id": "tree_stump_01",
+      "path": "forest/models/tree_stump_01/tree_stump_01_1k.glb",
+      "page": "https://polyhaven.com/a/tree_stump_01",
+      "bytes": 714532
+     },
+     {
+      "id": "tree_stump_02",
+      "path": "forest/models/tree_stump_02/tree_stump_02_1k.glb",
+      "page": "https://polyhaven.com/a/tree_stump_02",
+      "bytes": 762700
+     },
+     {
+      "id": "fern_02",
+      "path": "forest/models/fern_02/fern_02_1k.glb",
+      "page": "https://polyhaven.com/a/fern_02",
+      "bytes": 154396
+     },
+     {
+      "id": "shrub_02",
+      "path": "forest/models/shrub_02/shrub_02_1k.glb",
+      "page": "https://polyhaven.com/a/shrub_02",
+      "bytes": 202320
+     },
+     {
+      "id": "shrub_04",
+      "path": "forest/models/shrub_04/shrub_04_1k.glb",
+      "page": "https://polyhaven.com/a/shrub_04",
+      "bytes": 198980
+     },
+     {
+      "id": "dead_tree_trunk_02",
+      "path": "forest/models/dead_tree_trunk_02/dead_tree_trunk_02_1k.glb",
+      "page": "https://polyhaven.com/a/dead_tree_trunk_02",
+      "bytes": 727260
+     }
+    ],
+    "prop": [
+     {
+      "id": "wooden_crate_01",
+      "path": "forest/models/wooden_crate_01/wooden_crate_01_1k.glb",
+      "page": "https://polyhaven.com/a/wooden_crate_01",
+      "bytes": 287260
+     },
+     {
+      "id": "wine_barrel_01",
+      "path": "forest/models/wine_barrel_01/wine_barrel_01_1k.glb",
+      "page": "https://polyhaven.com/a/wine_barrel_01",
+      "bytes": 280696
+     }
+    ]
+   },
+   "backdrop": "forest/hdri/autumn_forest_01_bg.jpg"
+  },
+  "desert": {
+   "hdri": "desert/hdri/goegap_1k.hdr",
+   "hdriPage": "https://polyhaven.com/a/goegap",
+   "ground": {
+    "map": "desert/tex/coast_sand_01_diff_1k.jpg",
+    "normalMap": "desert/tex/coast_sand_01_nor_1k.jpg",
+    "roughnessMap": "desert/tex/coast_sand_01_rough_1k.jpg"
+   },
+   "groundPage": "https://polyhaven.com/a/coast_sand_01",
+   "wall": {
+    "map": "desert/tex/clay_plaster_diff_1k.jpg",
+    "normalMap": "desert/tex/clay_plaster_nor_1k.jpg",
+    "roughnessMap": "desert/tex/clay_plaster_rough_1k.jpg"
+   },
+   "wallPage": "https://polyhaven.com/a/clay_plaster",
+   "fog": "#d8c3a0",
+   "models": {
+    "tree": [
+     {
+      "id": "quiver_tree_02",
+      "path": "desert/models/quiver_tree_02/quiver_tree_02_1k.glb",
+      "page": "https://polyhaven.com/a/quiver_tree_02",
+      "bytes": 541384
+     },
+     {
+      "id": "dead_quiver_trunk",
+      "path": "desert/models/dead_quiver_trunk/dead_quiver_trunk_1k.glb",
+      "page": "https://polyhaven.com/a/dead_quiver_trunk",
+      "bytes": 312916
+     }
+    ],
+    "rock": [
+     {
+      "id": "namaqualand_boulder_03",
+      "path": "desert/models/namaqualand_boulder_03/namaqualand_boulder_03_1k.glb",
+      "page": "https://polyhaven.com/a/namaqualand_boulder_03",
+      "bytes": 475516
+     },
+     {
+      "id": "namaqualand_boulder_04",
+      "path": "desert/models/namaqualand_boulder_04/namaqualand_boulder_04_1k.glb",
+      "page": "https://polyhaven.com/a/namaqualand_boulder_04",
+      "bytes": 548936
+     },
+     {
+      "id": "rock_07",
+      "path": "desert/models/rock_07/rock_07_1k.glb",
+      "page": "https://polyhaven.com/a/rock_07",
+      "bytes": 304292
+     },
+     {
+      "id": "rock_09",
+      "path": "desert/models/rock_09/rock_09_1k.glb",
+      "page": "https://polyhaven.com/a/rock_09",
+      "bytes": 276436
+     }
+    ],
+    "debris": [
+     {
+      "id": "namaqualand_stones_01",
+      "path": "desert/models/namaqualand_stones_01/namaqualand_stones_01_1k.glb",
+      "page": "https://polyhaven.com/a/namaqualand_stones_01",
+      "bytes": 549000
+     },
+     {
+      "id": "dry_branches_medium_01",
+      "path": "desert/models/dry_branches_medium_01/dry_branches_medium_01_1k.glb",
+      "page": "https://polyhaven.com/a/dry_branches_medium_01",
+      "bytes": 611992
+     },
+     {
+      "id": "old_tyre",
+      "path": "desert/models/old_tyre/old_tyre_1k.glb",
+      "page": "https://polyhaven.com/a/old_tyre",
+      "bytes": 349100
+     }
+    ],
+    "prop": [
+     {
+      "id": "Barrel_01",
+      "path": "desert/models/Barrel_01/Barrel_01_1k.glb",
+      "page": "https://polyhaven.com/a/Barrel_01",
+      "bytes": 335112
+     },
+     {
+      "id": "rusted_wheel_rim_01",
+      "path": "desert/models/rusted_wheel_rim_01/rusted_wheel_rim_01_1k.glb",
+      "page": "https://polyhaven.com/a/rusted_wheel_rim_01",
+      "bytes": 378480
+     },
+     {
+      "id": "wooden_crate_02",
+      "path": "desert/models/wooden_crate_02/wooden_crate_02_1k.glb",
+      "page": "https://polyhaven.com/a/wooden_crate_02",
+      "bytes": 290012
+     }
+    ]
+   },
+   "backdrop": "desert/hdri/goegap_bg.jpg"
+  },
+  "snow": {
+   "hdri": "snow/hdri/passendorf_snow_1k.hdr",
+   "hdriPage": "https://polyhaven.com/a/passendorf_snow",
+   "ground": {
+    "map": "snow/tex/snow_02_diff_1k.jpg",
+    "normalMap": "snow/tex/snow_02_nor_1k.jpg",
+    "roughnessMap": "snow/tex/snow_02_rough_1k.jpg"
+   },
+   "groundPage": "https://polyhaven.com/a/snow_02",
+   "wall": {
+    "map": "snow/tex/concrete_block_wall_diff_1k.jpg",
+    "normalMap": "snow/tex/concrete_block_wall_nor_1k.jpg",
+    "roughnessMap": "snow/tex/concrete_block_wall_rough_1k.jpg"
+   },
+   "wallPage": "https://polyhaven.com/a/concrete_block_wall",
+   "fog": "#dfe6ee",
+   "models": {
+    "tree": [
+     {
+      "id": "fir_sapling",
+      "path": "snow/models/fir_sapling/fir_sapling_1k.glb",
+      "page": "https://polyhaven.com/a/fir_sapling",
+      "bytes": 1217348
+     }
+    ],
+    "rock": [
+     {
+      "id": "rock_face_01",
+      "path": "snow/models/rock_face_01/rock_face_01_1k.glb",
+      "page": "https://polyhaven.com/a/rock_face_01",
+      "bytes": 550468
+     },
+     {
+      "id": "rock_09",
+      "path": "snow/models/rock_09/rock_09_1k.glb",
+      "page": "https://polyhaven.com/a/rock_09",
+      "bytes": 276436
+     },
+     {
+      "id": "boulder_01",
+      "path": "snow/models/boulder_01/boulder_01_1k.glb",
+      "page": "https://polyhaven.com/a/boulder_01",
+      "bytes": 996468
+     }
+    ],
+    "debris": [
+     {
+      "id": "tree_stump_01",
+      "path": "snow/models/tree_stump_01/tree_stump_01_1k.glb",
+      "page": "https://polyhaven.com/a/tree_stump_01",
+      "bytes": 714532
+     },
+     {
+      "id": "rock_07",
+      "path": "snow/models/rock_07/rock_07_1k.glb",
+      "page": "https://polyhaven.com/a/rock_07",
+      "bytes": 304292
+     },
+     {
+      "id": "dead_tree_trunk_02",
+      "path": "snow/models/dead_tree_trunk_02/dead_tree_trunk_02_1k.glb",
+      "page": "https://polyhaven.com/a/dead_tree_trunk_02",
+      "bytes": 727260
+     }
+    ],
+    "prop": [
+     {
+      "id": "old_military_crate",
+      "path": "snow/models/old_military_crate/old_military_crate_1k.glb",
+      "page": "https://polyhaven.com/a/old_military_crate",
+      "bytes": 300092
+     },
+     {
+      "id": "metal_jerrycan",
+      "path": "snow/models/metal_jerrycan/metal_jerrycan_1k.glb",
+      "page": "https://polyhaven.com/a/metal_jerrycan",
+      "bytes": 446528
+     },
+     {
+      "id": "wooden_crate_01",
+      "path": "snow/models/wooden_crate_01/wooden_crate_01_1k.glb",
+      "page": "https://polyhaven.com/a/wooden_crate_01",
+      "bytes": 287260
+     }
+    ]
+   },
+   "backdrop": "snow/hdri/passendorf_snow_bg.jpg"
+  },
+  "ruins": {
+   "hdri": "ruins/hdri/abandoned_construction_1k.hdr",
+   "hdriPage": "https://polyhaven.com/a/abandoned_construction",
+   "ground": {
+    "map": "ruins/tex/asphalt_02_diff_1k.jpg",
+    "normalMap": "ruins/tex/asphalt_02_nor_1k.jpg",
+    "roughnessMap": "ruins/tex/asphalt_02_rough_1k.jpg"
+   },
+   "groundPage": "https://polyhaven.com/a/asphalt_02",
+   "wall": {
+    "map": "ruins/tex/damaged_plaster_diff_1k.jpg",
+    "normalMap": "ruins/tex/damaged_plaster_nor_1k.jpg",
+    "roughnessMap": "ruins/tex/damaged_plaster_rough_1k.jpg"
+   },
+   "wallPage": "https://polyhaven.com/a/damaged_plaster",
+   "fog": "#a9a6a0",
+   "models": {
+    "rock": [
+     {
+      "id": "rock_07",
+      "path": "ruins/models/rock_07/rock_07_1k.glb",
+      "page": "https://polyhaven.com/a/rock_07",
+      "bytes": 304292
+     },
+     {
+      "id": "concrete_road_barrier",
+      "path": "ruins/models/concrete_road_barrier/concrete_road_barrier_1k.glb",
+      "page": "https://polyhaven.com/a/concrete_road_barrier",
+      "bytes": 454760
+     }
+    ],
+    "debris": [
+     {
+      "id": "old_tyre",
+      "path": "ruins/models/old_tyre/old_tyre_1k.glb",
+      "page": "https://polyhaven.com/a/old_tyre",
+      "bytes": 349100
+     },
+     {
+      "id": "cardboard_box_01",
+      "path": "ruins/models/cardboard_box_01/cardboard_box_01_1k.glb",
+      "page": "https://polyhaven.com/a/cardboard_box_01",
+      "bytes": 244916
+     },
+     {
+      "id": "metal_trash_can",
+      "path": "ruins/models/metal_trash_can/metal_trash_can_1k.glb",
+      "page": "https://polyhaven.com/a/metal_trash_can",
+      "bytes": 787808
+     },
+     {
+      "id": "concrete_road_barrier_02",
+      "path": "ruins/models/concrete_road_barrier_02/concrete_road_barrier_02_1k.glb",
+      "page": "https://polyhaven.com/a/concrete_road_barrier_02",
+      "bytes": 463904
+     }
+    ],
+    "prop": [
+     {
+      "id": "Barrel_02",
+      "path": "ruins/models/Barrel_02/Barrel_02_1k.glb",
+      "page": "https://polyhaven.com/a/Barrel_02",
+      "bytes": 155168
+     },
+     {
+      "id": "covered_car",
+      "path": "ruins/models/covered_car/covered_car_1k.glb",
+      "page": "https://polyhaven.com/a/covered_car",
+      "bytes": 252148
+     },
+     {
+      "id": "fire_hydrant",
+      "path": "ruins/models/fire_hydrant/fire_hydrant_1k.glb",
+      "page": "https://polyhaven.com/a/fire_hydrant",
+      "bytes": 575512
+     },
+     {
+      "id": "street_lamp_01",
+      "path": "ruins/models/street_lamp_01/street_lamp_01_1k.glb",
+      "page": "https://polyhaven.com/a/street_lamp_01",
+      "bytes": 187544
+     },
+     {
+      "id": "wooden_crate_02",
+      "path": "ruins/models/wooden_crate_02/wooden_crate_02_1k.glb",
+      "page": "https://polyhaven.com/a/wooden_crate_02",
+      "bytes": 290012
+     }
+    ]
+   },
+   "backdrop": "ruins/hdri/abandoned_construction_bg.jpg"
+  },
+  "industrial": {
+   "hdri": "industrial/hdri/abandoned_tank_farm_04_1k.hdr",
+   "hdriPage": "https://polyhaven.com/a/abandoned_tank_farm_04",
+   "ground": {
+    "map": "industrial/tex/gravel_concrete_diff_1k.jpg",
+    "normalMap": "industrial/tex/gravel_concrete_nor_1k.jpg",
+    "roughnessMap": "industrial/tex/gravel_concrete_rough_1k.jpg"
+   },
+   "groundPage": "https://polyhaven.com/a/gravel_concrete",
+   "wall": {
+    "map": "industrial/tex/rusty_metal_diff_1k.jpg",
+    "normalMap": "industrial/tex/rusty_metal_nor_1k.jpg",
+    "roughnessMap": "industrial/tex/rusty_metal_rough_1k.jpg"
+   },
+   "wallPage": "https://polyhaven.com/a/rusty_metal",
+   "fog": "#9c9a94",
+   "models": {
+    "rock": [
+     {
+      "id": "concrete_road_barrier_02",
+      "path": "industrial/models/concrete_road_barrier_02/concrete_road_barrier_02_1k.glb",
+      "page": "https://polyhaven.com/a/concrete_road_barrier_02",
+      "bytes": 463904
+     },
+     {
+      "id": "rock_09",
+      "path": "industrial/models/rock_09/rock_09_1k.glb",
+      "page": "https://polyhaven.com/a/rock_09",
+      "bytes": 276436
+     }
+    ],
+    "debris": [
+     {
+      "id": "old_tyre",
+      "path": "industrial/models/old_tyre/old_tyre_1k.glb",
+      "page": "https://polyhaven.com/a/old_tyre",
+      "bytes": 349100
+     },
+     {
+      "id": "propane_tank",
+      "path": "industrial/models/propane_tank/propane_tank_1k.glb",
+      "page": "https://polyhaven.com/a/propane_tank",
+      "bytes": 245104
+     },
+     {
+      "id": "utility_box_02",
+      "path": "industrial/models/utility_box_02/utility_box_02_1k.glb",
+      "page": "https://polyhaven.com/a/utility_box_02",
+      "bytes": 204476
+     }
+    ],
+    "prop": [
+     {
+      "id": "Barrel_01",
+      "path": "industrial/models/Barrel_01/Barrel_01_1k.glb",
+      "page": "https://polyhaven.com/a/Barrel_01",
+      "bytes": 335112
+     },
+     {
+      "id": "industrial_pastic_container",
+      "path": "industrial/models/industrial_pastic_container/industrial_pastic_container_1k.glb",
+      "page": "https://polyhaven.com/a/industrial_pastic_container",
+      "bytes": 229456
+     },
+     {
+      "id": "portable_generator",
+      "path": "industrial/models/portable_generator/portable_generator_1k.glb",
+      "page": "https://polyhaven.com/a/portable_generator",
+      "bytes": 487468
+     },
+     {
+      "id": "wooden_military_crate",
+      "path": "industrial/models/wooden_military_crate/wooden_military_crate_1k.glb",
+      "page": "https://polyhaven.com/a/wooden_military_crate",
+      "bytes": 400480
+     },
+     {
+      "id": "power_box_01",
+      "path": "industrial/models/power_box_01/power_box_01_1k.glb",
+      "page": "https://polyhaven.com/a/power_box_01",
+      "bytes": 251508
+     }
+    ]
+   },
+   "backdrop": "industrial/hdri/abandoned_tank_farm_04_bg.jpg"
+  },
+  "volcanic": {
+   "hdri": "volcanic/hdri/aarfontein_dusk_1k.hdr",
+   "hdriPage": "https://polyhaven.com/a/aarfontein_dusk",
+   "ground": {
+    "map": "volcanic/tex/dark_rock_02_diff_1k.jpg",
+    "normalMap": "volcanic/tex/dark_rock_02_nor_1k.jpg",
+    "roughnessMap": "volcanic/tex/dark_rock_02_rough_1k.jpg"
+   },
+   "groundPage": "https://polyhaven.com/a/dark_rock_02",
+   "wall": {
+    "map": "volcanic/tex/rusty_metal_diff_1k.jpg",
+    "normalMap": "volcanic/tex/rusty_metal_nor_1k.jpg",
+    "roughnessMap": "volcanic/tex/rusty_metal_rough_1k.jpg"
+   },
+   "wallPage": "https://polyhaven.com/a/rusty_metal",
+   "fog": "#3a2a26",
+   "models": {
+    "tree": [
+     {
+      "id": "dead_quiver_trunk",
+      "path": "volcanic/models/dead_quiver_trunk/dead_quiver_trunk_1k.glb",
+      "page": "https://polyhaven.com/a/dead_quiver_trunk",
+      "bytes": 312916
+     }
+    ],
+    "rock": [
+     {
+      "id": "rock_face_02",
+      "path": "volcanic/models/rock_face_02/rock_face_02_1k.glb",
+      "page": "https://polyhaven.com/a/rock_face_02",
+      "bytes": 653996
+     },
+     {
+      "id": "boulder_01",
+      "path": "volcanic/models/boulder_01/boulder_01_1k.glb",
+      "page": "https://polyhaven.com/a/boulder_01",
+      "bytes": 996468
+     },
+     {
+      "id": "moon_rock_05",
+      "path": "volcanic/models/moon_rock_05/moon_rock_05_1k.glb",
+      "page": "https://polyhaven.com/a/moon_rock_05",
+      "bytes": 175556
+     },
+     {
+      "id": "rock_07",
+      "path": "volcanic/models/rock_07/rock_07_1k.glb",
+      "page": "https://polyhaven.com/a/rock_07",
+      "bytes": 304292
+     }
+    ],
+    "debris": [
+     {
+      "id": "moon_rock_02",
+      "path": "volcanic/models/moon_rock_02/moon_rock_02_1k.glb",
+      "page": "https://polyhaven.com/a/moon_rock_02",
+      "bytes": 152584
+     },
+     {
+      "id": "moon_rock_03",
+      "path": "volcanic/models/moon_rock_03/moon_rock_03_1k.glb",
+      "page": "https://polyhaven.com/a/moon_rock_03",
+      "bytes": 164112
+     }
+    ],
+    "prop": [
+     {
+      "id": "barrel_stove",
+      "path": "volcanic/models/barrel_stove/barrel_stove_1k.glb",
+      "page": "https://polyhaven.com/a/barrel_stove",
+      "bytes": 350428
+     }
+    ]
+   },
+   "backdrop": "volcanic/hdri/aarfontein_dusk_bg.jpg"
+  },
+  "night-city": {
+   "hdri": "night-city/hdri/modern_evening_street_1k.hdr",
+   "hdriPage": "https://polyhaven.com/a/modern_evening_street",
+   "ground": {
+    "map": "night-city/tex/asphalt_04_diff_1k.jpg",
+    "normalMap": "night-city/tex/asphalt_04_nor_1k.jpg",
+    "roughnessMap": "night-city/tex/asphalt_04_rough_1k.jpg"
+   },
+   "groundPage": "https://polyhaven.com/a/asphalt_04",
+   "wall": {
+    "map": "night-city/tex/concrete_diff_1k.jpg",
+    "normalMap": "night-city/tex/concrete_nor_1k.jpg",
+    "roughnessMap": "night-city/tex/concrete_rough_1k.jpg"
+   },
+   "wallPage": "https://polyhaven.com/a/concrete",
+   "fog": "#2a2f3a",
+   "models": {
+    "rock": [
+     {
+      "id": "concrete_road_barrier_02",
+      "path": "night-city/models/concrete_road_barrier_02/concrete_road_barrier_02_1k.glb",
+      "page": "https://polyhaven.com/a/concrete_road_barrier_02",
+      "bytes": 463904
+     }
+    ],
+    "debris": [
+     {
+      "id": "cardboard_box_01",
+      "path": "night-city/models/cardboard_box_01/cardboard_box_01_1k.glb",
+      "page": "https://polyhaven.com/a/cardboard_box_01",
+      "bytes": 244916
+     },
+     {
+      "id": "metal_trash_can",
+      "path": "night-city/models/metal_trash_can/metal_trash_can_1k.glb",
+      "page": "https://polyhaven.com/a/metal_trash_can",
+      "bytes": 787808
+     },
+     {
+      "id": "plastic_crate_03",
+      "path": "night-city/models/plastic_crate_03/plastic_crate_03_1k.glb",
+      "page": "https://polyhaven.com/a/plastic_crate_03",
+      "bytes": 467240
+     }
+    ],
+    "prop": [
+     {
+      "id": "street_lamp_02",
+      "path": "night-city/models/street_lamp_02/street_lamp_02_1k.glb",
+      "page": "https://polyhaven.com/a/street_lamp_02",
+      "bytes": 189072
+     },
+     {
+      "id": "utility_box_01",
+      "path": "night-city/models/utility_box_01/utility_box_01_1k.glb",
+      "page": "https://polyhaven.com/a/utility_box_01",
+      "bytes": 193156
+     },
+     {
+      "id": "exterior_aircon_unit",
+      "path": "night-city/models/exterior_aircon_unit/exterior_aircon_unit_1k.glb",
+      "page": "https://polyhaven.com/a/exterior_aircon_unit",
+      "bytes": 1259800
+     },
+     {
+      "id": "fire_hydrant",
+      "path": "night-city/models/fire_hydrant/fire_hydrant_1k.glb",
+      "page": "https://polyhaven.com/a/fire_hydrant",
+      "bytes": 575512
+     }
+    ]
+   },
+   "backdrop": "night-city/hdri/modern_evening_street_bg.jpg"
+  },
+  "temple": {
+   "hdri": "temple/hdri/cloud_layers_1k.hdr",
+   "hdriPage": "https://polyhaven.com/a/cloud_layers",
+   "ground": {
+    "map": "temple/tex/stone_tiles_02_diff_1k.jpg",
+    "normalMap": "temple/tex/stone_tiles_02_nor_1k.jpg",
+    "roughnessMap": "temple/tex/stone_tiles_02_rough_1k.jpg"
+   },
+   "groundPage": "https://polyhaven.com/a/stone_tiles_02",
+   "wall": {
+    "map": "temple/tex/marble_01_diff_1k.jpg",
+    "normalMap": "temple/tex/marble_01_nor_1k.jpg",
+    "roughnessMap": "temple/tex/marble_01_rough_1k.jpg"
+   },
+   "wallPage": "https://polyhaven.com/a/marble_01",
+   "fog": "#d9e3ee",
+   "models": {
+    "tree": [
+     {
+      "id": "fir_sapling",
+      "path": "temple/models/fir_sapling/fir_sapling_1k.glb",
+      "page": "https://polyhaven.com/a/fir_sapling",
+      "bytes": 1217348
+     }
+    ],
+    "rock": [
+     {
+      "id": "boulder_01",
+      "path": "temple/models/boulder_01/boulder_01_1k.glb",
+      "page": "https://polyhaven.com/a/boulder_01",
+      "bytes": 996468
+     },
+     {
+      "id": "rock_moss_set_01",
+      "path": "temple/models/rock_moss_set_01/rock_moss_set_01_1k.glb",
+      "page": "https://polyhaven.com/a/rock_moss_set_01",
+      "bytes": 337268
+     }
+    ],
+    "debris": [
+     {
+      "id": "antique_ceramic_vase_01",
+      "path": "temple/models/antique_ceramic_vase_01/antique_ceramic_vase_01_1k.glb",
+      "page": "https://polyhaven.com/a/antique_ceramic_vase_01",
+      "bytes": 135304
+     },
+     {
+      "id": "ceramic_vase_02",
+      "path": "temple/models/ceramic_vase_02/ceramic_vase_02_1k.glb",
+      "page": "https://polyhaven.com/a/ceramic_vase_02",
+      "bytes": 233396
+     },
+     {
+      "id": "brass_vase_01",
+      "path": "temple/models/brass_vase_01/brass_vase_01_1k.glb",
+      "page": "https://polyhaven.com/a/brass_vase_01",
+      "bytes": 147308
+     }
+    ],
+    "prop": [
+     {
+      "id": "gothic_statue",
+      "path": "temple/models/gothic_statue/gothic_statue_1k.glb",
+      "page": "https://polyhaven.com/a/gothic_statue",
+      "bytes": 779364
+     },
+     {
+      "id": "treasure_chest",
+      "path": "temple/models/treasure_chest/treasure_chest_1k.glb",
+      "page": "https://polyhaven.com/a/treasure_chest",
+      "bytes": 628804
+     },
+     {
+      "id": "wooden_lantern_01",
+      "path": "temple/models/wooden_lantern_01/wooden_lantern_01_1k.glb",
+      "page": "https://polyhaven.com/a/wooden_lantern_01",
+      "bytes": 425120
+     },
+     {
+      "id": "wooden_barrels_01",
+      "path": "temple/models/wooden_barrels_01/wooden_barrels_01_1k.glb",
+      "page": "https://polyhaven.com/a/wooden_barrels_01",
+      "bytes": 965080
+     }
+    ]
+   },
+   "backdrop": "temple/hdri/cloud_layers_bg.jpg"
+  },
+  "crypt": {
+   "hdri": "crypt/hdri/castle_zavelstein_cellar_1k.hdr",
+   "hdriPage": "https://polyhaven.com/a/castle_zavelstein_cellar",
+   "ground": {
+    "map": "crypt/tex/cobblestone_floor_04_diff_1k.jpg",
+    "normalMap": "crypt/tex/cobblestone_floor_04_nor_1k.jpg",
+    "roughnessMap": "crypt/tex/cobblestone_floor_04_rough_1k.jpg"
+   },
+   "groundPage": "https://polyhaven.com/a/cobblestone_floor_04",
+   "wall": {
+    "map": "crypt/tex/castle_brick_07_diff_1k.jpg",
+    "normalMap": "crypt/tex/castle_brick_07_nor_1k.jpg",
+    "roughnessMap": "crypt/tex/castle_brick_07_rough_1k.jpg"
+   },
+   "wallPage": "https://polyhaven.com/a/castle_brick_07",
+   "fog": "#120e0b",
+   "models": {
+    "rock": [
+     {
+      "id": "rock_07",
+      "path": "crypt/models/rock_07/rock_07_1k.glb",
+      "page": "https://polyhaven.com/a/rock_07",
+      "bytes": 304292
+     }
+    ],
+    "debris": [
+     {
+      "id": "antique_ceramic_vase_01",
+      "path": "crypt/models/antique_ceramic_vase_01/antique_ceramic_vase_01_1k.glb",
+      "page": "https://polyhaven.com/a/antique_ceramic_vase_01",
+      "bytes": 135304
+     },
+     {
+      "id": "ceramic_vase_02",
+      "path": "crypt/models/ceramic_vase_02/ceramic_vase_02_1k.glb",
+      "page": "https://polyhaven.com/a/ceramic_vase_02",
+      "bytes": 233396
+     },
+     {
+      "id": "wooden_candlestick",
+      "path": "crypt/models/wooden_candlestick/wooden_candlestick_1k.glb",
+      "page": "https://polyhaven.com/a/wooden_candlestick",
+      "bytes": 472432
+     }
+    ],
+    "prop": [
+     {
+      "id": "treasure_chest",
+      "path": "crypt/models/treasure_chest/treasure_chest_1k.glb",
+      "page": "https://polyhaven.com/a/treasure_chest",
+      "bytes": 628804
+     },
+     {
+      "id": "wooden_barrels_01",
+      "path": "crypt/models/wooden_barrels_01/wooden_barrels_01_1k.glb",
+      "page": "https://polyhaven.com/a/wooden_barrels_01",
+      "bytes": 965080
+     },
+     {
+      "id": "gothic_statue",
+      "path": "crypt/models/gothic_statue/gothic_statue_1k.glb",
+      "page": "https://polyhaven.com/a/gothic_statue",
+      "bytes": 779364
+     },
+     {
+      "id": "wooden_lantern_01",
+      "path": "crypt/models/wooden_lantern_01/wooden_lantern_01_1k.glb",
+      "page": "https://polyhaven.com/a/wooden_lantern_01",
+      "bytes": 425120
+     }
+    ]
+   },
+   "backdrop": "crypt/hdri/castle_zavelstein_cellar_bg.jpg"
+  }
+ }
+}

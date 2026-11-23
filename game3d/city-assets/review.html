@@ -1,0 +1,37 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><title>실제 도시 자산 검토</title>
+<style>body{margin:0;background:#101820;color:#fff;font:15px system-ui}#label{position:absolute;left:24px;top:18px;z-index:1}small{display:block;color:#a6c5bf;margin-top:6px}canvas{display:block}</style>
+<script type="importmap">{"imports":{"three":"/three/build/three.module.js","three/addons/":"/three/examples/jsm/"}}</script>
+<div id="label">공식 CC0 실제 GLB 불러오는 중…</div>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+const catalog=await fetch('./commonassetcatalog.json').then(r=>r.json());
+const id=new URLSearchParams(location.search).get('id');
+const asset=catalog.assets.find(a=>a.id===id)||catalog.assets[0];
+const renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});
+renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(1);renderer.shadowMap.enabled=true;
+renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;
+document.body.append(renderer.domElement);
+const scene=new THREE.Scene();scene.background=new THREE.Color('#152630');
+scene.add(new THREE.HemisphereLight('#c1eaff','#4b4534',2));
+const sun=new THREE.DirectionalLight('#fff0d5',3);sun.position.set(6,10,8);sun.castShadow=true;
+sun.shadow.mapSize.set(2048,2048);sun.shadow.normalBias=.03;sun.shadow.bias=-.0003;
+sun.shadow.camera.near=1;sun.shadow.camera.far=40;scene.add(sun);
+const model=(await new GLTFLoader().loadAsync(asset.path.replace('city-assets/',''))).scene;
+model.updateMatrixWorld(true);
+const original=new THREE.Box3().setFromObject(model),size=original.getSize(new THREE.Vector3());
+const center=original.getCenter(new THREE.Vector3());
+const scale=4/Math.max(size.x,size.y,size.z);
+model.scale.setScalar(scale);model.position.set(-center.x*scale,-original.min.y*scale,-center.z*scale);
+model.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});scene.add(model);
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(40,40),new THREE.MeshStandardMaterial({color:'#3a4850',roughness:1}));
+floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;floor.position.y=-.005;scene.add(floor);
+const camera=new THREE.PerspectiveCamera(38,innerWidth/innerHeight,.1,100);
+camera.position.set(5.4,4.5,7.5);camera.lookAt(0,size.y*scale*.45,0);
+document.querySelector('#label').textContent=asset.id;
+const note=document.createElement('small');note.textContent='실제 원본 GLB · Kenney CC0 · 자산 검토용 화면(게임 아님)';document.querySelector('#label').append(note);
+renderer.render(scene,camera);
+window.REVIEW={status:'ACTUAL_GLB_RENDERED',id:asset.id,sha256:asset.sha256,
+ nativeBounds:{min:original.min.toArray(),max:original.max.toArray(),size:size.toArray()},
+ renderCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,source:asset.source};
+</script></html>

@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "title": "루나와 잃어버린 코어",
+  "genre": "rpg-quest",
+  "palette": {"bg": "#10140f", "accent": "#f2c14e", "text": "#f5f7fa"},
+  "player": {"ipId": "ip_dev_hero", "name": "루나", "spriteUrl": "dev/assets/hero.png", "speed": 2},
+  "props": [
+    {"ipId": "ip_dev_prop", "name": "플라즈마 코어", "spriteUrl": "dev/assets/prop.png", "effect": "key"}
+  ],
+  "enemies": [
+    {"name": "슬라임", "color": "#7bd389", "shape": "circle", "speed": 1, "hp": 1}
+  ],
+  "objective": {"type": "talk", "target": 1},
+  "difficulty": "normal",
+  "dialogue": [
+    {"speaker": "촌장", "text": "어서 오게, 루나. 마을을 밝히던 플라즈마 코어가 사라졌다네."},
+    {"speaker": "루나", "text": "걱정 마세요. 제가 찾아올게요!"}
+  ],
+  "quest": {"giverName": "촌장", "itemName": "플라즈마 코어", "itemPropIndex": 0, "completeText": "코어를 되찾았군! 이제 마을에 다시 불이 켜지겠어."},
+  "map": {"width": 20, "height": 15, "seed": 1234}
+}

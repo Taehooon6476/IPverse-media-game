@@ -1,0 +1,52 @@
+{
+  "specificationVersion": "jobtemplate-2023-09",
+  "name": "IPverse auto-rig",
+  "description": "Hunyuan3D GLB -> UAL-skeleton rigged.glb + run-cycle preview under OutputPrefix/. Embedded files are filled in by workers/template_loader.load_rig_template().",
+  "parameterDefinitions": [
+    {"name": "InputUri", "type": "STRING", "description": "s3://bucket/key of the character GLB"},
+    {"name": "AnimUri", "type": "STRING", "description": "s3://bucket/key of ual.glb (UAL clips on the bare skeleton)"},
+    {"name": "PoseModelUri", "type": "STRING", "description": "s3://bucket/key of the RTMPose-m body7 256x192 ONNX"},
+    {"name": "OutputPrefix", "type": "STRING", "description": "s3://bucket/prefix for outputs, no trailing slash"},
+    {"name": "Resolution", "type": "INT", "default": 512},
+    {"name": "Samples", "type": "INT", "default": 12},
+    {"name": "CondaPackages", "type": "STRING", "default": "blender python boto3 ffmpeg onnxruntime pillow numpy"},
+    {"name": "CondaChannels", "type": "STRING", "default": "deadline-cloud conda-forge"}
+  ],
+  "steps": [
+    {
+      "name": "Rig",
+      "script": {
+        "actions": {
+          "onRun": {
+            "command": "python",
+            "args": [
+              "{{Task.File.Run}}",
+              "{{Param.InputUri}}",
+              "{{Param.AnimUri}}",
+              "{{Param.PoseModelUri}}",
+              "{{Param.OutputPrefix}}",
+              "{{Param.Resolution}}",
+              "{{Param.Samples}}",
+              "{{Task.File.Rig}}",
+              "{{Task.File.Pose}}",
+              "{{Task.File.Sheet}}",
+              "{{Task.File.Bones}}",
+              "{{Task.File.Clips}}",
+              "{{Task.File.Clean}}"
+            ],
+            "timeout": 2400
+          }
+        },
+        "embeddedFiles": [
+          {"name": "Run", "type": "TEXT", "data": "@@run_rig.py@@"},
+          {"name": "Rig", "type": "TEXT", "data": "@@blender_rig.py@@"},
+          {"name": "Pose", "type": "TEXT", "data": "@@pose2d.py@@"},
+          {"name": "Sheet", "type": "TEXT", "data": "@@sheet.py@@"},
+          {"name": "Bones", "type": "TEXT", "data": "@@ual_bones.json@@"},
+          {"name": "Clips", "type": "TEXT", "data": "@@ual_clips.json@@"},
+          {"name": "Clean", "type": "TEXT", "data": "@@../img3d/meshclean.py@@"}
+        ]
+      }
+    }
+  ]
+}

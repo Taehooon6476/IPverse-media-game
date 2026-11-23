@@ -1,0 +1,31 @@
+{
+  "version":2,"engine":"three","title":"수정 정원의 기억","genre":"rpg-quest",
+  "palette":{"bg":"#cedbcf","accent":"#b398ee","text":"#f5fbf7"},
+  "player":{"ipId":"ip_dev_hero","name":"루나","spriteUrl":"dev/assets/hero.png","speed":2},
+  "props":[{"ipId":"ip_dev_prop","name":"기억 수정","effect":"key","spriteUrl":"dev/assets/prop.png"}],
+  "enemies":[],"objective":{"type":"collect","target":1},"difficulty":"easy",
+  "dialogue":[{"speaker":"정원 안내자","text":"기억을 되찾았군요. 이제 북쪽 정원으로 가세요."}],"quest":null,
+  "map":{"width":20,"height":15,"seed":928},"rules":{"timeLimitSec":120},
+  "artDirection":{"skyColor":"#b9cfda","fogColor":"#cfdfdb","fogDensity":0.012,"exposure":1.3,"bloomStrength":0.2},
+  "world":{
+    "width":44,"depth":60,"groundColor":"#6d8d71","spawn":{"x":0,"z":12},
+    "entities":[
+      {"id":"tree-west","kind":"tree","x":-8,"z":5,"width":6,"depth":6,"height":8,"color":"#559875"},
+      {"id":"tree-east","kind":"tree","x":9,"z":-4,"width":7,"depth":6,"height":10,"color":"#649f82"},
+      {"id":"crystal-west","kind":"crystal","x":-7,"z":-7,"width":2,"depth":2,"height":5,"color":"#b9a3e9","emissive":"#b398ee"},
+      {"id":"crystal-east","kind":"crystal","x":7,"z":14,"width":2,"depth":2,"height":4,"color":"#89cfd0"},
+      {"id":"garden-gate","kind":"arch","x":0,"z":-13,"width":7,"depth":2,"height":5,"color":"#e0d0a6"},
+      {"id":"memory-stone","kind":"cylinder","x":-10,"z":-17,"width":4,"depth":4,"height":2,"color":"#939897"},
+      {"id":"north-garden","kind":"beacon","x":0,"z":-20,"width":4,"height":2,"color":"#ddcc92","label":"북쪽 기억 정원","solid":false}
+    ],
+    "npc":{"id":"guide","name":"정원 안내자","x":0,"z":-5},
+    "propPlacements":[{"id":"memory","propIndex":0,"x":0,"z":5,"stageId":"recover"}],
+    "enemySpawns":[]
+  },
+  "mission":{"title":"기억 수정으로 길 찾기","successText":"정원의 기억이 돌아왔습니다","stages":[
+    {"id":"recover","type":"collect","label":"기억 수정을 찾아 주세요","target":1,"entityIds":["memory"]},
+    {"id":"greet","type":"talk","label":"정원 안내자에게 기억을 전달하세요","target":1,"entityIds":["guide"]},
+    {"id":"journey","type":"reach","label":"북쪽 기억 정원을 찾아가세요","target":1,"entityIds":["north-garden"],"holdSec":0.5}
+  ]},
+  "mechanics":{"dash":false,"jump":true,"sprint":true,"autoFire":false,"regenPerSec":0,"weaponDamage":1,"fireIntervalSec":0.6,"interactRadius":2.4}
+}

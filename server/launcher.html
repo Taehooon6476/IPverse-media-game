@@ -1,0 +1,146 @@
+<!doctype html>
+<!-- The IPverse launcher (server/playable.py uploads it to games/gm_launcher/index.html): a warm GameLift Streams
+     session opens this page and waits. A watch-page card click leaves a signed, single-use instruction for it; this page
+     fetches it and opens that viewer's game (an allowed /games/gm_*/index.html page of this same CDN).
+     Round 17, so the click only swaps the game: the shared engine (three.js from jsdelivr) is fetched into the HTTP
+     cache at once; the server names the game its page's viewer will likely click (preload) and this page loads it
+     ahead in a hidden same-origin frame, held for the first input (&standby=1); a click for that game reveals the
+     frame (measured: 16 ms), any other game is opened as before with the engine already cached. The poll is quick
+     while a card is up (the server's next).
+     Round 18: the server names the next card's games between cards (preload, and also: the page's other tiles'), so
+     they are built before the card shows; a built game stops drawing until it is revealed. -->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>IPverse</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #05060a; color: #cfd3dc; font: 18px system-ui, sans-serif; }
+  body { display: grid; place-items: center; }
+  p { opacity: .7; }
+  /* the game loaded ahead renders (opacity, not display/visibility: a hidden frame may not run its loop) but takes
+     no input until it is revealed */
+  iframe { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; opacity: 0; pointer-events: none; }
+  iframe.on { opacity: 1; pointer-events: auto; }
+</style>
+</head>
+<body>
+<p id="s">IPverse 클라우드 플레이 · 게임을 기다리는 중</p>
+<script>
+  const ALLOWED = /^https:\/\/[^/]+\/games\/gm_[A-Za-z0-9_-]+\/index\.html(\?[\w=&.%-]*)?$/;
+  const allowed = (url) => typeof url === 'string' && ALLOWED.test(url) && new URL(url).origin === location.origin;
+  // round17-verify live-playable: 스타더스트 스카우트 (an older runtime copy: no &standby=1) ran its round in the hidden
+  // frame from the hint on. Only a game that holds for the first input is loaded ahead, whatever the server names
+  const holds = (url) => allowed(url) && /[?&]standby=1(&|$)/.test(url);
+  const token = new URLSearchParams(location.search).get('t') || '';
+  const say = (text) => { document.getElementById('s').textContent = text; };
+  // the engine every game imports (game3d/index.html's import map: three@0.170.0), the addons and the draco decoder
+  const THREE = 'https://cdn.jsdelivr.net/npm/three@0.170.0/';
+  const ENGINE = ['build/three.module.js', ...[
+    'environments/RoomEnvironment.js', 'geometries/RoundedBoxGeometry.js', 'libs/draco/gltf/draco_decoder.wasm',
+    'libs/draco/gltf/draco_wasm_wrapper.js', 'loaders/DRACOLoader.js', 'loaders/GLTFLoader.js', 'loaders/RGBELoader.js',
+    'objects/GroundedSkybox.js', 'postprocessing/EffectComposer.js', 'postprocessing/MaskPass.js',
+    'postprocessing/OutputPass.js', 'postprocessing/Pass.js', 'postprocessing/RenderPass.js',
+    'postprocessing/ShaderPass.js', 'postprocessing/UnrealBloomPass.js', 'shaders/CopyShader.js',
+    'shaders/LuminosityHighPassShader.js', 'shaders/OutputShader.js', 'utils/BufferGeometryUtils.js',
+    'utils/SkeletonUtils.js'].map((p) => `examples/jsm/${p}`)];
+  for (const p of ENGINE) fetch(THREE + p, { mode: 'cors', credentials: 'omit' }).catch(() => undefined);
+
+  // round17-verify live-playable: a game takes 7–14.5 s to build on the stream host, and its build holds this page's
+  // one thread (two clicks 6.3 s into a hidden build waited 6.7 and 7.0 s for this page's poll). So games build one
+  // at a time; another viewer's starts only while no card is up and none is due for BUILD_SEC (the server's calm),
+  // and one still building when a card comes up makes way: a click must find this page idle
+  const BUILD_SEC = 15;
+  const BUILD_MAX_MS = 45000; // a game that never says it is built stops holding the others back
+  const SETTLE_FRAMES = 10; // frames a built game draws before it stops (its first ones compile the shaders)
+  const frames = new Map(); // url -> the hidden frame of a game loaded ahead
+  let want = { first: null, also: [], card: false, calm: 0, at: 0 }; // the server's last word on what to hold
+  function drop(url) {
+    frames.get(url)?.remove();
+    frames.delete(url);
+  }
+  // a built game waits without drawing (it costs the host nothing while the next one builds): its loop's next frame
+  // is kept, and asked for again at the reveal
+  function freeze(f, w) {
+    const raf = w.requestAnimationFrame, kept = new Set();
+    w.requestAnimationFrame = (cb) => { kept.add(cb); return 0; };
+    f.built = true;
+    f.thaw = () => {
+      f.thaw = null;
+      w.requestAnimationFrame = raf;
+      for (const cb of kept) raf.call(w, cb);
+    };
+  }
+  function load(url) {
+    const f = document.createElement('iframe');
+    f.dataset.url = url;
+    f.allow = 'autoplay; fullscreen; gamepad';
+    f.src = url;
+    document.body.append(f);
+    frames.set(url, f);
+    let drawn = 0;
+    const mine = () => frames.get(url) === f && !f.classList.contains('on'); // not dropped, not revealed (it plays)
+    const watch = () => { // built: its page says so (#loading goes) and it drew its first frames
+      if (!mine()) return;
+      let w = null, up = false;
+      try { w = f.contentWindow; up = f.contentDocument.getElementById('loading').hidden; } catch (e) { /* no page yet */ }
+      if (!up) { setTimeout(watch, 100); return; }
+      if (++drawn <= SETTLE_FRAMES) { w.requestAnimationFrame(watch); return; }
+      freeze(f, w);
+      hold();
+    };
+    watch();
+    setTimeout(() => { if (mine() && !f.built) { f.built = true; hold(); } }, BUILD_MAX_MS);
+  }
+  function hold() {
+    const { first, also, card } = want;
+    const calm = want.calm - (Date.now() - want.at) / 1000; // a build may have kept this page from asking again
+    const urls = [first, ...also].filter(holds);
+    for (const url of [...frames.keys()]) if (!urls.includes(url)) drop(url);
+    const building = [...frames.values()].find((f) => !f.built);
+    if (holds(first) && !frames.has(first)) { // the page's viewer's game: at once, card or not
+      if (building) drop(building.dataset.url);
+      load(first);
+      return;
+    }
+    if (building) {
+      if (card && building.dataset.url !== first) drop(building.dataset.url);
+      return;
+    }
+    if (card || calm < BUILD_SEC) return;
+    const next = urls.find((url) => !frames.has(url));
+    if (next) load(next);
+  }
+  function open(url) {
+    const f = frames.get(url);
+    for (const other of [...frames.keys()]) if (other !== url) drop(other); // the game played gets the whole host
+    if (f) {
+      f.classList.add('on');
+      f.thaw?.();
+      say('');
+      f.focus();
+      f.contentWindow?.focus(); // the keys go to the game
+      return;
+    }
+    say('게임을 불러오는 중…');
+    location.replace(url);
+  }
+  async function poll() {
+    let next = 1500;
+    try {
+      const r = await fetch(`/api/ads/launch/${encodeURIComponent(token)}`, { cache: 'no-store' });
+      const d = await r.json().catch(() => ({}));
+      if (r.ok && d.state === 'go' && allowed(d.url)) { open(d.url); return; }
+      if (r.ok && d.state === 'wait') {
+        want = { first: d.preload, also: Array.isArray(d.also) ? d.also : [], card: d.card === true, calm: Number(d.calm) || 0,
+          at: Date.now() };
+        hold();
+        if (Number(d.next) > 0) next = Math.min(5000, Math.max(200, Number(d.next)));
+      }
+      if (r.status === 403 || r.status === 410) { say('이 대기 세션은 끝났어요'); return; }
+    } catch (e) { /* the next poll */ }
+    setTimeout(poll, next);
+  }
+  poll();
+</script>
+</body>
+</html>

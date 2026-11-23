@@ -1,0 +1,178 @@
+{
+  "verifiedAt": "2026-11-01T14:50:20.751141+00:00",
+  "status": "PASS",
+  "scope": "Actual d12 CloudFront delivery + authenticated UI read-only; separate from local fixture QA",
+  "deployment": {
+    "host": "d12ka835iwfpnx.cloudfront.net",
+    "entryAsset": "assets/index-B4unEG6G.js",
+    "httpStatus": 200,
+    "remoteSha256": "bc7fcd0064ade3316bfb1e94501882b501b802fae2f5f38a5b64e4d270486087",
+    "localSha256": "bc7fcd0064ade3316bfb1e94501882b501b802fae2f5f38a5b64e4d270486087",
+    "bytesMatch": true,
+    "entryReferencedByLiveHtml": true,
+    "bytes": 350354
+  },
+  "auth": {
+    "method": "Dedicated demo user Cognito USER_PASSWORD_AUTH via memory-only SecretsManager read",
+    "credentialSavedToFiles": false,
+    "tokenLogged": false,
+    "browserStateFileSaved": false,
+    "browserSession": "ipverse-authored-live-ui-qa"
+  },
+  "drawer": {
+    "desktopViewport": [
+      1440,
+      1000
+    ],
+    "mobileViewport": [
+      390,
+      844
+    ],
+    "chosenRoles": {
+      "제나": "player",
+      "노인 정비사 카이": "npc",
+      "에너지 코어": "prop"
+    },
+    "freeformPromptRetained": true,
+    "autoTypeSelected": true,
+    "validDraftSubmitEnabled": true,
+    "submissionClicked": false,
+    "mobileHorizontalOverflow": false,
+    "mobileDrawerWidth": 390,
+    "maxTextareaCharacters": 4000,
+    "longDraftGuard": {
+      "typedCharacters": 4000,
+      "fullBriefCharacters": 4177,
+      "buttonDisabled": true,
+      "draftRetained": true,
+      "errorShown": true
+    }
+  },
+  "cases": [
+    {
+      "sessionId": "ses_de73dbabc0",
+      "gameId": "gm_6487d05bd1",
+      "name": "숲의 유적 · IP 맞춤 데모",
+      "missionLabels": [
+        "노인 정비사 카이에게 E로 말을 걸기",
+        "서로 다른 숲 구역의 에너지 코어 3개 수집",
+        "신전 입구에 도착하기"
+      ],
+      "worldDimensions": [
+        80,
+        80
+      ],
+      "geometryEntities": 34,
+      "propPlacements": 3,
+      "enemyPlacements": 0,
+      "timeLimitSec": 0,
+      "playerHp": 100,
+      "movement": [
+        "jump",
+        "sprint"
+      ],
+      "autoFire": false,
+      "bindings": {
+        "player": "제나:3D",
+        "prop": "에너지 코어:3D:3placements",
+        "npc": "노인 정비사 카이:3D:1placement"
+      },
+      "sourcePromptVisibleAndMatchesCase": true,
+      "ipWarnings": [],
+      "desktopAndMobileCaptured": true
+    },
+    {
+      "sessionId": "ses_9ad48c6559",
+      "gameId": "gm_46b7b7b66b",
+      "name": "네온 시설 탈출 · IP 맞춤 데모",
+      "missionLabels": [
+        "전력실에서 에너지 코어 2개 수집",
+        "떨어진 단말 2곳에서 E로 작동",
+        "탈출 게이트에 도착"
+      ],
+      "worldDimensions": [
+        80,
+        60
+      ],
+      "geometryEntities": 21,
+      "propPlacements": 2,
+      "enemyPlacements": 0,
+      "timeLimitSec": 90,
+      "playerHp": 200,
+      "movement": [
+        "dash",
+        "sprint"
+      ],
+      "autoFire": false,
+      "bindings": {
+        "player": "제나:3D",
+        "prop": "에너지 코어:3D:2placements",
+        "npc": "노인 정비사 카이:3D:1placement"
+      },
+      "sourcePromptVisibleAndMatchesCase": true,
+      "ipWarnings": [],
+      "desktopAndMobileCaptured": true
+    }
+  ],
+  "pageErrors": [],
+  "limits": {
+    "gamesGeneratedByThisAudit": 0,
+    "modelJobsCreatedByThisAudit": 0,
+    "gameplayVerifiedByThisAudit": false,
+    "loadedGameAssetsVerifiedByThisAudit": false,
+    "originalSessionsModified": false,
+    "deploymentExecutedByThisAudit": false
+  },
+  "navigationNote": "A hash-only browser navigation retained the currently mounted session; final per-case captures used a complete document navigation and checked title/sourcePrompt before capture. This audit made no source change for that existing navigation behavior.",
+  "screenshots": [
+    {
+      "path": "web/dev/game-design-live-desktop-20261101.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "f8bb76bd53e3243d0f6b6414de43180ab75049fdde1fda55b9690656e6969681",
+      "scope": "Actual authenticated deployed UI; game not started and generation not submitted"
+    },
+    {
+      "path": "web/dev/game-design-live-mobile-20261101.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "afeb0d21a2e92303475a3d0c228df2fd5c32488fd283f3b4240d451605a5cd40",
+      "scope": "Actual authenticated deployed UI; game not started and generation not submitted"
+    },
+    {
+      "path": "web/dev/game-forest-spec-live-desktop-20261101.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "41b5672114236bfe7d952fa585bad28019b307941c025845af4596faeb3c84dd",
+      "scope": "Actual authenticated deployed UI; game not started and generation not submitted"
+    },
+    {
+      "path": "web/dev/game-forest-prompt-live-desktop-20261101.png",
+      "width": 1440,
+      "height": 1100,
+      "sha256": "217a4dde9ef592d5c68059ff0b1c0ec7024259a7a4793c1e60988e8224eeefe8",
+      "scope": "Actual authenticated deployed UI; game not started and generation not submitted"
+    },
+    {
+      "path": "web/dev/game-forest-spec-live-mobile-20261101.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "3b86af113124a5a4746058f4db16e620100d4578e6e1ebc0e7a79a13de05c910",
+      "scope": "Actual authenticated deployed UI; game not started and generation not submitted"
+    },
+    {
+      "path": "web/dev/game-neon-spec-live-desktop-20261101.png",
+      "width": 1440,
+      "height": 1100,
+      "sha256": "58f4305b7cbb0d25ce892986d4f2ba3a9b15778c2857268f504ade2bae32af67",
+      "scope": "Actual authenticated deployed UI; game not started and generation not submitted"
+    },
+    {
+      "path": "web/dev/game-neon-spec-live-mobile-20261101.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "89eb9dab6dc7a0be65b444ad6fc09b7aaa05887075e390b443e9141ba8fe3c12",
+      "scope": "Actual authenticated deployed UI; game not started and generation not submitted"
+    }
+  ]
+}

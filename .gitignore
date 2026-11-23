@@ -1,0 +1,12 @@
+node_modules/
+build/
+cdk.out/
+dist/
+__pycache__/
+*.pyc
+.venv/
+.env
+.DS_Store
+web/dev/*.png
+!evidence/*.png
+game3d/dev/assets/ual/

@@ -1,0 +1,11 @@
+{
+  "app": ".venv/bin/python app.py",
+  "watch": {
+    "include": ["infra/**"]
+  },
+  "context": {
+    "@aws-cdk/aws-lambda:recognizeLayerVersion": true,
+    "@aws-cdk/core:checkSecretUsage": true,
+    "@aws-cdk/aws-ecs:disableExplicitDeploymentControllerForCircuitBreaker": true
+  }
+}

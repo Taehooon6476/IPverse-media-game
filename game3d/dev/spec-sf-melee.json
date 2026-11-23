@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "engine": "three",
+  "title": "마네킹 아레나 (근접)",
+  "genre": "sf-shooter",
+  "palette": {"bg": "#0b0d12", "accent": "#5de6cf", "text": "#f5f7fa"},
+  "animUrl": "dev/assets/ual/UAL1_Standard.glb",
+  "player": {"ipId": "ip_dev_hero", "name": "마네킹", "speed": 2, "modelUrl": "dev/assets/ual/UAL1_Standard.glb",
+             "weaponUrl": "dev/assets/blade.glb", "weaponType": "melee"},
+  "props": [
+    {"ipId": "ip_dev_prop", "name": "플라즈마 코어", "spriteUrl": "dev/assets/prop.png", "effect": "score"},
+    {"ipId": "ip_dev_prop", "name": "수리 키트", "spriteUrl": "dev/assets/prop.png", "effect": "heal"}
+  ],
+  "enemies": [
+    {"name": "좀비 마네킹", "color": "#ff5a5a", "shape": "square", "speed": 2, "hp": 2, "ipId": "ip_dev_enemy",
+     "modelUrl": "dev/assets/ual/UAL1_Standard.glb", "weaponUrl": "dev/assets/blade.glb", "humanoid": true},
+    {"name": "돌격 마네킹", "color": "#ffb84d", "shape": "triangle", "speed": 3, "hp": 1, "ipId": "ip_dev_enemy2",
+     "modelUrl": "dev/assets/ual/UAL1_Standard.glb", "humanoid": true},
+    {"name": "드론", "color": "#b28dff", "shape": "circle", "speed": 2, "hp": 1}
+  ],
+  "objective": {"type": "kills", "target": 15},
+  "difficulty": "normal",
+  "dialogue": [],
+  "quest": null,
+  "map": {"width": 20, "height": 15, "seed": 1234}
+}

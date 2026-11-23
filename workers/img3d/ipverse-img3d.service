@@ -1,0 +1,19 @@
+[Unit]
+Description=IPverse img3d worker (Hunyuan3D-2.1, SQS -> S3)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/img3d.env
+Environment=HF_HOME=/opt/img3d/hf
+Environment=HY3DGEN_MODELS=/opt/img3d/hy3dgen
+Environment=PYTHONUNBUFFERED=1
+# pick up a newer worker.py uploaded by scripts/deploy_img3d.sh on every start
+ExecStartPre=-/bin/bash -c '. /etc/img3d.env && aws s3 cp s3://$IMG3D_BUCKET/img3d/worker/worker.py /opt/img3d/worker.py'
+ExecStart=/opt/img3d/venv/bin/python /opt/img3d/worker.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

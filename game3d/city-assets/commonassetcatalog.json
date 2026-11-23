@@ -1,0 +1,2440 @@
+{
+  "version": 1,
+  "provider": "Kenney official packs",
+  "license": "CC0-1.0",
+  "acquiredAt": "2026-11-01T16:20:38.996897+00:00",
+  "style": "Stylized low-poly actual meshes; not photorealistic or GTA-level assets",
+  "totalMeshAndDependencyBytes": 3853718,
+  "sources": [
+    {
+      "sourcePage": "https://kenney.nl/assets/city-kit-commercial",
+      "archiveSha256": "f8b09b081c2bb88bcc126e2dec1cb40fd0dad7e7e591b6c26aaefe96fb35276b",
+      "archiveBytes": 4096974,
+      "id": "city-kit-commercial",
+      "license": "CC0-1.0",
+      "licensePath": "licenses/city-kit-commercial.txt",
+      "licenseSha256": "c38cee408d022e57e44e49f1cd655c2fe0dc881a07b881276b795215cdc0de69"
+    },
+    {
+      "sourcePage": "https://kenney.nl/assets/city-kit-industrial",
+      "archiveSha256": "5b381164e5760f3830a2dbee43b972deee38b2a695d091b56e238ab2910c96d2",
+      "archiveBytes": 5045077,
+      "id": "city-kit-industrial",
+      "license": "CC0-1.0",
+      "licensePath": "licenses/city-kit-industrial.txt",
+      "licenseSha256": "60a8c5c31191256ec9779dc18745dea6d69c46f4b29703459ce064c1765a59ea"
+    },
+    {
+      "sourcePage": "https://kenney.nl/assets/city-kit-roads",
+      "archiveSha256": "374a4552115cbd11b4ec5c930ee31a533562dc78a09af249a655d03f7ea3b959",
+      "archiveBytes": 2852289,
+      "id": "city-kit-roads",
+      "license": "CC0-1.0",
+      "licensePath": "licenses/city-kit-roads.txt",
+      "licenseSha256": "d23f51360ca2cd81711bc5b09ddfb28ac94da96d7ca2dbdef12c50f33f35c353"
+    },
+    {
+      "sourcePage": "https://kenney.nl/assets/car-kit",
+      "archiveSha256": "fac7dacac5c7874348cf19729af3ef205f3d366493edaf0a827d93f4fdf3d0c4",
+      "archiveBytes": 4814237,
+      "id": "car-kit",
+      "license": "CC0-1.0",
+      "licensePath": "licenses/car-kit.txt",
+      "licenseSha256": "c33b7f6453d134deae7b1b8493717d9ccfa754c25ab97f6de89b88f8fda19b00"
+    }
+  ],
+  "assets": [
+    {
+      "id": "city-kit-commercial-building-a",
+      "path": "city-assets/models/city-kit-commercial/building-a.glb",
+      "category": "building",
+      "source": "https://kenney.nl/assets/city-kit-commercial",
+      "sourceArchiveMember": "Models/GLB format/building-a.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-commercial.txt",
+      "sha256": "5cf220f90ee3f21e7abe38055ca409a48aa8ef1d5ffab6e2deb99e5a5e1ed5e0",
+      "bytes": 108936,
+      "boundingBox": {
+        "min": [
+          -0.44179391860961914,
+          0.0,
+          -0.4699999690055847
+        ],
+        "max": [
+          0.4417939782142639,
+          1.2929999828338623,
+          0.4700000286102295
+        ],
+        "size": [
+          0.8835878968238831,
+          1.2929999828338623,
+          0.9399999976158142
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 8,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 10.343999862670898,
+      "sizeMeters": [
+        7.0687031745910645,
+        10.343999862670898,
+        7.519999980926514
+      ],
+      "meshCounts": {
+        "vertices": 2074,
+        "triangles": 1252,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-commercial/Textures/colormap.png",
+          "bytes": 11002,
+          "sha256": "191bec3889aaaca5018380038fecc129ebb5c2182879a099b7b538b3fa050b5d"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-commercial-building-b",
+      "path": "city-assets/models/city-kit-commercial/building-b.glb",
+      "category": "building",
+      "source": "https://kenney.nl/assets/city-kit-commercial",
+      "sourceArchiveMember": "Models/GLB format/building-b.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-commercial.txt",
+      "sha256": "3b5d3ac0799c024781d92bb15971d42f4f8e380554dc5cf6a40c2f07d948947a",
+      "bytes": 106408,
+      "boundingBox": {
+        "min": [
+          -0.48500001430511475,
+          0.0,
+          -0.4699999690055847
+        ],
+        "max": [
+          0.4850000739097595,
+          1.2929999828338623,
+          0.4700000286102295
+        ],
+        "size": [
+          0.9700000882148743,
+          1.2929999828338623,
+          0.9399999976158142
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 8,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 10.343999862670898,
+      "sizeMeters": [
+        7.760000705718994,
+        10.343999862670898,
+        7.519999980926514
+      ],
+      "meshCounts": {
+        "vertices": 2018,
+        "triangles": 1276,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-commercial/Textures/colormap.png",
+          "bytes": 11002,
+          "sha256": "191bec3889aaaca5018380038fecc129ebb5c2182879a099b7b538b3fa050b5d"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-commercial-building-c",
+      "path": "city-assets/models/city-kit-commercial/building-c.glb",
+      "category": "building",
+      "source": "https://kenney.nl/assets/city-kit-commercial",
+      "sourceArchiveMember": "Models/GLB format/building-c.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-commercial.txt",
+      "sha256": "f6887608a95a165503561730252c30506938803731c6546efca12bd47b1666bd",
+      "bytes": 102788,
+      "boundingBox": {
+        "min": [
+          -0.44179391860961914,
+          0.0,
+          -0.5450000166893005
+        ],
+        "max": [
+          0.4417939782142639,
+          0.8930000066757202,
+          0.5450000762939453
+        ],
+        "size": [
+          0.8835878968238831,
+          0.8930000066757202,
+          1.0900000929832458
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 8,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 7.144000053405762,
+      "sizeMeters": [
+        7.0687031745910645,
+        7.144000053405762,
+        8.720000743865967
+      ],
+      "meshCounts": {
+        "vertices": 1953,
+        "triangles": 1195,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-commercial/Textures/colormap.png",
+          "bytes": 11002,
+          "sha256": "191bec3889aaaca5018380038fecc129ebb5c2182879a099b7b538b3fa050b5d"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-commercial-building-d",
+      "path": "city-assets/models/city-kit-commercial/building-d.glb",
+      "category": "building",
+      "source": "https://kenney.nl/assets/city-kit-commercial",
+      "sourceArchiveMember": "Models/GLB format/building-d.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-commercial.txt",
+      "sha256": "40605608e9aca0c98e294acff4af0f74afa417a51d589be490ca98f33ce4c2f5",
+      "bytes": 95160,
+      "boundingBox": {
+        "min": [
+          -0.41999998688697815,
+          0.0,
+          -0.4500000476837158
+        ],
+        "max": [
+          0.4200000464916229,
+          1.2929999828338623,
+          0.4499998092651367
+        ],
+        "size": [
+          0.8400000333786011,
+          1.2929999828338623,
+          0.8999998569488525
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 8,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 10.343999862670898,
+      "sizeMeters": [
+        6.720000267028809,
+        10.343999862670898,
+        7.19999885559082
+      ],
+      "meshCounts": {
+        "vertices": 1806,
+        "triangles": 1100,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-commercial/Textures/colormap.png",
+          "bytes": 11002,
+          "sha256": "191bec3889aaaca5018380038fecc129ebb5c2182879a099b7b538b3fa050b5d"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-commercial-building-e",
+      "path": "city-assets/models/city-kit-commercial/building-e.glb",
+      "category": "building",
+      "source": "https://kenney.nl/assets/city-kit-commercial",
+      "sourceArchiveMember": "Models/GLB format/building-e.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-commercial.txt",
+      "sha256": "edbe5b49858a3c83e72d3cf496129c06082ef3a3d6005769f8883138e275b456",
+      "bytes": 128208,
+      "boundingBox": {
+        "min": [
+          -0.8199999928474426,
+          0.0,
+          -0.5039456486701965
+        ],
+        "max": [
+          0.8200000524520874,
+          0.8930000066757202,
+          0.5039458870887756
+        ],
+        "size": [
+          1.64000004529953,
+          0.8930000066757202,
+          1.0078915357589722
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 8,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 7.144000053405762,
+      "sizeMeters": [
+        13.12000036239624,
+        7.144000053405762,
+        8.063132286071777
+      ],
+      "meshCounts": {
+        "vertices": 2443,
+        "triangles": 1509,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-commercial/Textures/colormap.png",
+          "bytes": 11002,
+          "sha256": "191bec3889aaaca5018380038fecc129ebb5c2182879a099b7b538b3fa050b5d"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-commercial-building-f",
+      "path": "city-assets/models/city-kit-commercial/building-f.glb",
+      "category": "building",
+      "source": "https://kenney.nl/assets/city-kit-commercial",
+      "sourceArchiveMember": "Models/GLB format/building-f.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-commercial.txt",
+      "sha256": "633a25f7fb3ccf98e304a885a36ed900aecee5bde7ecd554729dec753cceea78",
+      "bytes": 148952,
+      "boundingBox": {
+        "min": [
+          -0.42000001668930054,
+          0.0,
+          -0.5149999856948853
+        ],
+        "max": [
+          0.42000001668930054,
+          1.693000078201294,
+          0.5150002241134644
+        ],
+        "size": [
+          0.8400000333786011,
+          1.693000078201294,
+          1.0300002098083496
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 8,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 13.544000625610352,
+      "sizeMeters": [
+        6.720000267028809,
+        13.544000625610352,
+        8.240001678466797
+      ],
+      "meshCounts": {
+        "vertices": 2842,
+        "triangles": 1794,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-commercial/Textures/colormap.png",
+          "bytes": 11002,
+          "sha256": "191bec3889aaaca5018380038fecc129ebb5c2182879a099b7b538b3fa050b5d"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-commercial-building-g",
+      "path": "city-assets/models/city-kit-commercial/building-g.glb",
+      "category": "building",
+      "source": "https://kenney.nl/assets/city-kit-commercial",
+      "sourceArchiveMember": "Models/GLB format/building-g.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-commercial.txt",
+      "sha256": "9a28fa2fdfac07492ee95589882213cfd6eb32d6752cb3b2f5404604c676d27a",
+      "bytes": 166356,
+      "boundingBox": {
+        "min": [
+          -0.48500001430511475,
+          0.0,
+          -0.460999995470047
+        ],
+        "max": [
+          0.48500001430511475,
+          1.693000078201294,
+          0.4610002040863037
+        ],
+        "size": [
+          0.9700000286102295,
+          1.693000078201294,
+          0.9220001995563507
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 8,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 13.544000625610352,
+      "sizeMeters": [
+        7.760000228881836,
+        13.544000625610352,
+        7.376001596450806
+      ],
+      "meshCounts": {
+        "vertices": 3176,
+        "triangles": 2006,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-commercial/Textures/colormap.png",
+          "bytes": 11002,
+          "sha256": "191bec3889aaaca5018380038fecc129ebb5c2182879a099b7b538b3fa050b5d"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-commercial-building-h",
+      "path": "city-assets/models/city-kit-commercial/building-h.glb",
+      "category": "building",
+      "source": "https://kenney.nl/assets/city-kit-commercial",
+      "sourceArchiveMember": "Models/GLB format/building-h.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-commercial.txt",
+      "sha256": "6881613ce218bb33a0f56137d4d33b00d307c47e518fbb21ccba1083efbea896",
+      "bytes": 127384,
+      "boundingBox": {
+        "min": [
+          -0.44179391860961914,
+          0.0,
+          -0.5039456486701965
+        ],
+        "max": [
+          0.44179391860961914,
+          1.2929999828338623,
+          0.5039454698562622
+        ],
+        "size": [
+          0.8835878372192383,
+          1.2929999828338623,
+          1.0078911185264587
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 8,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 10.343999862670898,
+      "sizeMeters": [
+        7.068702697753906,
+        10.343999862670898,
+        8.06312894821167
+      ],
+      "meshCounts": {
+        "vertices": 2428,
+        "triangles": 1512,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-commercial/Textures/colormap.png",
+          "bytes": 11002,
+          "sha256": "191bec3889aaaca5018380038fecc129ebb5c2182879a099b7b538b3fa050b5d"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-commercial-building-skyscraper-a",
+      "path": "city-assets/models/city-kit-commercial/building-skyscraper-a.glb",
+      "category": "building",
+      "source": "https://kenney.nl/assets/city-kit-commercial",
+      "sourceArchiveMember": "Models/GLB format/building-skyscraper-a.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-commercial.txt",
+      "sha256": "d8339bbb75944ff91d1ec9a70ec6dead71bd98b94a42d3dd0fc1f3b107ddbe85",
+      "bytes": 111336,
+      "boundingBox": {
+        "min": [
+          -0.680000364780426,
+          0.0,
+          -0.6800000667572021
+        ],
+        "max": [
+          0.6799994111061096,
+          2.879999876022339,
+          0.6800000667572021
+        ],
+        "size": [
+          1.3599997758865356,
+          2.879999876022339,
+          1.3600001335144043
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 8,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 23.03999900817871,
+      "sizeMeters": [
+        10.879998207092285,
+        23.03999900817871,
+        10.880001068115234
+      ],
+      "meshCounts": {
+        "vertices": 2118,
+        "triangles": 1292,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-commercial/Textures/colormap.png",
+          "bytes": 11002,
+          "sha256": "191bec3889aaaca5018380038fecc129ebb5c2182879a099b7b538b3fa050b5d"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-commercial-building-skyscraper-b",
+      "path": "city-assets/models/city-kit-commercial/building-skyscraper-b.glb",
+      "category": "building",
+      "source": "https://kenney.nl/assets/city-kit-commercial",
+      "sourceArchiveMember": "Models/GLB format/building-skyscraper-b.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-commercial.txt",
+      "sha256": "3a383e8a0a8819023d30b2aee1c6f40fa6bc28990227a306a86e531f36c6b8d5",
+      "bytes": 138480,
+      "boundingBox": {
+        "min": [
+          -0.6800006031990051,
+          0.0,
+          -0.6799999475479126
+        ],
+        "max": [
+          0.6799991726875305,
+          4.480000019073486,
+          0.6800000071525574
+        ],
+        "size": [
+          1.3599997758865356,
+          4.480000019073486,
+          1.35999995470047
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 8,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 35.84000015258789,
+      "sizeMeters": [
+        10.879998207092285,
+        35.84000015258789,
+        10.87999963760376
+      ],
+      "meshCounts": {
+        "vertices": 2646,
+        "triangles": 1592,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-commercial/Textures/colormap.png",
+          "bytes": 11002,
+          "sha256": "191bec3889aaaca5018380038fecc129ebb5c2182879a099b7b538b3fa050b5d"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-commercial-building-skyscraper-c",
+      "path": "city-assets/models/city-kit-commercial/building-skyscraper-c.glb",
+      "category": "building",
+      "source": "https://kenney.nl/assets/city-kit-commercial",
+      "sourceArchiveMember": "Models/GLB format/building-skyscraper-c.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-commercial.txt",
+      "sha256": "e73c357554f7561fedb8c1cbecf9d7163ba09ada264d661c59a0f0a180e0185f",
+      "bytes": 149524,
+      "boundingBox": {
+        "min": [
+          -0.6399999856948853,
+          0.0,
+          -0.6939456462860107
+        ],
+        "max": [
+          0.6399996876716614,
+          4.079999923706055,
+          0.6939457058906555
+        ],
+        "size": [
+          1.2799996733665466,
+          4.079999923706055,
+          1.3878913521766663
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 8,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 32.63999938964844,
+      "sizeMeters": [
+        10.239997386932373,
+        32.63999938964844,
+        11.10313081741333
+      ],
+      "meshCounts": {
+        "vertices": 2862,
+        "triangles": 1704,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-commercial/Textures/colormap.png",
+          "bytes": 11002,
+          "sha256": "191bec3889aaaca5018380038fecc129ebb5c2182879a099b7b538b3fa050b5d"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-commercial-detail-awning-wide",
+      "path": "city-assets/models/city-kit-commercial/detail-awning-wide.glb",
+      "category": "street-prop",
+      "source": "https://kenney.nl/assets/city-kit-commercial",
+      "sourceArchiveMember": "Models/GLB format/detail-awning-wide.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-commercial.txt",
+      "sha256": "d37ba34be414cef84db966e548e2c558088aec3fdf68763565b9caf95c11ac5f",
+      "bytes": 5544,
+      "boundingBox": {
+        "min": [
+          -0.4000000059604645,
+          -2.707167856703783e-16,
+          0.09999999403953552
+        ],
+        "max": [
+          0.4000000059604645,
+          0.4000000059604645,
+          0.24789130687713623
+        ],
+        "size": [
+          0.800000011920929,
+          0.40000000596046476,
+          0.1478913128376007
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 4,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 1.600000023841859,
+      "sizeMeters": [
+        3.200000047683716,
+        1.600000023841859,
+        0.5915652513504028
+      ],
+      "meshCounts": {
+        "vertices": 76,
+        "triangles": 40,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-commercial/Textures/colormap.png",
+          "bytes": 11002,
+          "sha256": "191bec3889aaaca5018380038fecc129ebb5c2182879a099b7b538b3fa050b5d"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-commercial-detail-parasol-a",
+      "path": "city-assets/models/city-kit-commercial/detail-parasol-a.glb",
+      "category": "street-prop",
+      "source": "https://kenney.nl/assets/city-kit-commercial",
+      "sourceArchiveMember": "Models/GLB format/detail-parasol-a.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-commercial.txt",
+      "sha256": "70e636bea8dc67c3bfd19b163333e824356118458c8c401017322ec43c10a7f7",
+      "bytes": 10320,
+      "boundingBox": {
+        "min": [
+          -0.17320507764816284,
+          0.0,
+          -0.20000000298023224
+        ],
+        "max": [
+          0.17320507764816284,
+          0.45000001788139343,
+          0.20000000298023224
+        ],
+        "size": [
+          0.3464101552963257,
+          0.45000001788139343,
+          0.4000000059604645
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 4,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 1.8000000715255737,
+      "sizeMeters": [
+        1.3856406211853027,
+        1.8000000715255737,
+        1.600000023841858
+      ],
+      "meshCounts": {
+        "vertices": 172,
+        "triangles": 96,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-commercial/Textures/colormap.png",
+          "bytes": 11002,
+          "sha256": "191bec3889aaaca5018380038fecc129ebb5c2182879a099b7b538b3fa050b5d"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-industrial-building-a",
+      "path": "city-assets/models/city-kit-industrial/building-a.glb",
+      "category": "building",
+      "source": "https://kenney.nl/assets/city-kit-industrial",
+      "sourceArchiveMember": "Models/GLB format/building-a.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-industrial.txt",
+      "sha256": "0e6ef8eb1e1bdbb9d06b5496b5daf3066e00eaf74b3fcd61b74072116a1c86cf",
+      "bytes": 177316,
+      "boundingBox": {
+        "min": [
+          -1.0410665273666382,
+          0.0,
+          -0.6209999918937683
+        ],
+        "max": [
+          1.0425217151641846,
+          1.4700000286102295,
+          0.6210000514984131
+        ],
+        "size": [
+          2.0835882425308228,
+          1.4700000286102295,
+          1.2420000433921814
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 8,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 11.760000228881836,
+      "sizeMeters": [
+        16.668705940246582,
+        11.760000228881836,
+        9.936000347137451
+      ],
+      "meshCounts": {
+        "vertices": 6780,
+        "triangles": 2046,
+        "meshes": 1,
+        "materials": 2
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-industrial/Textures/colormap.png",
+          "bytes": 11986,
+          "sha256": "950f4f891ebd05a2affac810e6eeb0fea1511bc39039b65a3cbf2e17d17bc6a2"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-industrial-building-d",
+      "path": "city-assets/models/city-kit-industrial/building-d.glb",
+      "category": "building",
+      "source": "https://kenney.nl/assets/city-kit-industrial",
+      "sourceArchiveMember": "Models/GLB format/building-d.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-industrial.txt",
+      "sha256": "72b9e9e29986df0778ffa7c56e2f92fcfadfaa0f89bf167603877db4f38a789e",
+      "bytes": 100768,
+      "boundingBox": {
+        "min": [
+          -0.44179388880729675,
+          -4.51194631754889e-17,
+          -0.8000000715255737
+        ],
+        "max": [
+          0.4417939782142639,
+          1.4145522117614746,
+          0.6200001239776611
+        ],
+        "size": [
+          0.8835878670215607,
+          1.4145522117614746,
+          1.4200001955032349
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 8,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 11.316417694091797,
+      "sizeMeters": [
+        7.068702936172485,
+        11.316417694091797,
+        11.360001564025879
+      ],
+      "meshCounts": {
+        "vertices": 3812,
+        "triangles": 1158,
+        "meshes": 1,
+        "materials": 2
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-industrial/Textures/colormap.png",
+          "bytes": 11986,
+          "sha256": "950f4f891ebd05a2affac810e6eeb0fea1511bc39039b65a3cbf2e17d17bc6a2"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-industrial-building-g",
+      "path": "city-assets/models/city-kit-industrial/building-g.glb",
+      "category": "building",
+      "source": "https://kenney.nl/assets/city-kit-industrial",
+      "sourceArchiveMember": "Models/GLB format/building-g.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-industrial.txt",
+      "sha256": "d09d0d53e85989870f39087435f3c8fc788fe68e87589439fa6bf227c2e4a611",
+      "bytes": 106940,
+      "boundingBox": {
+        "min": [
+          -0.839069128036499,
+          -5.551042736584577e-09,
+          -0.641793966293335
+        ],
+        "max": [
+          0.8390690684318542,
+          1.28000009059906,
+          0.6417942047119141
+        ],
+        "size": [
+          1.6781381964683533,
+          1.2800000961501028,
+          1.283588171005249
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 8,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 10.240000769200822,
+      "sizeMeters": [
+        13.425105571746826,
+        10.240000769200822,
+        10.268705368041992
+      ],
+      "meshCounts": {
+        "vertices": 4048,
+        "triangles": 1242,
+        "meshes": 1,
+        "materials": 2
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-industrial/Textures/colormap.png",
+          "bytes": 11986,
+          "sha256": "950f4f891ebd05a2affac810e6eeb0fea1511bc39039b65a3cbf2e17d17bc6a2"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-industrial-building-j",
+      "path": "city-assets/models/city-kit-industrial/building-j.glb",
+      "category": "building",
+      "source": "https://kenney.nl/assets/city-kit-industrial",
+      "sourceArchiveMember": "Models/GLB format/building-j.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-industrial.txt",
+      "sha256": "58f135e706662a201bc0c660c2c680ec6bf2997233dd61fe03c28d4965b45bc9",
+      "bytes": 80792,
+      "boundingBox": {
+        "min": [
+          -0.9482060670852661,
+          1.2993813636148028e-16,
+          -0.37599998712539673
+        ],
+        "max": [
+          0.07841576635837555,
+          0.8611457943916321,
+          0.9240000247955322
+        ],
+        "size": [
+          1.0266218334436417,
+          0.861145794391632,
+          1.300000011920929
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 8,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 6.889166355133056,
+      "sizeMeters": [
+        8.212974667549133,
+        6.889166355133056,
+        10.400000095367432
+      ],
+      "meshCounts": {
+        "vertices": 3048,
+        "triangles": 886,
+        "meshes": 1,
+        "materials": 2
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-industrial/Textures/colormap.png",
+          "bytes": 11986,
+          "sha256": "950f4f891ebd05a2affac810e6eeb0fea1511bc39039b65a3cbf2e17d17bc6a2"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-industrial-building-m",
+      "path": "city-assets/models/city-kit-industrial/building-m.glb",
+      "category": "building",
+      "source": "https://kenney.nl/assets/city-kit-industrial",
+      "sourceArchiveMember": "Models/GLB format/building-m.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-industrial.txt",
+      "sha256": "526881cb1851120a60195f76bd4d8c1963653cdda66e4d1d53f085b3395fb8a9",
+      "bytes": 138920,
+      "boundingBox": {
+        "min": [
+          -0.6581377387046814,
+          0.0,
+          -0.8500000238418579
+        ],
+        "max": [
+          0.6581377387046814,
+          1.519006609916687,
+          0.8500000238418579
+        ],
+        "size": [
+          1.3162754774093628,
+          1.519006609916687,
+          1.7000000476837158
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 8,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 12.152052879333496,
+      "sizeMeters": [
+        10.530203819274902,
+        12.152052879333496,
+        13.600000381469727
+      ],
+      "meshCounts": {
+        "vertices": 5268,
+        "triangles": 1694,
+        "meshes": 1,
+        "materials": 2
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-industrial/Textures/colormap.png",
+          "bytes": 11986,
+          "sha256": "950f4f891ebd05a2affac810e6eeb0fea1511bc39039b65a3cbf2e17d17bc6a2"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-industrial-chimney-large",
+      "path": "city-assets/models/city-kit-industrial/chimney-large.glb",
+      "category": "street-prop",
+      "source": "https://kenney.nl/assets/city-kit-industrial",
+      "sourceArchiveMember": "Models/GLB format/chimney-large.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-industrial.txt",
+      "sha256": "fd88d6c971ffb27f5ee5b0df9f7c23ac82f9b6d32e85d3e2066f90a62f92f59f",
+      "bytes": 20932,
+      "boundingBox": {
+        "min": [
+          -0.5399999618530273,
+          0.0,
+          -0.5399999618530273
+        ],
+        "max": [
+          0.5399999618530273,
+          1.7000000476837158,
+          0.5399999618530273
+        ],
+        "size": [
+          1.0799999237060547,
+          1.7000000476837158,
+          1.0799999237060547
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 4,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 6.800000190734863,
+      "sizeMeters": [
+        4.319999694824219,
+        6.800000190734863,
+        4.319999694824219
+      ],
+      "meshCounts": {
+        "vertices": 372,
+        "triangles": 218,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-industrial/Textures/colormap.png",
+          "bytes": 11986,
+          "sha256": "950f4f891ebd05a2affac810e6eeb0fea1511bc39039b65a3cbf2e17d17bc6a2"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-industrial-shipping-container-a",
+      "path": "city-assets/models/city-kit-industrial/shipping-container-a.glb",
+      "category": "street-prop",
+      "source": "https://kenney.nl/assets/city-kit-industrial",
+      "sourceArchiveMember": "Models/GLB format/shipping-container-a.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-industrial.txt",
+      "sha256": "7b2d5ca874c8e659ee6cfd1614f0470b70410b2ddc7620ac83b8954dedeb861d",
+      "bytes": 36624,
+      "boundingBox": {
+        "min": [
+          -0.1863002246618271,
+          6.857303924689973e-10,
+          -0.41130002617836003
+        ],
+        "max": [
+          0.18629990279674533,
+          0.34807996273040775,
+          0.41130002617836003
+        ],
+        "size": [
+          0.3726001274585724,
+          0.34807996204467734,
+          0.8226000523567201
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 4,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 1.3923198481787094,
+      "sizeMeters": [
+        1.4904005098342896,
+        1.3923198481787094,
+        3.2904002094268803
+      ],
+      "meshCounts": {
+        "vertices": 672,
+        "triangles": 402,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-industrial/Textures/colormap.png",
+          "bytes": 11986,
+          "sha256": "950f4f891ebd05a2affac810e6eeb0fea1511bc39039b65a3cbf2e17d17bc6a2"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-industrial-water-tower",
+      "path": "city-assets/models/city-kit-industrial/water-tower.glb",
+      "category": "street-prop",
+      "source": "https://kenney.nl/assets/city-kit-industrial",
+      "sourceArchiveMember": "Models/GLB format/water-tower.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-industrial.txt",
+      "sha256": "11ac7ae19f32ce889bfe7a9c8e78c8ce8c77b7a76b52fd4ffa439a022ea2ef40",
+      "bytes": 93836,
+      "boundingBox": {
+        "min": [
+          -0.42610743403434753,
+          -6.483190240686467e-24,
+          -0.41589976608753204
+        ],
+        "max": [
+          0.426108358502388,
+          2.141665468215942,
+          0.4158998221158981
+        ],
+        "size": [
+          0.8522157925367355,
+          2.141665468215942,
+          0.8317995882034301
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 4,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 8.566661872863769,
+      "sizeMeters": [
+        3.408863170146942,
+        8.566661872863769,
+        3.3271983528137206
+      ],
+      "meshCounts": {
+        "vertices": 1796,
+        "triangles": 968,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-industrial/Textures/colormap.png",
+          "bytes": 11986,
+          "sha256": "950f4f891ebd05a2affac810e6eeb0fea1511bc39039b65a3cbf2e17d17bc6a2"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-industrial-solar-panel-landscape-group",
+      "path": "city-assets/models/city-kit-industrial/solar-panel-landscape-group.glb",
+      "category": "street-prop",
+      "source": "https://kenney.nl/assets/city-kit-industrial",
+      "sourceArchiveMember": "Models/GLB format/solar-panel-landscape-group.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-industrial.txt",
+      "sha256": "451623ce9feedbcc99bf0d9e4b372c34e1704acbb847ef8574994867b30b085c",
+      "bytes": 81860,
+      "boundingBox": {
+        "min": [
+          -0.7567002177238464,
+          -1.4600591669022833e-07,
+          -0.4475252628326416
+        ],
+        "max": [
+          0.7567006349563599,
+          0.26236069202423096,
+          0.4475248456001282
+        ],
+        "size": [
+          1.5134008526802063,
+          0.26236083803014765,
+          0.8950501084327698
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 4,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 1.0494433521205906,
+      "sizeMeters": [
+        6.053603410720825,
+        1.0494433521205906,
+        3.580200433731079
+      ],
+      "meshCounts": {
+        "vertices": 3072,
+        "triangles": 976,
+        "meshes": 1,
+        "materials": 2
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-industrial/Textures/colormap.png",
+          "bytes": 11986,
+          "sha256": "950f4f891ebd05a2affac810e6eeb0fea1511bc39039b65a3cbf2e17d17bc6a2"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-roads-road-straight",
+      "path": "city-assets/models/city-kit-roads/road-straight.glb",
+      "category": "road",
+      "source": "https://kenney.nl/assets/city-kit-roads",
+      "sourceArchiveMember": "Models/GLB format/road-straight.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-roads.txt",
+      "sha256": "f8f744fb6fc96dedd5ad1f763b550166f2624a3757bf36b4b39969d2e7cacac5",
+      "bytes": 5248,
+      "boundingBox": {
+        "min": [
+          -0.5,
+          0.0,
+          -0.5
+        ],
+        "max": [
+          0.5,
+          0.019999999552965164,
+          0.5
+        ],
+        "size": [
+          1.0,
+          0.019999999552965164,
+          1.0
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 12.0,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 0.23999999463558197,
+      "sizeMeters": [
+        12.0,
+        0.23999999463558197,
+        12.0
+      ],
+      "meshCounts": {
+        "vertices": 72,
+        "triangles": 44,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-roads/Textures/colormap.png",
+          "bytes": 11428,
+          "sha256": "a48e2962661ae44368ffddf3054f80ed8491d082b757dcc3011184cd9a98b185"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-roads-road-straight-half",
+      "path": "city-assets/models/city-kit-roads/road-straight-half.glb",
+      "category": "road",
+      "source": "https://kenney.nl/assets/city-kit-roads",
+      "sourceArchiveMember": "Models/GLB format/road-straight-half.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-roads.txt",
+      "sha256": "8dc2e2f4f6d38094f9c35004f78f20a596554454246d348db2832e6c443188bc",
+      "bytes": 5264,
+      "boundingBox": {
+        "min": [
+          -0.25,
+          0.0,
+          -0.5
+        ],
+        "max": [
+          0.25,
+          0.019999999552965164,
+          0.5
+        ],
+        "size": [
+          0.5,
+          0.019999999552965164,
+          1.0
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 24.0,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 0.47999998927116394,
+      "sizeMeters": [
+        12.0,
+        0.47999998927116394,
+        24.0
+      ],
+      "meshCounts": {
+        "vertices": 72,
+        "triangles": 44,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-roads/Textures/colormap.png",
+          "bytes": 11428,
+          "sha256": "a48e2962661ae44368ffddf3054f80ed8491d082b757dcc3011184cd9a98b185"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-roads-road-crossroad",
+      "path": "city-assets/models/city-kit-roads/road-crossroad.glb",
+      "category": "road",
+      "source": "https://kenney.nl/assets/city-kit-roads",
+      "sourceArchiveMember": "Models/GLB format/road-crossroad.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-roads.txt",
+      "sha256": "2dc52a28cf89ec88025a047c0f6fff4c643f16b0f50f0e9a1140f16230c28b12",
+      "bytes": 10084,
+      "boundingBox": {
+        "min": [
+          -0.5,
+          0.0,
+          -0.5
+        ],
+        "max": [
+          0.5,
+          0.019999999552965164,
+          0.5
+        ],
+        "size": [
+          1.0,
+          0.019999999552965164,
+          1.0
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 12.0,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 0.23999999463558197,
+      "sizeMeters": [
+        12.0,
+        0.23999999463558197,
+        12.0
+      ],
+      "meshCounts": {
+        "vertices": 168,
+        "triangles": 116,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-roads/Textures/colormap.png",
+          "bytes": 11428,
+          "sha256": "a48e2962661ae44368ffddf3054f80ed8491d082b757dcc3011184cd9a98b185"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-roads-road-intersection",
+      "path": "city-assets/models/city-kit-roads/road-intersection.glb",
+      "category": "road",
+      "source": "https://kenney.nl/assets/city-kit-roads",
+      "sourceArchiveMember": "Models/GLB format/road-intersection.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-roads.txt",
+      "sha256": "fdf4f213abe41ddfe2a7e798a0ef1c3de5b7a68143e21c44f1893985ec6aae58",
+      "bytes": 7900,
+      "boundingBox": {
+        "min": [
+          -0.5,
+          0.0,
+          -0.5
+        ],
+        "max": [
+          0.5,
+          0.019999999552965164,
+          0.5000001192092896
+        ],
+        "size": [
+          1.0,
+          0.019999999552965164,
+          1.0000001192092896
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 12.0,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 0.23999999463558197,
+      "sizeMeters": [
+        12.0,
+        0.23999999463558197,
+        12.000001430511475
+      ],
+      "meshCounts": {
+        "vertices": 124,
+        "triangles": 84,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-roads/Textures/colormap.png",
+          "bytes": 11428,
+          "sha256": "a48e2962661ae44368ffddf3054f80ed8491d082b757dcc3011184cd9a98b185"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-roads-road-crossing",
+      "path": "city-assets/models/city-kit-roads/road-crossing.glb",
+      "category": "road",
+      "source": "https://kenney.nl/assets/city-kit-roads",
+      "sourceArchiveMember": "Models/GLB format/road-crossing.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-roads.txt",
+      "sha256": "eb8575335f77da513add4a5277a7b60cad4886c07966f024b15cf55e5966cde3",
+      "bytes": 8700,
+      "boundingBox": {
+        "min": [
+          -0.5,
+          0.0,
+          -0.5
+        ],
+        "max": [
+          0.5,
+          0.019999999552965164,
+          0.5
+        ],
+        "size": [
+          1.0,
+          0.019999999552965164,
+          1.0
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 12.0,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 0.23999999463558197,
+      "sizeMeters": [
+        12.0,
+        0.23999999463558197,
+        12.0
+      ],
+      "meshCounts": {
+        "vertices": 140,
+        "triangles": 104,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-roads/Textures/colormap.png",
+          "bytes": 11428,
+          "sha256": "a48e2962661ae44368ffddf3054f80ed8491d082b757dcc3011184cd9a98b185"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-roads-road-bend",
+      "path": "city-assets/models/city-kit-roads/road-bend.glb",
+      "category": "road",
+      "source": "https://kenney.nl/assets/city-kit-roads",
+      "sourceArchiveMember": "Models/GLB format/road-bend.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-roads.txt",
+      "sha256": "9752f63448c8e7a3d30ca2e0e1bb6784c5adb72b56a2b05667be8d546c1674bc",
+      "bytes": 20164,
+      "boundingBox": {
+        "min": [
+          -0.5,
+          0.0,
+          -0.5
+        ],
+        "max": [
+          0.5,
+          0.019999999552965164,
+          0.5
+        ],
+        "size": [
+          1.0,
+          0.019999999552965164,
+          1.0
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 12.0,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 0.23999999463558197,
+      "sizeMeters": [
+        12.0,
+        0.23999999463558197,
+        12.0
+      ],
+      "meshCounts": {
+        "vertices": 352,
+        "triangles": 260,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-roads/Textures/colormap.png",
+          "bytes": 11428,
+          "sha256": "a48e2962661ae44368ffddf3054f80ed8491d082b757dcc3011184cd9a98b185"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-roads-road-side",
+      "path": "city-assets/models/city-kit-roads/road-side.glb",
+      "category": "road",
+      "source": "https://kenney.nl/assets/city-kit-roads",
+      "sourceArchiveMember": "Models/GLB format/road-side.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-roads.txt",
+      "sha256": "f5482c921a40719f89b1e7c0f6cc9d662b1f3a6149060e9b6bb543390fbdff66",
+      "bytes": 5272,
+      "boundingBox": {
+        "min": [
+          -0.5,
+          -2.6507684326086516e-16,
+          -0.809999942779541
+        ],
+        "max": [
+          0.5,
+          0.019999999552965164,
+          0.5
+        ],
+        "size": [
+          1.0,
+          0.019999999552965428,
+          1.309999942779541
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 12.0,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 0.23999999463558513,
+      "sizeMeters": [
+        12.0,
+        0.23999999463558513,
+        15.719999313354492
+      ],
+      "meshCounts": {
+        "vertices": 72,
+        "triangles": 44,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-roads/Textures/colormap.png",
+          "bytes": 11428,
+          "sha256": "a48e2962661ae44368ffddf3054f80ed8491d082b757dcc3011184cd9a98b185"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-roads-road-square",
+      "path": "city-assets/models/city-kit-roads/road-square.glb",
+      "category": "road",
+      "source": "https://kenney.nl/assets/city-kit-roads",
+      "sourceArchiveMember": "Models/GLB format/road-square.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-roads.txt",
+      "sha256": "97ee7a325fd53087388c317fdee2620a61fc8a9f5e467bbe1a0a80f0b52a98c0",
+      "bytes": 4436,
+      "boundingBox": {
+        "min": [
+          -0.5,
+          0.0,
+          -0.5
+        ],
+        "max": [
+          0.5,
+          0.019999999552965164,
+          0.5
+        ],
+        "size": [
+          1.0,
+          0.019999999552965164,
+          1.0
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 12.0,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 0.23999999463558197,
+      "sizeMeters": [
+        12.0,
+        0.23999999463558197,
+        12.0
+      ],
+      "meshCounts": {
+        "vertices": 56,
+        "triangles": 36,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-roads/Textures/colormap.png",
+          "bytes": 11428,
+          "sha256": "a48e2962661ae44368ffddf3054f80ed8491d082b757dcc3011184cd9a98b185"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-roads-road-curve-pavement",
+      "path": "city-assets/models/city-kit-roads/road-curve-pavement.glb",
+      "category": "road",
+      "source": "https://kenney.nl/assets/city-kit-roads",
+      "sourceArchiveMember": "Models/GLB format/road-curve-pavement.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-roads.txt",
+      "sha256": "f028db0675286bfa0f48fe174bef9ff8d8c65886c327a85abe05fed9453e9853",
+      "bytes": 17044,
+      "boundingBox": {
+        "min": [
+          -1.0000001192092896,
+          0.0,
+          -1.0
+        ],
+        "max": [
+          1.0,
+          0.019999999552965164,
+          1.0
+        ],
+        "size": [
+          2.0000001192092896,
+          0.019999999552965164,
+          2.0
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 5.999999642372153,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 0.1199999901652342,
+      "sizeMeters": [
+        12.0,
+        0.1199999901652342,
+        11.999999284744305
+      ],
+      "meshCounts": {
+        "vertices": 292,
+        "triangles": 220,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-roads/Textures/colormap.png",
+          "bytes": 11428,
+          "sha256": "a48e2962661ae44368ffddf3054f80ed8491d082b757dcc3011184cd9a98b185"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-roads-light-curved",
+      "path": "city-assets/models/city-kit-roads/light-curved.glb",
+      "category": "streetlight",
+      "source": "https://kenney.nl/assets/city-kit-roads",
+      "sourceArchiveMember": "Models/GLB format/light-curved.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-roads.txt",
+      "sha256": "154dcce9d58ec2cd165e26c91a89c97bdd2838cf06d255099b3570df84f82ec6",
+      "bytes": 9492,
+      "boundingBox": {
+        "min": [
+          -0.02500000037252903,
+          0.0,
+          -0.20000000298023224
+        ],
+        "max": [
+          0.02500000037252903,
+          0.6749999523162842,
+          0.02500000037252903
+        ],
+        "size": [
+          0.05000000074505806,
+          0.6749999523162842,
+          0.22500000335276127
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 7.407407930685533,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 5.0,
+      "sizeMeters": [
+        0.37037040205322563,
+        5.0,
+        1.6666668092395154
+      ],
+      "meshCounts": {
+        "vertices": 156,
+        "triangles": 92,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-roads/Textures/colormap.png",
+          "bytes": 11428,
+          "sha256": "a48e2962661ae44368ffddf3054f80ed8491d082b757dcc3011184cd9a98b185"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-roads-light-curved-double",
+      "path": "city-assets/models/city-kit-roads/light-curved-double.glb",
+      "category": "streetlight",
+      "source": "https://kenney.nl/assets/city-kit-roads",
+      "sourceArchiveMember": "Models/GLB format/light-curved-double.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-roads.txt",
+      "sha256": "038808ab235b889686ae348994e1605f9ec239fecc47b04ba89131b5fb70969c",
+      "bytes": 14208,
+      "boundingBox": {
+        "min": [
+          -0.02500000037252903,
+          0.0,
+          -0.20000000298023224
+        ],
+        "max": [
+          0.02500000037252903,
+          0.6749999523162842,
+          0.20000000298023224
+        ],
+        "size": [
+          0.05000000074505806,
+          0.6749999523162842,
+          0.4000000059604645
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 7.407407930685533,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 5.0,
+      "sizeMeters": [
+        0.37037040205322563,
+        5.0,
+        2.962963216425805
+      ],
+      "meshCounts": {
+        "vertices": 250,
+        "triangles": 152,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-roads/Textures/colormap.png",
+          "bytes": 11428,
+          "sha256": "a48e2962661ae44368ffddf3054f80ed8491d082b757dcc3011184cd9a98b185"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-roads-light-square",
+      "path": "city-assets/models/city-kit-roads/light-square.glb",
+      "category": "streetlight",
+      "source": "https://kenney.nl/assets/city-kit-roads",
+      "sourceArchiveMember": "Models/GLB format/light-square.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-roads.txt",
+      "sha256": "6230d136c8883d7f9bc1b86f0309077e452e26e5e1e587ef1b77abef3c5f047c",
+      "bytes": 6996,
+      "boundingBox": {
+        "min": [
+          -0.02500000037252903,
+          0.0,
+          -0.21250002086162567
+        ],
+        "max": [
+          0.02500000037252903,
+          0.6000000238418579,
+          0.02500000037252903
+        ],
+        "size": [
+          0.05000000074505806,
+          0.6000000238418579,
+          0.2375000212341547
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 8.333333002196431,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 5.0,
+      "sizeMeters": [
+        0.4166666563186385,
+        5.0,
+        1.9791667649729345
+      ],
+      "meshCounts": {
+        "vertices": 106,
+        "triangles": 60,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-roads/Textures/colormap.png",
+          "bytes": 11428,
+          "sha256": "a48e2962661ae44368ffddf3054f80ed8491d082b757dcc3011184cd9a98b185"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-roads-road-sign-stop",
+      "path": "city-assets/models/city-kit-roads/road-sign-stop.glb",
+      "category": "street-prop",
+      "source": "https://kenney.nl/assets/city-kit-roads",
+      "sourceArchiveMember": "Models/GLB format/road-sign-stop.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-roads.txt",
+      "sha256": "0991181f37171daf8d2501e436a688e46ea2bcebb5e27aa451640fcbaab107ef",
+      "bytes": 10720,
+      "boundingBox": {
+        "min": [
+          -0.051403969526290894,
+          0.0,
+          -0.06910618394613266
+        ],
+        "max": [
+          0.026096034795045853,
+          0.49407491087913513,
+          0.06910618394613266
+        ],
+        "size": [
+          0.07750000432133675,
+          0.49407491087913513,
+          0.13821236789226532
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 4,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 1.9762996435165405,
+      "sizeMeters": [
+        0.310000017285347,
+        1.9762996435165405,
+        0.5528494715690613
+      ],
+      "meshCounts": {
+        "vertices": 180,
+        "triangles": 104,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-roads/Textures/colormap.png",
+          "bytes": 11428,
+          "sha256": "a48e2962661ae44368ffddf3054f80ed8491d082b757dcc3011184cd9a98b185"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-roads-sign-highway-detailed",
+      "path": "city-assets/models/city-kit-roads/sign-highway-detailed.glb",
+      "category": "street-prop",
+      "source": "https://kenney.nl/assets/city-kit-roads",
+      "sourceArchiveMember": "Models/GLB format/sign-highway-detailed.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-roads.txt",
+      "sha256": "122d293bc9ee3378ab2492242ac615fee1c791066ec747599829a801f6a5b99d",
+      "bytes": 23532,
+      "boundingBox": {
+        "min": [
+          -0.10737502574920654,
+          0.0,
+          -0.49999991059303284
+        ],
+        "max": [
+          0.02500000037252903,
+          0.8221249580383301,
+          0.49999991059303284
+        ],
+        "size": [
+          0.13237502612173557,
+          0.8221249580383301,
+          0.9999998211860657
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 4,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 3.2884998321533203,
+      "sizeMeters": [
+        0.5295001044869423,
+        3.2884998321533203,
+        3.9999992847442627
+      ],
+      "meshCounts": {
+        "vertices": 420,
+        "triangles": 256,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-roads/Textures/colormap.png",
+          "bytes": 11428,
+          "sha256": "a48e2962661ae44368ffddf3054f80ed8491d082b757dcc3011184cd9a98b185"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-roads-dumpster",
+      "path": "city-assets/models/city-kit-roads/dumpster.glb",
+      "category": "street-prop",
+      "source": "https://kenney.nl/assets/city-kit-roads",
+      "sourceArchiveMember": "Models/GLB format/dumpster.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-roads.txt",
+      "sha256": "d87d4a812567d0e8b91c545387d758aa18f7652eb8fc0aed2513a83abb988dd6",
+      "bytes": 24400,
+      "boundingBox": {
+        "min": [
+          -0.1300000101327896,
+          0.0,
+          -0.1849999576807022
+        ],
+        "max": [
+          0.14500001072883606,
+          0.20944177147938442,
+          0.1850001960992813
+        ],
+        "size": [
+          0.27500002086162567,
+          0.20944177147938442,
+          0.3700001537799835
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 4,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 0.8377670859175377,
+      "sizeMeters": [
+        1.1000000834465027,
+        0.8377670859175377,
+        1.480000615119934
+      ],
+      "meshCounts": {
+        "vertices": 392,
+        "triangles": 234,
+        "meshes": 3,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-roads/Textures/colormap.png",
+          "bytes": 11428,
+          "sha256": "a48e2962661ae44368ffddf3054f80ed8491d082b757dcc3011184cd9a98b185"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-roads-construction-barrier",
+      "path": "city-assets/models/city-kit-roads/construction-barrier.glb",
+      "category": "street-prop",
+      "source": "https://kenney.nl/assets/city-kit-roads",
+      "sourceArchiveMember": "Models/GLB format/construction-barrier.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-roads.txt",
+      "sha256": "906f73a6d62d8de58a4c5a19e76ff95b460c42b37e5fa37478b8612f06793f26",
+      "bytes": 7052,
+      "boundingBox": {
+        "min": [
+          -0.0677499994635582,
+          0.0,
+          -0.11249999701976776
+        ],
+        "max": [
+          0.0677499994635582,
+          0.12999999523162842,
+          0.11249999701976776
+        ],
+        "size": [
+          0.1354999989271164,
+          0.12999999523162842,
+          0.22499999403953552
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 4,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 0.5199999809265137,
+      "sizeMeters": [
+        0.5419999957084656,
+        0.5199999809265137,
+        0.8999999761581421
+      ],
+      "meshCounts": {
+        "vertices": 104,
+        "triangles": 60,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-roads/Textures/colormap.png",
+          "bytes": 11428,
+          "sha256": "a48e2962661ae44368ffddf3054f80ed8491d082b757dcc3011184cd9a98b185"
+        }
+      ]
+    },
+    {
+      "id": "city-kit-roads-electricity-pole",
+      "path": "city-assets/models/city-kit-roads/electricity-pole.glb",
+      "category": "street-prop",
+      "source": "https://kenney.nl/assets/city-kit-roads",
+      "sourceArchiveMember": "Models/GLB format/electricity-pole.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/city-kit-roads.txt",
+      "sha256": "08c9b924e297eaa46bbd79ac09795c045848a4e38a72b2ce4f973517f840c2d3",
+      "bytes": 43652,
+      "boundingBox": {
+        "min": [
+          -0.29736000299453735,
+          4.511975103434207e-16,
+          -0.10711249709129333
+        ],
+        "max": [
+          0.2817249894142151,
+          0.5249999761581421,
+          0.10711249709129333
+        ],
+        "size": [
+          0.5790849924087524,
+          0.5249999761581416,
+          0.21422499418258667
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": null,
+      "forwardVerification": "Not inferred from bounding boxes",
+      "metersPerUnit": 4,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 2.0999999046325666,
+      "sizeMeters": [
+        2.3163399696350098,
+        2.0999999046325666,
+        0.8568999767303467
+      ],
+      "meshCounts": {
+        "vertices": 820,
+        "triangles": 416,
+        "meshes": 1,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/city-kit-roads/Textures/colormap.png",
+          "bytes": 11428,
+          "sha256": "a48e2962661ae44368ffddf3054f80ed8491d082b757dcc3011184cd9a98b185"
+        }
+      ]
+    },
+    {
+      "id": "car-kit-suv",
+      "path": "city-assets/models/car-kit/suv.glb",
+      "category": "vehicle",
+      "source": "https://kenney.nl/assets/car-kit",
+      "sourceArchiveMember": "Models/GLB format/suv.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/car-kit.txt",
+      "sha256": "9df31f6e89e927a8176fc792aa125f0b19dc1ba29d2025bfef7c4f4d6ab1778a",
+      "bytes": 207572,
+      "boundingBox": {
+        "min": [
+          -0.75,
+          -1.1920928966180355e-08,
+          -1.3499999305371886
+        ],
+        "max": [
+          0.75,
+          1.3000000238418579,
+          1.350000023841855
+        ],
+        "size": [
+          1.5,
+          1.3000000357627868,
+          2.6999999543790434
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": 0,
+      "forwardVerification": "Official GLB named front/rear wheel root-node positions verify +Z front",
+      "metersPerUnit": 1.7037037324905902,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 2.2148149131669603,
+      "sizeMeters": [
+        2.5555555987358853,
+        2.2148149131669603,
+        4.6
+      ],
+      "meshCounts": {
+        "vertices": 3836,
+        "triangles": 2474,
+        "meshes": 6,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/car-kit/Textures/colormap.png",
+          "bytes": 12371,
+          "sha256": "f3622a03a20c6696065cae9cbe391351be873508af190c2ebd1d420c055787a5"
+        }
+      ]
+    },
+    {
+      "id": "car-kit-suv-luxury",
+      "path": "city-assets/models/car-kit/suv-luxury.glb",
+      "category": "vehicle",
+      "source": "https://kenney.nl/assets/car-kit",
+      "sourceArchiveMember": "Models/GLB format/suv-luxury.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/car-kit.txt",
+      "sha256": "9e2a79dc050189d4555a88d2e9da0f30ff946ba74f1d43b5b3bda3c193d1f7d7",
+      "bytes": 175908,
+      "boundingBox": {
+        "min": [
+          -0.75,
+          -1.1920928966180355e-08,
+          -1.4000000715255738
+        ],
+        "max": [
+          0.75,
+          1.2999999523162842,
+          1.4500000715255736
+        ],
+        "size": [
+          1.5,
+          1.299999964237213,
+          2.8500001430511475
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": 0,
+      "forwardVerification": "Official GLB named front/rear wheel root-node positions verify +Z front",
+      "metersPerUnit": 1.6140350067054174,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 2.0982454509946526,
+      "sizeMeters": [
+        2.421052510058126,
+        2.0982454509946526,
+        4.6
+      ],
+      "meshCounts": {
+        "vertices": 3254,
+        "triangles": 2086,
+        "meshes": 5,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/car-kit/Textures/colormap.png",
+          "bytes": 12371,
+          "sha256": "f3622a03a20c6696065cae9cbe391351be873508af190c2ebd1d420c055787a5"
+        }
+      ]
+    },
+    {
+      "id": "car-kit-taxi",
+      "path": "city-assets/models/car-kit/taxi.glb",
+      "category": "vehicle",
+      "source": "https://kenney.nl/assets/car-kit",
+      "sourceArchiveMember": "Models/GLB format/taxi.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/car-kit.txt",
+      "sha256": "3803539718ffd3b84b515dbce8ed6b489f1ff5be58edb1903d2c5db5c584bdc7",
+      "bytes": 175608,
+      "boundingBox": {
+        "min": [
+          -0.75,
+          -1.1920928966180355e-08,
+          -1.3999998807907104
+        ],
+        "max": [
+          0.75,
+          1.4999999046325683,
+          1.3499998807907105
+        ],
+        "size": [
+          1.5,
+          1.4999999165534972,
+          2.749999761581421
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": 0,
+      "forwardVerification": "Official GLB named front/rear wheel root-node positions verify +Z front",
+      "metersPerUnit": 1.672727417748834,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 2.5090909870399978,
+      "sizeMeters": [
+        2.509091126623251,
+        2.5090909870399978,
+        4.6
+      ],
+      "meshCounts": {
+        "vertices": 3250,
+        "triangles": 2072,
+        "meshes": 5,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/car-kit/Textures/colormap.png",
+          "bytes": 12371,
+          "sha256": "f3622a03a20c6696065cae9cbe391351be873508af190c2ebd1d420c055787a5"
+        }
+      ]
+    },
+    {
+      "id": "car-kit-sedan",
+      "path": "city-assets/models/car-kit/sedan.glb",
+      "category": "vehicle",
+      "source": "https://kenney.nl/assets/car-kit",
+      "sourceArchiveMember": "Models/GLB format/sedan.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/car-kit.txt",
+      "sha256": "b532ea7d2c59f7f6b22b138cf1955218a2c1898f1cea932af4d3fd563c3959b7",
+      "bytes": 172216,
+      "boundingBox": {
+        "min": [
+          -0.75,
+          -1.1920928966180355e-08,
+          -1.299999976158142
+        ],
+        "max": [
+          0.75,
+          1.299999976158142,
+          1.2499999761581422
+        ],
+        "size": [
+          1.5,
+          1.299999988079071,
+          2.549999952316284
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": 0,
+      "forwardVerification": "Official GLB named front/rear wheel root-node positions verify +Z front",
+      "metersPerUnit": 1.8039216023598763,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 2.3450980615634176,
+      "sizeMeters": [
+        2.7058824035398144,
+        2.3450980615634176,
+        4.6
+      ],
+      "meshCounts": {
+        "vertices": 3184,
+        "triangles": 2032,
+        "meshes": 5,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/car-kit/Textures/colormap.png",
+          "bytes": 12371,
+          "sha256": "f3622a03a20c6696065cae9cbe391351be873508af190c2ebd1d420c055787a5"
+        }
+      ]
+    },
+    {
+      "id": "car-kit-police",
+      "path": "city-assets/models/car-kit/police.glb",
+      "category": "vehicle",
+      "source": "https://kenney.nl/assets/car-kit",
+      "sourceArchiveMember": "Models/GLB format/police.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/car-kit.txt",
+      "sha256": "a617b880594f56239b7ac4cf6fd4d74ebdae3ba6c5d842e77c76a5906eff352a",
+      "bytes": 195336,
+      "boundingBox": {
+        "min": [
+          -0.75,
+          -1.1920928966180355e-08,
+          -1.549999976158142
+        ],
+        "max": [
+          0.75,
+          1.3000000238418579,
+          1.5499997077750207
+        ],
+        "size": [
+          1.5,
+          1.3000000357627868,
+          3.099999683933163
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": 0,
+      "forwardVerification": "Official GLB named front/rear wheel root-node positions verify +Z front",
+      "metersPerUnit": 1.4838711190330487,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 1.9290325078103296,
+      "sizeMeters": [
+        2.225806678549573,
+        1.9290325078103296,
+        4.6
+      ],
+      "meshCounts": {
+        "vertices": 3606,
+        "triangles": 2304,
+        "meshes": 6,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/car-kit/Textures/colormap.png",
+          "bytes": 12371,
+          "sha256": "f3622a03a20c6696065cae9cbe391351be873508af190c2ebd1d420c055787a5"
+        }
+      ]
+    },
+    {
+      "id": "car-kit-delivery",
+      "path": "city-assets/models/car-kit/delivery.glb",
+      "category": "vehicle",
+      "source": "https://kenney.nl/assets/car-kit",
+      "sourceArchiveMember": "Models/GLB format/delivery.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/car-kit.txt",
+      "sha256": "426a3e3a2c242c05c889b1445ba02ef95b2c8b7cd6f597e1275ef736a826014b",
+      "bytes": 240264,
+      "boundingBox": {
+        "min": [
+          -0.75,
+          -1.1920928966180355e-08,
+          -1.6499998807907104
+        ],
+        "max": [
+          0.75,
+          1.6499998807907104,
+          1.5999998807907105
+        ],
+        "size": [
+          1.5,
+          1.6499998927116393,
+          3.249999761581421
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": 0,
+      "forwardVerification": "Official GLB named front/rear wheel root-node positions verify +Z front",
+      "metersPerUnit": 1.4153847192166196,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 2.3353846348531158,
+      "sizeMeters": [
+        2.123077078824929,
+        2.3353846348531158,
+        4.6
+      ],
+      "meshCounts": {
+        "vertices": 4530,
+        "triangles": 2476,
+        "meshes": 6,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/car-kit/Textures/colormap.png",
+          "bytes": 12371,
+          "sha256": "f3622a03a20c6696065cae9cbe391351be873508af190c2ebd1d420c055787a5"
+        }
+      ]
+    },
+    {
+      "id": "car-kit-van",
+      "path": "city-assets/models/car-kit/van.glb",
+      "category": "vehicle",
+      "source": "https://kenney.nl/assets/car-kit",
+      "sourceArchiveMember": "Models/GLB format/van.glb",
+      "license": "CC0-1.0",
+      "licensePath": "city-assets/licenses/car-kit.txt",
+      "sha256": "ed4ed56e8e5ed98db050af09ed2062b3b6bb7b93eab1e563cb6774b387b233a1",
+      "bytes": 175664,
+      "boundingBox": {
+        "min": [
+          -0.75,
+          -1.1920928966180355e-08,
+          -1.4000001192092895
+        ],
+        "max": [
+          0.75,
+          1.349999976158142,
+          1.3500001192092896
+        ],
+        "size": [
+          1.5,
+          1.349999988079071,
+          2.750000238418579
+        ],
+        "coordinateSystem": "glTF scene Y-up"
+      },
+      "nativeForwardYaw": 0,
+      "forwardVerification": "Official GLB named front/rear wheel root-node positions verify +Z front",
+      "metersPerUnit": 1.6727271277057363,
+      "scaleBasis": "Authored recommended placement scale, not a real-world measurement",
+      "height": 2.2581816024622827,
+      "sizeMeters": [
+        2.5090906915586046,
+        2.2581816024622827,
+        4.6
+      ],
+      "meshCounts": {
+        "vertices": 3250,
+        "triangles": 2082,
+        "meshes": 5,
+        "materials": 1
+      },
+      "dependencies": [
+        {
+          "path": "models/car-kit/Textures/colormap.png",
+          "bytes": 12371,
+          "sha256": "f3622a03a20c6696065cae9cbe391351be873508af190c2ebd1d420c055787a5"
+        }
+      ]
+    }
+  ]
+}
