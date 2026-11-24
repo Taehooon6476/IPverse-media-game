@@ -1,41 +1,41 @@
-# IPverse Studio 데모 스크립트
+# IPverse Studio demo script
 
-앱: `https://d12ka835iwfpnx.cloudfront.net/` · 로그인 `demo` (비밀번호: Secrets Manager `ipverse/demo-user`)
+App: `https://d12ka835iwfpnx.cloudfront.net/` · login `demo` (password: Secrets Manager `ipverse/demo-user`)
 
-## 사전 준비 (데모 20분 전)
+## Preparation (20 minutes before the demo)
 
-1. 로그인 후 임시 세션에서 "주인공 하나 만들어줘" → "3D로 만들어줘"를 실행해 Deadline 워커와 Conda 환경(Blender)을 깨워 둡니다. 첫 잡은 10~20분, 이후 잡은 약 2분입니다.
-2. `python3 scripts/smoke.py`로 API가 살아 있는지 확인합니다(채팅 1턴, 약 1분).
+1. After logging in, run "Make one hero" → "Make it in 3D" in a throwaway session to wake the Deadline worker and the Conda environment (Blender). The first job takes 10–20 minutes; later jobs take about 2 minutes.
+2. Check that the API is alive with `python3 scripts/smoke.py` (one chat turn, about 1 minute).
 
-## 본 데모 (약 12분 + 대기)
+## Main demo (about 12 minutes + waiting)
 
-| 단계 | 조작 | 기대 결과 | 대기 |
+| Step | Action | Expected result | Wait |
 | --- | --- | --- | --- |
-| 1 | 사이드바 **새 세션** → 제목 "우주 고양이 탐험가 루나", 장르 **SF 슈터** | 빈 두 패널 + 채팅 독 | 즉시 |
-| 2 | 채팅: `컨셉 잡고 주인공 캐릭터와 핵심 소품 하나 만들어줘` (모델을 보여주려면 `Krea로 …`) | 상단 바에 컨셉 칩, 좌측 캐릭터/소품 탭에 이미지와 누끼 토글, 카드에 `v1 · Krea 2 Turbo` | 1~2분 (툴 진행 상태가 채팅 독에 표시) |
-| 2b | (선택) 채팅: `루나 겨울 코트 입은 버전 만들어줘` | 같은 카드가 `v2 · FLUX.2 klein 9B`로 바뀌고 같은 얼굴·체형 유지 | 30초~3분(Krea→klein 모델 교체 시 +2분) |
-| 2c | (선택) 캐릭터 카드 **수정하기** → 드로어에 `고글을 머리 위로 올려줘` → 수정 요청 | 같은 카드가 v2로 바뀌고 요청한 부분만 달라짐(klein 이미지 투 이미지) | 30초~3분 |
-| 3 | 캐릭터 카드의 **3D로 만들어줘** 빠른 버튼 → 전송 | 우측 파이프라인 탭에 `render3d` 잡(Deadline). 완료 시 좌측 3D 탭에 턴테이블 영상 + 회전 GLB | 2분(워커 웜) / 10~20분(콜드) |
-| 4 | 채팅: `LTX로 루나 영상 샷 2개 만들고 teal-orange 트레일러랑 숏츠로 잘라줘` (고품질 사운드를 보여주려면 `MiniMax H3로 …`) | 파이프라인 행에 `mediagen GPU · LTX-2.5`, 영상 탭에 샷 2개 → 트레일러(16:9) + 숏츠(9:16) | LTX 샷 3~6분(웜), H3·Kandinsky는 멈춰 있으면 부팅 ~10분 추가, 트레일러 수십 초 |
-| 4b | (선택) 채팅: `라이벌 캐릭터 하나 만들고 Wan으로 첫 샷의 움직임대로 움직이게 해줘` | `Wan 2.2 Animate` 샷이 첫 샷 완료 후 시작 | 3~8분 |
-| 4c | (선택) 영상 탭 **연출해서 만들기** → 장면 흐름을 문장으로, 길이 20초 → 이 연출로 만들기 | LTX 20초 샷 한 번(이어 붙이지 않음) → 색보정 트레일러 + 숏츠 + 제목 카드 | 6~8분 |
-| 5 | 우측 장르 탭 확인 후 채팅: `게임 만들어줘` | 미리보기 탭에 플레이 가능한 SF 슈터(주인공 = 루나 누끼, 소품 = 아이템), GameSpec 탭에 JSON | 10~20초 |
-| 6 | 미리보기에서 방향키·스페이스로 플레이, 목표 달성 → `클리어!` | 게임이 실제로 돌아감을 보여줌 | — |
-| 7 | 상단 **게시하기** → 모달에서 트레일러 선택, 건너뛰기 5초 → **올리기** | 발행 URL + 열기/복사 | 2~3초 |
-| 8 | 발행 URL 새 창 → 프리롤 트레일러 재생 → `광고 건너뛰기 (5)` 카운트다운 → 게임 시작 | 광고와 게임이 같은 IP를 공유함을 보여줌 | — |
+| 1 | Sidebar **New session** → title "Luna the space cat explorer", genre **Sci-fi shooter** | Two empty panes + the chat dock | Immediate |
+| 2 | Chat: `Set the concept and make the hero character and one key prop` (to show the model, `With Krea, …`) | Concept chip in the top bar, images with a cutout toggle in the Characters/Props tabs on the left, `v1 · Krea 2 Turbo` on the card | 1–2 min (tool progress shows in the chat dock) |
+| 2b | (Optional) Chat: `Make a version of Luna wearing a winter coat` | The same card changes to `v2 · FLUX.2 klein 9B` and keeps the same face and build | 30 s–3 min (+2 min when the model swaps Krea→klein) |
+| 2c | (Optional) Character card **Edit** → in the drawer `Push the goggles up onto the head` → Request edit | The same card changes to v2 and only the requested part differs (klein image-to-image) | 30 s–3 min |
+| 3 | The **Make 3D** quick button on the character card → send | A `render3d` job (Deadline) in the Pipeline tab on the right. When done, a turntable video + a rotating GLB in the 3D tab on the left | 2 min (worker warm) / 10–20 min (cold) |
+| 4 | Chat: `Make 2 video shots of Luna with LTX and cut them into a teal-orange trailer and shorts` (to show high-quality sound, `With MiniMax H3, …`) | `mediagen GPU · LTX-2.5` on the pipeline row, 2 shots in the Video tab → trailer (16:9) + shorts (9:16) | LTX shots 3–6 min (warm); H3 and Kandinsky add ~10 min of boot if stopped; trailer tens of seconds |
+| 4b | (Optional) Chat: `Make one rival character and make it move like the first shot with Wan` | The `Wan 2.2 Animate` shot starts after the first shot finishes | 3–8 min |
+| 4c | (Optional) Video tab **Direct a trailer** → the scene flow in sentences, length 20 s → Make with this direction | One LTX 20 s shot (not stitched) → color-graded trailer + shorts + title card | 6–8 min |
+| 5 | Check the genre tab on the right, then chat: `Make a game` | A playable sci-fi shooter in the Preview tab (hero = Luna's cutout, prop = item), JSON in the GameSpec tab | 10–20 s |
+| 6 | Play in the preview with the arrow keys and space, reach the goal → `클리어!` ("Clear!") | Shows that the game really runs | — |
+| 7 | **Publish** at the top → pick the trailer in the modal, skip after 5 s → **Upload** | Published URL + open/copy | 2–3 s |
+| 8 | Published URL in a new window → the pre-roll trailer plays → `광고 건너뛰기 (5)` ("Skip ad (5)") countdown → the game starts | Shows that the ad and the game share the same IP | — |
 
-## 말할 포인트
+## Talking points
 
-- 좌우가 **같은 IP 레코드**를 참조한다: 트레일러의 캐릭터가 게임의 플레이어 스프라이트와 동일한 누끼 파일이다.
-- 모델이 쓴 것은 **데이터**(GameSpec JSON)이고, 실행되는 것은 검증된 런타임이다(Agentic Arcade 패턴).
-- 긴 작업은 전부 **비동기 잡**이다. Deadline Cloud(Blender), 계정 자체 GPU 영상 모델(mediagen MCP 프록시: LTX-2.5 · MiniMax H3 · Kandinsky 6.0 Pro · Wan 2.2 Animate), Lambda self-invoke(ffmpeg).
-- 이미지·영상 모델은 사용자가 고른다: 채팅에서 모델 이름을 말하면 그 모델을 쓴다. 기본값은 이미지 Krea 2 Turbo(기존 IP에서 파생하면 FLUX.2 klein 9B), 영상 LTX-2.5다. Stable Image Ultra(Bedrock)도 고를 수 있다.
-- Griptape Nodes는 **플러그인**이다: `plugins/griptape-ipverse` 노드가 같은 툴 API를 호출하고, Deadline 프로바이더는 Griptape 워크플로우도 잡으로 돌릴 수 있다.
+- Left and right refer to the **same IP records**: the character in the trailer is the same cutout file as the player sprite in the game.
+- What the model wrote is **data** (GameSpec JSON), and what runs is a validated runtime (the Agentic Arcade pattern).
+- All long work is **asynchronous jobs**: Deadline Cloud (Blender), the account's own GPU video models (mediagen MCP proxy: LTX-2.5 · MiniMax H3 · Kandinsky 6.0 Pro · Wan 2.2 Animate), Lambda self-invoke (ffmpeg).
+- The user picks the image and video models: name a model in the chat and that model is used. The defaults are Krea 2 Turbo for images (FLUX.2 klein 9B when deriving from an existing IP) and LTX-2.5 for video. Stable Image Ultra (Bedrock) can also be picked.
+- Griptape Nodes is a **plugin**: the `plugins/griptape-ipverse` nodes call the same tool API, and the Deadline provider can also run Griptape workflows as jobs.
 
-## 장애 대비
+## If something fails
 
-- 3D 잡이 `FAILED`면 파이프라인 탭의 오류 문구를 읽고, 미리 돌려둔 세션의 턴테이블을 보여줍니다.
-- 이미지 생성이 "끝나지 않았습니다"로 실패하면 GPU가 모델을 바꾸는 중입니다. 같은 요청을 다시 보내거나 `Stable Image로` 요청하세요.
-- 영상 샷 진행 문구가 `starting_instance`나 `model_loading`이면 GPU 박스가 부팅 중입니다(~10분). 기다리거나 LTX로 다시 요청하세요.
-- 영상 샷이 실패하면 파이프라인 행의 오류 문구(GPU 서버 메시지)를 읽고 LTX로 다시 요청합니다.
-- 채팅 턴이 실패하면 메시지에 한국어 원인이 표시됩니다. 다시 보내면 됩니다.
+- If the 3D job is `FAILED`, read the error text in the Pipeline tab and show the turntable from a session run in advance.
+- If image generation fails with "끝나지 않았습니다" ("did not finish"), the GPU is swapping models. Send the same request again, or ask `With Stable Image`.
+- If the video shot's progress text is `starting_instance` or `model_loading`, the GPU box is booting (~10 min). Wait, or ask again with LTX.
+- If a video shot fails, read the error text on the pipeline row (the GPU server's message) and ask again with LTX.
+- If a chat turn fails, the message shows the cause in the page's language. Send it again.

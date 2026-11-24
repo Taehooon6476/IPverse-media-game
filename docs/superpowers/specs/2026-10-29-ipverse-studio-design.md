@@ -82,16 +82,16 @@ Anti-goals
 
 ## UI (ui-picker build message, final)
 
-- 세션 목록 (새 세션 버튼): Sidebar Layout — 260px, icon rail at ≤1024px, drawer under 768px.
-- 상단 바 (세션 제목·컨셉·배포 버튼): Sticky Header — ≤64px, shadow once scrolled, skip link first in DOM.
-- 좌/우 결과 화면 2개: Split Layout — 50/50, 48px gap, one column under 768px (IP pane first). Panes stretch to
+- Session list (new session button): Sidebar Layout — 260px, icon rail at ≤1024px, drawer under 768px.
+- Top bar (session title, concept, publish button): Sticky Header — ≤64px, shadow once scrolled, skip link first in DOM.
+- Two result panes, left and right: Split Layout — 50/50, 48px gap, one column under 768px (IP pane first). Panes stretch to
   full height (the card's vertical centering applies to text-beside-media, not to app panes).
-- 좌측 IP 결과물: Tabs — 캐릭터 | 소품 | 3D | 영상, underline indicator, URL hash, arrow keys.
-- 우측 게임 장르 선택: Dropdown — SF 슈터 / SF 서바이벌 / RPG 탐험 / RPG 퀘스트.
-- 우측 게임 파이프라인·미리보기: Tabs — 미리보기 | 파이프라인 | GameSpec.
-- 생성 대기 중 표시: Skeleton — only for loads under 5s; longer jobs show progress text in job rows.
-- 광고 영상 붙여서 게임 올리기: Drawer — right, 400px, dialog semantics, focus trap, full width on mobile.
-- 생성·배포 완료 알림: Toast — top-right, 4s, max 3, `role="status"` (`alert` for failures).
+- Left, IP results: Tabs — 캐릭터 | 소품 | 3D | 영상 (Characters | Props | 3D | Video), underline indicator, URL hash, arrow keys.
+- Right, game genre choice: Dropdown — SF 슈터 / SF 서바이벌 / RPG 탐험 / RPG 퀘스트 (SF shooter / SF survival / RPG exploration / RPG quest).
+- Right, game pipeline and preview: Tabs — 미리보기 | 파이프라인 | GameSpec (Preview | Pipeline | GameSpec).
+- Waiting for generation: Skeleton — only for loads under 5s; longer jobs show progress text in job rows.
+- Publish the game with an ad video: Drawer — right, 400px, dialog semantics, focus trap, full width on mobile.
+- Generation and publish notices: Toast — top-right, 4s, max 3, `role="status"` (`alert` for failures).
 - Chat: a bottom dock spanning both panes (transcript + composer). Claude's call; not a vocab term.
 
 ## Griptape Nodes verdict (delivered to the user in chat)

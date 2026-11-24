@@ -1,70 +1,70 @@
-# 기존 IPverse에서 도시 게임을 만드는 방식
+# How the existing IPverse makes a city game
 
-인증된 채팅 경로에서 사용자가 고른 캐릭터·소품·NPC와 도시 요청을 GameSpec으로 저장하고 Three.js 게임으로 실행한다. **공통 도시 엔진이 모델이 작성한 선언형 데이터를 실행하는 방식**이며, 모델이 새 게임 엔진이나 임의의 실행 코드를 작성하지 않는다.
+On the authenticated chat path, the characters, props and NPC the user picked and the city request are saved as a GameSpec and run as a Three.js game. **A shared city engine runs declarative data written by the model**; the model does not write a new game engine or arbitrary executable code.
 
-## UI 요청과 서버 입력
+## UI request and server input
 
-`web/src/components/DesignDrawer.tsx`의 ‘도시 오픈월드’ 유형과 ‘도시 코어 운송’ 프리셋은 기존 설계 drawer를 사용한다. 프리셋은 사용자가 선택한 IP나 역할을 바꾸지 않는다. 유형은 프롬프트를 구성하는 UI 값이며, 실제 도시 모드는 저장된 `version: 2`, `engine: "three"`, `world.city`로 결정된다.
+The ‘Open-world city’ type and the ‘City core delivery’ preset in `web/src/components/DesignDrawer.tsx` use the existing design drawer. The preset does not change the IPs or roles the user selected. The type is a UI value that composes the prompt; the actual city mode is decided by the saved `version: 2`, `engine: "three"` and `world.city`.
 
-`gameDesignRequest()`는 전체 설계와 선택 역할을 다음 형태로 직렬화한다. 원래 요청에 `[출연 IP cast_ip_ids=…]`와 선택한 IP 이름·종류도 포함한다.
+`gameDesignRequest()` serializes the whole design and the selected roles in the following form. The original request also includes `[출연 IP cast_ip_ids=…]` ("cast IPs") and the names and kinds of the selected IPs.
 
 ```json
 {
-  "text": "전체 게임 요청과 공간·미션·조작 조건",
+  "text": "the whole game request with the space, mission and control conditions",
   "gameDesign": {
-    "prompt": "text와 동일한 전체 원문",
-    "castIpIds": ["선택한 주인공 ID", "선택한 소품 ID", "선택한 NPC ID"],
-    "playerIpId": "선택한 주인공 ID",
+    "prompt": "the same full original text as text",
+    "castIpIds": ["selected hero ID", "selected prop ID", "selected NPC ID"],
+    "playerIpId": "selected hero ID",
     "weaponIpId": null,
-    "propIpIds": ["선택한 소품 ID"],
+    "propIpIds": ["selected prop ID"],
     "enemyIpIds": [],
-    "npcIpIds": ["선택한 NPC ID"]
+    "npcIpIds": ["selected NPC ID"]
   }
 }
 ```
 
-`App.tsx` → `api.sendChat()` → `POST /api/sessions/{sessionId}/chat`으로 보낸다. 서버는 세션 소유권, 원문 일치, 4,000자 제한, IP 존재 여부와 역할을 검사하고 사용자 메시지에 `gameDesign`을 저장한다. `npcIpIds`는 현재 한 종이며 도시 보행자는 그 NPC IP를 재사용한다.
+It is sent through `App.tsx` → `api.sendChat()` → `POST /api/sessions/{sessionId}/chat`. The server checks session ownership, that the original text matches, the 4,000-character limit, and that the IPs exist with those roles, and saves `gameDesign` on the user message. `npcIpIds` currently holds one kind, and the city pedestrians reuse that NPC IP.
 
-## 실제 생성·패키징 경로
+## Actual generation and packaging path
 
-1. 채팅 API가 pending assistant 메시지를 만들고 기존 Lambda의 `agent_turn`을 비동기로 호출한다.
-2. `server/agent.py`가 실제 세션 상태와 서버가 검증한 선택 역할을 Bedrock Converse에 제공한다. 모델 ID는 Lambda 환경 변수 `AGENT_MODEL_ID`다.
-3. 에이전트가 `make_game`을 호출한다. 서버가 GameSpec, 도시 경계·도로·경로·대상 참조, 단계별 미션과 출연 역할을 검증한다. 도시 요청에 `world.city`가 없으면 작은 아레나로 저장하지 않고 오류를 반환한다. 실패한 도구 호출도 채팅 요약 기록에 남는다.
-4. `make_game`이 모델이 작성한 `design`을 제거하고 원래 사용자 요청·역할을 서버 provenance로 저장한다. GLB·컷아웃 경로는 해당 세션의 준비된 IP 에셋에서 해결한다.
-5. 신뢰된 공통 런타임과 실제 선택 IP 에셋을 S3의 `games/{gameId}/`로 복사하고 `spec.json`, `release.json`과 게임 레코드를 저장한다. 캐릭터·NPC의 준비된 리깅 GLB를 그대로 사용한다.
-6. 기존 오른쪽 게임 패널은 게임 레코드의 `previewUrl`을 iframe으로 연다. 브라우저 런타임이 그 게임의 `spec.json`을 읽고 도시·차량·보행자·미션을 실행한다. GameSpec 요약은 저장된 도시 데이터와 주행 거리 목표를 읽으며 원래 요청과 구분해 표시한다.
+1. The chat API creates a pending assistant message and invokes `agent_turn` of the existing Lambda asynchronously.
+2. `server/agent.py` gives Bedrock Converse the real session state and the selected roles the server validated. The model ID is the Lambda environment variable `AGENT_MODEL_ID`.
+3. The agent calls `make_game`. The server validates the GameSpec, the city bounds, roads, routes and target references, the staged missions and the cast roles. If a city request has no `world.city`, it is not saved as a small arena; an error is returned. Failed tool calls are also kept in the chat summary record.
+4. `make_game` removes the `design` the model wrote and saves the original user request and roles as server provenance. GLB and cutout paths are resolved from the ready IP assets of that session.
+5. The trusted shared runtime and the actual selected IP assets are copied to `games/{gameId}/` in S3, and `spec.json`, `release.json` and the game record are saved. The ready rigged GLBs of the character and NPC are used as they are.
+6. The existing game pane on the right opens the game record's `previewUrl` in an iframe. The browser runtime reads that game's `spec.json` and runs the city, vehicles, pedestrians and missions. The GameSpec summary reads the saved city data and the driving distance goal and shows them separately from the original request.
 
-공통 환경 키트는 `/games/city-kit/v1/city-assets/commonassetcatalog.json`과 그 아래 자산을 사용한다. 선택 IP는 게임별 폴더로 복사되고, 도시 건물·차량·가로시설은 출처와 라이선스가 보존된 공유 CC0 키트에서 로드된다. 도시 게임 생성은 새 이미지·3D·영상 작업을 시작하지 않는다.
+The shared environment kit uses `/games/city-kit/v1/city-assets/commonassetcatalog.json` and the assets under it. Selected IPs are copied into the per-game folder, and city buildings, vehicles and street furniture are loaded from the shared CC0 kit, whose sources and licenses are preserved. Making a city game does not start new image, 3D or video jobs.
 
-## 예: 같은 IP로 만든 두 도시
+## Example: two cities made from the same IPs
 
-같은 주인공·소품·NPC IP로 서로 다른 두 요청을 보낸 결과다. `scripts/create_city_games.py`가 새 세션에 소유 IP·에셋 레코드를 복제하고 인증된 채팅 API로 요청을 제출한다. 원본 세션과 원본 파일은 바뀌지 않는다.
+This is the result of sending two different requests with the same hero, prop and NPC IPs. `scripts/create_city_games.py` clones the owned IP and asset records into a new session and submits the request through the authenticated chat API. The source session and source files are not changed.
 
-| 실제 저장된 게임 | 낮의 해안 도시 | 밤의 산업 도시 |
+| Game as actually saved | Daytime coastal city | Night industrial city |
 | --- | --- | --- |
-| 도시 크기 | 600 × 600m | 800 × 600m |
-| 3개 구역 | 도심·주거·수변 | 산업·도심·주거 |
-| 도로 6개 | x축의 z와 z축의 x 모두 −180 / 0 / 180m | x축 z는 −180 / 0 / 180m, z축 x는 −240 / 0 / 240m |
-| 운전 차량 / 주행 목표 | 세단 1대 / 140m | SUV 1대 / 180m |
-| 보행자 / 교통 차량 | 카이 IP 4명 / 6대 | 카이 IP 4명 / 4대 |
-| 임무 순서 | 대화 → 주행 → 코어 회수 → 수변 배송 지점 | 코어 회수 → 주행 → 산업 배송 지점 |
-| 하늘·안개·노출·블룸 | 낮의 청색, 안개 0.002, 노출 1.1, 블룸 0.2 | 밤의 남색, 안개 0.003, 노출 1.25, 블룸 0.75 |
+| City size | 600 × 600m | 800 × 600m |
+| 3 districts | Downtown, residential, waterfront | Industrial, downtown, residential |
+| 6 roads | Both z of the x-axis roads and x of the z-axis roads: −180 / 0 / 180m | z of the x-axis roads −180 / 0 / 180m, x of the z-axis roads −240 / 0 / 240m |
+| Drivable vehicle / driving goal | 1 sedan / 140m | 1 SUV / 180m |
+| Pedestrians / traffic vehicles | 4 of the Kai IP / 6 | 4 of the Kai IP / 4 |
+| Mission order | Talk → drive → retrieve the core → waterfront delivery point | Retrieve the core → drive → industrial delivery point |
+| Sky, fog, exposure, bloom | Daytime blue, fog 0.002, exposure 1.1, bloom 0.2 | Night navy, fog 0.003, exposure 1.25, bloom 0.75 |
 
-프롬프트는 출발·NPC·차량·코어·배송 지점 좌표, 도로 폭, 보행자 순환 경로, 단계 ID와 주행 거리를 구체적으로 요청한다. `scripts/create_city_games.py`는 저장된 값과 요청을 비교한다. 도로 비교에서는 UUID 차이를 제거하고 축·좌표·폭을 비교하므로, 이름만 바뀐 동일 도로를 다른 구조로 판정하지 않는다.
+The prompt asks specifically for the coordinates of the spawn, NPC, vehicle, core and delivery point, the road width, the pedestrian loop route, the stage IDs and the driving distance. `scripts/create_city_games.py` compares the saved values with the request. The road comparison removes UUID differences and compares axis, coordinate and width, so the same road under a different name is not judged a different structure.
 
-## 검증 도구
+## Verification tools
 
-- `scripts/create_city_games.py`: 생성 요청과 저장된 GameSpec·선택 자산 바이트·런타임 복사·원본 불변을 비교한다. raw Bedrock Converse 응답과 전체 tool payload는 보관하지 않는다.
-- `scripts/verify_city_games.mjs`: 공개 게임 URL에서 native 키보드·포인터 입력으로 플레이한다(주행 거리, E 승하차, 보행자·교통 이동, 건물 충돌, 렌더 chunk 로드·해제, 재시작). 읽기 전용 `__ipverseGameState`만 관찰하고 위치·거리·미션 진행을 바꾸지 않는다.
-- `scripts/verify_city_studio.mjs --input evidence/city-generation-live.json --output evidence/city-studio-live.json --screenshots evidence/city-studio` (`--self-test`는 로컬 자체 검사): 스튜디오의 원래 로그인 폼, 설계 요약·원본 요청·선택 역할, 오른쪽 iframe 로드와 시작을 확인한다. 자격 증명은 stdin의 `{"username","password"}` JSON으로만 받고, 로그인 외의 변경 요청은 브라우저 네트워크 단계에서 차단한다.
-- `scripts/verify_city_delivery.py`: 배포된 코드·S3 객체·공개 런타임 바이트·인증 거부를 읽기 전용으로 확인한다.
+- `scripts/create_city_games.py`: compares the generation request with the saved GameSpec, the selected asset bytes, the runtime copy and the unchanged originals. Raw Bedrock Converse responses and full tool payloads are not kept.
+- `scripts/verify_city_games.mjs`: plays at the public game URL with native keyboard and pointer input (driving distance, E to enter/exit, pedestrian and traffic movement, building collision, render chunk load/unload, restart). It only observes the read-only `__ipverseGameState` and does not change position, distance or mission progress.
+- `scripts/verify_city_studio.mjs --input evidence/city-generation-live.json --output evidence/city-studio-live.json --screenshots evidence/city-studio` (`--self-test` is a local self-check): checks the studio's original login form, the design summary, original request and selected roles, and that the iframe on the right loads and starts. Credentials are accepted only as `{"username","password"}` JSON on stdin, and mutating requests other than login are blocked at the browser network layer.
+- `scripts/verify_city_delivery.py`: read-only check of the deployed code, S3 objects, public runtime bytes and auth rejection.
 
-390px 화면은 표시와 시작만 지원한다. 작은 16:9 창에서는 데스크톱 HUD·미니맵·미션 안내가 겹치고, 터치 운전은 없다.
+A 390px screen supports display and start only. In a small 16:9 window the desktop HUD, minimap and mission guide overlap, and there is no touch driving.
 
-## 엔진과 품질 제한
+## Engine and quality limits
 
-모델은 지원하는 도시 데이터와 미션을 작성하고, 제공한 Three.js 엔진이 차량 제어·충돌·NPC 경로·구역 배치·렌더 chunk를 실행한다. 구역 건물은 결정적 배치 로직과 공식 Kenney의 stylized low-poly CC0 자산 키트로 조립된다. 모델이 새로운 건물 메쉬·차량 물리·군중 AI 코드를 생성했다고 주장하지 않는다.
+The model writes the supported city data and missions, and the provided Three.js engine runs vehicle control, collision, NPC routes, district layout and render chunks. District buildings are assembled by deterministic placement logic from the official Kenney stylized low-poly CC0 asset kits. No claim is made that the model generated new building meshes, vehicle physics or crowd AI code.
 
-지원 범위는 300–1200m 월드, 3–6구역, 4–14개 축 평행 도로, 운전 차량 1–8대, NPC IP 한 종을 재사용한 보행자 1–8명, 교통 차량 최대 16대다. 보행자 경로도 수평·수직 도로/인도 구간으로 제한된다. 임의 곡선 도로, 복잡한 군중 행동, 실내·파괴·다중 사용자, 실사 도시 또는 GTA6/AAA 제작 품질은 지원 범위가 아니다. Unreal로 실행하지 않는다.
+The supported range is a 300–1200m world, 3–6 districts, 4–14 axis-aligned roads, 1–8 drivable vehicles, 1–8 pedestrians reusing one NPC IP, and at most 16 traffic vehicles. Pedestrian routes are also limited to horizontal and vertical road/sidewalk segments. Arbitrary curved roads, complex crowd behavior, interiors, destruction, multiple users, a photoreal city, or GTA6/AAA production quality are outside the supported range. It does not run on Unreal.
 
-구체 계약은 `docs/city-contract.md`, 자산 출처는 `docs/city-assets.md`, 고품질 제작과의 구분은 `docs/open-world-quality.md`에 있다.
+The detailed contract is in `docs/city-contract.md`, asset sources in `docs/city-assets.md`, and the distinction from high-quality production in `docs/open-world-quality.md`.
